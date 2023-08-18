@@ -1,0 +1,27 @@
+<div class="calendar">
+    <header class="calendar-header">
+        {{ calendar.year }} {{ calendar.month | month }}
+    </header>
+
+    <div class="calendar-body">
+        <ul class="calendar-weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+        </ul>
+        <ul class="calendar-dates">
+            <li class="date" *ngFor="let day of calendar.days">
+                <span>{{ day.date }}</span>
+                <div class="img-container">
+                    <img src="https://picsum.photos/100/100/?random=10">
+                    <!-- <img [src]="day.imgUrl" alt="day{{day.no}}"> -->
+                    <input type="file" [disabled]="!canUpload(day.date)" (input)="uploadFile($event, day)">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

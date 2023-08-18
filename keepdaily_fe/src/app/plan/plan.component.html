@@ -1,0 +1,26 @@
+<div class="plan">
+    <div class="plan-info">
+        <label class="title">
+            <input type="text" [(ngModel)]="plan.title">
+        </label>
+        <p class="desc">
+            <input type="text" [(ngModel)]="plan.title">
+        </p>
+    </div>
+
+    <div class="plan-filter">
+        <label>
+            <input type="number" min="2020" [max]="year" [value]="year" (change)="change('year', $event)">
+        </label>
+        
+        <label>
+            <select [(ngModel)]="month" (change)="change('month', $event)">
+                <ng-container *ngFor="let m of monthList; index as i">
+                    <option [value]="i">{{ m }}</option>
+                </ng-container>
+            </select>
+        </label>
+    </div>
+    
+    <app-calendar [calendar]="calendar"></app-calendar>
+</div>

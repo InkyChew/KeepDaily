@@ -1,0 +1,19 @@
+<div class="plans">
+    <button>Add</button>
+
+    <ul *ngFor="let plan of planList">
+        <li>
+            <label>
+                <input type="text" [(ngModel)]="plan.title">
+            </label>
+
+            <label>
+                <input type="text" [(ngModel)]="plan.description">
+            </label>
+
+            <label>
+                <input type="datetime-local" [(ngModel)]="plan.startFrom">
+            </label>
+        </li>
+    </ul>
+</div>
