@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    url: 'https://localhost:5000/api',
+    endpoint: {
+      plan: '/Plan',
+      lineNotify: '/LineNotify'
+    }
+  }
 };
 
 /*

@@ -1,6 +1,10 @@
-using DataLayer.Data;
+using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using RepoLayer;
+using RepoLayer.IRepos;
 using Serilog;
+using ServiceLayer.IServices;
+using ServiceLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -21,7 +25,11 @@ builder.Logging.AddSerilog(Log.Logger);
  * Database
  */
 builder.Services.AddDbContext<KeepDailyContext>(options =>
-       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                            ?? throw new NullReferenceException("Null DefaultConnection.");
+    options.UseSqlServer(connectionString);
+});
 
 /*
  * Cors
@@ -32,12 +40,17 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
-                          policy.WithOrigins("https://www.fhs.com.tw",
+                          policy.WithOrigins("https://notify-bot.line.me",
                                               "http://10.199.15.44")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                       });
 });
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ILineNotifyService, LineNotifyService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

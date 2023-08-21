@@ -1,15 +1,19 @@
-﻿using DataLayer.Models;
+﻿using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataLayer.Data
+namespace DomainLayer.Data
 {
     public class KeepDailyContext : DbContext
     {
-        public KeepDailyContext(DbContextOptions options) : base(options)
-        {
-        }
+        public KeepDailyContext(DbContextOptions<KeepDailyContext> options) : base(options) { }
 
-        public virtual DbSet<Plan> Plan { get; set; }
-        public virtual DbSet<Day> Day { get; set; }
+        public DbSet<Plan> Plan { get; set; }
+        public DbSet<Day> Day { get; set; }
+        public DbSet<User> AppUser { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasData(new User { Id = 1, Name = "Inky", Email = "a@a", Password = "123" });
+        }
     }
 }

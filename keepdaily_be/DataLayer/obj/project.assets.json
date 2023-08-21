@@ -2778,9 +2778,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj",
-      "projectName": "DataLayer",
-      "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj",
+      "projectUniqueName": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
+      "projectName": "DomainLayer",
+      "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
       "packagesPath": "C:\\Users\\88690\\.nuget\\packages\\",
       "outputPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\obj\\",
       "projectStyle": "PackageReference",

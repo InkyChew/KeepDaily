@@ -1028,7 +1028,7 @@
           }
         }
       },
-      "DataLayer/1.0.0": {
+      "DomainLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -1037,10 +1037,10 @@
           "Serilog.AspNetCore": "7.0.0"
         },
         "compile": {
-          "bin/placeholder/DataLayer.dll": {}
+          "bin/placeholder/DomainLayer.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DataLayer.dll": {}
+          "bin/placeholder/DomainLayer.dll": {}
         }
       }
     }
@@ -2676,15 +2676,15 @@
         "version.txt"
       ]
     },
-    "DataLayer/1.0.0": {
+    "DomainLayer/1.0.0": {
       "type": "project",
-      "path": "../DataLayer/DataLayer.csproj",
-      "msbuildProject": "../DataLayer/DataLayer.csproj"
+      "path": "../DataLayer/DomainLayer.csproj",
+      "msbuildProject": "../DataLayer/DomainLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DataLayer >= 1.0.0"
+      "DomainLayer >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2719,8 +2719,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj": {
-              "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj"
+            "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj": {
+              "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj"
             }
           }
         }

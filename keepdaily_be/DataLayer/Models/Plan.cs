@@ -1,11 +1,19 @@
-﻿namespace DataLayer.Models
+﻿using DomainLayer.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace DomainLayer.Models
 {
     public class Plan
     {
-        public int id { get; set; }
-        public string title { get; set; } = null!;
-        public string description { get; set; } = null!;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [Column(TypeName = "nvarchar(10)")]
+        public string Title { get; set; } = null!;
+        [Column(TypeName = "nvarchar(50)")]
+        public string Description { get; set; } = null!;
         public DateTime StartFrom { get; set; }
-        public List<Day> DayList { get; set; } = new List<Day>();
+        public List<Day> Days { get; set; } = new List<Day>();
     }
 }

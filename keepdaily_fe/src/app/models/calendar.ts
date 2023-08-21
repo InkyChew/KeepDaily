@@ -19,9 +19,11 @@ export class Calendar {
 }
 
 export class Day {
+    id: number = 0;
     date: number;
     imgUrl?: string
-
+    planId: number = 0;
+    
     constructor(date: number) {
         this.date = date;
     }

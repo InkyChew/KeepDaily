@@ -1,0 +1,6 @@
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.csproj.AssemblyReference.cache
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.GeneratedMSBuildEditorConfig.editorconfig
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.AssemblyInfoInputs.cache
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.AssemblyInfo.cs
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.csproj.CoreCompileInputs.cache
+D:\InkyProject\KeepDaily\keepdaily_be\keepdaily_be\obj\Debug\net6.0\keepdaily_be.MvcApplicationPartsAssemblyInfo.cache

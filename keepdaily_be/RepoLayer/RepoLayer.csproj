@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+    <ProjectReference Include="..\DataLayer\DomainLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IRepos\" />
     <Folder Include="Repos\" />
   </ItemGroup>
 

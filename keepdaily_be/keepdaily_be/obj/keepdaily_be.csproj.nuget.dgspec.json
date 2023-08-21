@@ -4,12 +4,12 @@
     "D:\\InkyProject\\KeepDaily\\keepdaily_be\\keepdaily_be\\keepdaily_be.csproj": {}
   },
   "projects": {
-    "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj": {
+    "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj",
-        "projectName": "DataLayer",
-        "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
+        "projectName": "DomainLayer",
+        "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
         "packagesPath": "C:\\Users\\88690\\.nuget\\packages\\",
         "outputPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
@@ -111,8 +111,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj": {
-                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj"
+              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj": {
+                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj"
               },
               "D:\\InkyProject\\KeepDaily\\keepdaily_be\\RepoLayer\\RepoLayer.csproj": {
                 "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\RepoLayer\\RepoLayer.csproj"
@@ -195,8 +195,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj": {
-                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj"
+              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj": {
+                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj"
               }
             }
           }
@@ -258,8 +258,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj": {
-                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DataLayer.csproj"
+              "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj": {
+                "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj"
               },
               "D:\\InkyProject\\KeepDaily\\keepdaily_be\\RepoLayer\\RepoLayer.csproj": {
                 "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\RepoLayer\\RepoLayer.csproj"
@@ -276,6 +276,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Google.Apis.Drive.v3": {
+              "target": "Package",
+              "version": "[1.61.0.3120, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
