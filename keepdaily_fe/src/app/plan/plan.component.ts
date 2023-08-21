@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar, Day, Plan } from '../models/calendar';
 import { HelperService } from '../services/helper.service';
+import { LineNotifyService } from '../services/line-notify.service';
 
 @Component({
   selector: 'app-plan',
@@ -17,7 +18,7 @@ export class PlanComponent implements OnInit {
   calendar: Calendar;  
   monthList = this._helper.Month;
 
-  constructor(private _helper: HelperService) {
+  constructor(private _helper: HelperService, private _lineNotifyService: LineNotifyService) {
     this.calendar = (this.plan.calendars.length > 0) ? this.plan.calendars[0] : new Calendar(this.year, this.month);
     this.createDayList();
   }
@@ -48,5 +49,13 @@ export class PlanComponent implements OnInit {
     if(type == 'year') this.year = v;
     if(type == 'month') this.month = v;
     this.createDayList();
+  }
+
+  GetLineNotify() {
+    this._lineNotifyService.getAuth().subscribe(res => {
+      console.log(res);
+      
+      window.location.href = res;
+    })
   }
 }

@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+		<ProjectReference Include="..\DataLayer\DomainLayer.csproj" />
 		<ProjectReference Include="..\RepoLayer\RepoLayer.csproj" />
 		<ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
 	</ItemGroup>

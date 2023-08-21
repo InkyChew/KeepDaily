@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+    <ProjectReference Include="..\DataLayer\DomainLayer.csproj" />
     <ProjectReference Include="..\RepoLayer\RepoLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IServices\" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.61.0.3120" />
   </ItemGroup>
 
 </Project>
