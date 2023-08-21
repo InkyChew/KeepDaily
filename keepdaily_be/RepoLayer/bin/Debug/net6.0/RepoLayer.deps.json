@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "RepoLayer/1.0.0": {
         "dependencies": {
-          "DataLayer": "1.0.0"
+          "DomainLayer": "1.0.0"
         },
         "runtime": {
           "RepoLayer.dll": {}
@@ -643,14 +643,14 @@
           }
         }
       },
-      "DataLayer/1.0.0": {
+      "DomainLayer/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
           "Serilog.AspNetCore": "7.0.0"
         },
         "runtime": {
-          "DataLayer.dll": {}
+          "DomainLayer.dll": {}
         }
       }
     }
@@ -1046,7 +1046,7 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "DataLayer/1.0.0": {
+    "DomainLayer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

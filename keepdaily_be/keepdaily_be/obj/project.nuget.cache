@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "zehlGHraAng647u2dvI77NWCEFOLUwxi3FGLvDhaYs4OLA3sSl4GbnQ53xrL9hs1rrG9E4gTqiZFu/T0gkDqgw==",
+  "dgSpecHash": "WOZNF5YJRHO4IGcdG5s42yO5wCaRJKhekOsGuDArm9R4DhTtAmgw+glUTrJFQxnX2e1lo32xpkK9izdehEm+Rg==",
   "success": true,
   "projectFilePath": "C:\\InkyProject\\KeepDaily\\keepdaily_be\\keepdaily_be\\keepdaily_be.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\inky1\\.nuget\\packages\\google.apis\\1.61.0\\google.apis.1.61.0.nupkg.sha512",
+    "C:\\Users\\inky1\\.nuget\\packages\\google.apis.auth\\1.61.0\\google.apis.auth.1.61.0.nupkg.sha512",
+    "C:\\Users\\inky1\\.nuget\\packages\\google.apis.core\\1.61.0\\google.apis.core.1.61.0.nupkg.sha512",
+    "C:\\Users\\inky1\\.nuget\\packages\\google.apis.drive.v3\\1.61.0.3120\\google.apis.drive.v3.1.61.0.3120.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
@@ -38,6 +42,7 @@
     "C:\\Users\\inky1\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\inky1\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\serilog\\2.12.0\\serilog.2.12.0.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\serilog.aspnetcore\\7.0.0\\serilog.aspnetcore.7.0.0.nupkg.sha512",
     "C:\\Users\\inky1\\.nuget\\packages\\serilog.extensions.hosting\\7.0.0\\serilog.extensions.hosting.7.0.0.nupkg.sha512",

@@ -1,5 +1,5 @@
-﻿using DataLayer.Data;
-using DataLayer.Models;
+﻿using DomainLayer.Data;
+using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepoLayer.IRepos;

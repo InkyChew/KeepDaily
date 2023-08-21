@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "keepdaily_be/1.0.0": {
         "dependencies": {
-          "DataLayer": "1.0.0",
+          "DomainLayer": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "6.0.21",
           "RepoLayer": "1.0.0",
           "ServiceLayer": "1.0.0",
@@ -16,6 +16,56 @@
         },
         "runtime": {
           "keepdaily_be.dll": {}
+        }
+      },
+      "Google.Apis/1.61.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Auth/1.61.0": {
+        "dependencies": {
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Core/1.61.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Drive.v3/1.61.0.3120": {
+        "dependencies": {
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Auth": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Drive.v3.dll": {
+            "assemblyVersion": "1.61.0.3120",
+            "fileVersion": "1.61.0.3120"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -388,6 +438,14 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
       "Serilog/2.12.0": {
         "runtime": {
           "lib/net6.0/Serilog.dll": {
@@ -714,19 +772,19 @@
           }
         }
       },
-      "DataLayer/1.0.0": {
+      "DomainLayer/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
           "Serilog.AspNetCore": "7.0.0"
         },
         "runtime": {
-          "DataLayer.dll": {}
+          "DomainLayer.dll": {}
         }
       },
       "RepoLayer/1.0.0": {
         "dependencies": {
-          "DataLayer": "1.0.0"
+          "DomainLayer": "1.0.0"
         },
         "runtime": {
           "RepoLayer.dll": {}
@@ -734,7 +792,8 @@
       },
       "ServiceLayer/1.0.0": {
         "dependencies": {
-          "DataLayer": "1.0.0",
+          "DomainLayer": "1.0.0",
+          "Google.Apis.Drive.v3": "1.61.0.3120",
           "RepoLayer": "1.0.0"
         },
         "runtime": {
@@ -748,6 +807,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Google.Apis/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KUVqG6MRC7E8anPOLefqb+wnDeIS6IJ1B09GaXg07vAHGVnGxJ8odAtpnCQCN3aUzao3gFnSSEKawDvFrJpYZQ==",
+      "path": "google.apis/1.61.0",
+      "hashPath": "google.apis.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1tXnTa9WaimJdlrIyHnhjjgFX6fQ1r4ClWqlK9ZYF5YPyswG1GbWhhlPyQg615BnHSulmRINlXIi8AbGJsc1yQ==",
+      "path": "google.apis.auth/1.61.0",
+      "hashPath": "google.apis.auth.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/COXAFLc1SrLDZl7Ahhi0ZyNHM6ADvdd73UjIPXr1MRubHTrBgvdfwoTrCL0C8C6w0ur/RIR1RHUR5orSJozGg==",
+      "path": "google.apis.core/1.61.0",
+      "hashPath": "google.apis.core.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Drive.v3/1.61.0.3120": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RcdYnaXf7a+HoPKtqoTt4Vlvdfin6y27L8rsUcZ52+O2t0tTBk2WO0s01MnLu0gic1KSZ6fHqqZgf2nyau5C+g==",
+      "path": "google.apis.drive.v3/1.61.0.3120",
+      "hashPath": "google.apis.drive.v3.1.61.0.3120.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
@@ -987,6 +1074,13 @@
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
     "Serilog/2.12.0": {
       "type": "package",
       "serviceable": true,
@@ -1190,7 +1284,7 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "DataLayer/1.0.0": {
+    "DomainLayer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

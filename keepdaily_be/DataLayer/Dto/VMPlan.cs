@@ -1,6 +1,6 @@
-﻿using DataLayer.Models;
+﻿using DomainLayer.Models;
 
-namespace DataLayer.Dto
+namespace DomainLayer.Dto
 {
     public class VMPlan
     {

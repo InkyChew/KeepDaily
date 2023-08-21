@@ -1,5 +1,5 @@
-﻿using DataLayer.Dto;
-using DataLayer.Models;
+﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 
 namespace ServiceLayer.IServices
 {

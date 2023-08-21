@@ -1,5 +1,5 @@
-﻿using DataLayer.Dto;
-using DataLayer.Models;
+﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 using RepoLayer.IRepos;
 using ServiceLayer.IServices;
 

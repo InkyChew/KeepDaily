@@ -1,4 +1,4 @@
-﻿namespace DataLayer.Dto
+﻿namespace DomainLayer.Dto
 {
     public class VMPlanDay
     {
