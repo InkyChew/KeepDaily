@@ -1,0 +1,17 @@
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\ServiceLayer.deps.json
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\ServiceLayer.dll
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\ServiceLayer.pdb
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\DataLayer.dll
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\RepoLayer.dll
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\DataLayer.pdb
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\bin\Debug\net6.0\RepoLayer.pdb
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.AssemblyReference.cache
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.AssemblyInfoInputs.cache
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.AssemblyInfo.cs
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.CoreCompileInputs.cache
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.CopyComplete
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.dll
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\refint\ServiceLayer.dll
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ServiceLayer.pdb
+C:\InkyProject\KeepDaily\keepdaily_be\ServiceLayer\obj\Debug\net6.0\ref\ServiceLayer.dll

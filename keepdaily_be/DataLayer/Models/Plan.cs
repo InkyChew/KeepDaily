@@ -2,10 +2,10 @@
 {
     public class Plan
     {
-        public int id { get; set; }
-        public string title { get; set; } = null!;
-        public string description { get; set; } = null!;
+        public int Id { get; set; }
+        public string Title { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public DateTime StartFrom { get; set; }
-        public List<Day> DayList { get; set; } = new List<Day>();
+        public List<Day> Days { get; set; } = new List<Day>();
     }
 }

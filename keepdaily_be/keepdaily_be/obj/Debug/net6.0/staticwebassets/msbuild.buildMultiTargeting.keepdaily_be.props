@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\keepdaily_be.props" />
+</Project>
