@@ -3,7 +3,7 @@ using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using RepoLayer.IRepos;
 
-namespace RepoLayer
+namespace RepoLayer.Repos
 {
     public class UserRepo : IUserRepo
     {

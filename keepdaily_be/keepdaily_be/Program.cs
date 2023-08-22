@@ -1,7 +1,7 @@
 using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
-using RepoLayer;
 using RepoLayer.IRepos;
+using RepoLayer.Repos;
 using Serilog;
 using ServiceLayer.IServices;
 using ServiceLayer.Services;
