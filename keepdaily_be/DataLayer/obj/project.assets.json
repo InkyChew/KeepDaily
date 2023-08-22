@@ -2772,24 +2772,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\88690\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\inky1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
+      "projectUniqueName": "C:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
       "projectName": "DomainLayer",
-      "projectPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
-      "packagesPath": "C:\\Users\\88690\\.nuget\\packages\\",
-      "outputPath": "D:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\obj\\",
+      "projectPath": "C:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\DomainLayer.csproj",
+      "packagesPath": "C:\\Users\\inky1\\.nuget\\packages\\",
+      "outputPath": "C:\\InkyProject\\KeepDaily\\keepdaily_be\\DataLayer\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\88690\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\inky1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2850,7 +2845,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
