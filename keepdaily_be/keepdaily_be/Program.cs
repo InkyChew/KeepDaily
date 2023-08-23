@@ -5,6 +5,8 @@ using RepoLayer.Repos;
 using Serilog;
 using ServiceLayer.IServices;
 using ServiceLayer.Services;
+using ServiceLayer.Utils;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -51,8 +53,17 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<ILineNotifyService, LineNotifyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IPlanRepo, PlanRepo>();
+builder.Services.AddScoped<IDayService, DayService>();
+builder.Services.AddScoped<IDayRepo, DayRepo>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(config =>
+    {
+        config.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        config.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

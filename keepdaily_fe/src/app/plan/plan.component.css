@@ -1,15 +1,9 @@
-.plan-info input {
-    padding: .5em;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    outline: none;
-}
-
-.plan-info input:focus {
-    border-color: var(--primary);
-}
-
-.title input {
+.title {
     font-size: 1.5em;
-    /* margin-bottom: 1em; */
+}
+
+.plan-ctrl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

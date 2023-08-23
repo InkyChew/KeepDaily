@@ -5,10 +5,14 @@ namespace ServiceLayer.IServices
 {
     public interface IPlanService
     {
-        public List<VMPlan> GetAllPlan();
-        public VMPlan? GetPlan(int id);
-        public Plan CreatePlan(VMPlan vmPlan);
-        public Plan UpdatePlan(VMPlan vmPlan);
+        public List<Plan> GetAllPlan();
+        public List<VMPlan> GetAllPlanWithDetail();
+        public Plan? GetPlan(int id);
+        public Plan? GetPlanWithDetail(int id, int? year = null, int? month = null);
+        public Plan CreatePlan(Plan plan);
+        public Plan CreatePlanWithDetail(VMPlan vmPlan);
+        public Plan UpdatePlan(Plan plan);
+        public Plan UpdatePlanWithDetail(VMPlan vmPlan);
         public void DeletePlan(int id);
     }
 }

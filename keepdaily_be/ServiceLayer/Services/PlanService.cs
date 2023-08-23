@@ -14,10 +14,15 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public Plan CreatePlan(VMPlan vmPlan)
+        public Plan CreatePlan(Plan plan)
+        {
+            return _repo.InsertPlan(plan);
+        }
+
+        public Plan CreatePlanWithDetail(VMPlan vmPlan)
         {
             var plan = TransformToPlan(vmPlan);
-            return _repo.CreatePlan(plan);
+            return _repo.InsertPlan(plan);
         }
 
         public void DeletePlan(int id)
@@ -25,7 +30,12 @@ namespace ServiceLayer.Services
             _repo.DeletePlan(id);
         }
 
-        public List<VMPlan> GetAllPlan()
+        public List<Plan> GetAllPlan()
+        {
+            return _repo.GetAllPlan().OrderByDescending(_ => _.UpdateTime).ToList();
+        }
+
+        public List<VMPlan> GetAllPlanWithDetail()
         {
             var vmPlans = new List<VMPlan>();
             var plans = _repo.GetAllPlan();
@@ -36,16 +46,65 @@ namespace ServiceLayer.Services
             return vmPlans;
         }
 
-        public VMPlan? GetPlan(int id)
+        public Plan? GetPlan(int id)
         {
-            var plan = _repo.GetPlan(id);
-            return plan == null ? null : TransformToVMPlan(plan);
+            return _repo.GetPlan(id);
         }
 
-        public Plan UpdatePlan(VMPlan vmPlan)
+        public Plan? GetPlanWithDetail(int id, int? year = null, int? month = null)
+        {
+            var plan = _repo.GetPlanWithDetail(id);
+            if(plan != null)
+            {
+                var sf = plan.StartFrom.Split('-');
+                int y = year ?? int.Parse(sf[0]);
+                int m = month ?? int.Parse(sf[1]);
+                plan.Days = CreateDayList(plan, y, m);
+            }
+            return plan;
+        }
+
+        public Plan UpdatePlan(Plan plan)
+        {
+            return _repo.UpdatePlan(plan);
+        }
+
+        public Plan UpdatePlanWithDetail(VMPlan vmPlan)
         {
             var plan = TransformToPlan(vmPlan);
             return _repo.UpdatePlan(plan);
+        }
+
+        private List<Day> CreateDayList(Plan plan, int year, int month)
+        {
+            var days = new List<Day>();
+            int lastDate = DateTime.DaysInMonth(year, month);
+            int preLastDate = (month == 1) ? DateTime.DaysInMonth(year - 1, 12)  : DateTime.DaysInMonth(year, month - 1);
+            int firstDay = new DateTime(year, month, 1).DayOfWeek.GetHashCode();
+            int lastDay = new DateTime(year, month, lastDate).DayOfWeek.GetHashCode();
+
+            for (int i = firstDay; i > 0; i--)
+            {
+                days.Add(NewDay(plan, year, month - 1, preLastDate - i + 1));
+            }
+
+            for (int i = 1; i <= lastDate; i++)
+            {
+                days.Add(NewDay(plan, year, month, i));
+            }
+
+            for (int i = lastDay; i < 6; i++)
+            {
+                days.Add(NewDay(plan, year, month + 1, i - lastDay + 1));
+            }
+
+            return days;
+        }
+
+        private static Day NewDay(Plan plan, int year, int month, int date)
+        {
+            return plan.Days.SingleOrDefault(_ => _.Year == year && _.Month == month && _.Date == date)
+                        ?? new() { Year = year, Month = month, Date = date, PlanId = plan.Id };
         }
 
         private VMPlan TransformToVMPlan(Plan plan)
@@ -65,7 +124,7 @@ namespace ServiceLayer.Services
                                     {
                                         DayId = d.Id,
                                         Date = d.Date,
-                                        ImgUrl = d.ImgUrl
+                                        ImgUrl = d.ImgName
                                     }).ToList()
                                 }).ToList()
             };
@@ -89,7 +148,7 @@ namespace ServiceLayer.Services
                         Year = c.Year,
                         Month = c.Month,
                         Date = d.Date,
-                        ImgUrl = d.ImgUrl
+                        ImgName = d.ImgUrl
                     });
                 }
             }

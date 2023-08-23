@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ServiceLayer.IServices;
@@ -23,19 +24,18 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPlan(int id)
+        public IActionResult GetPlanWithDetail(int id, int? year, int? month)
         {
-            var plan = _service.GetPlan(id);
+            var plan = _service.GetPlanWithDetail(id, year, month);
             return plan == null ? NotFound() : Ok(plan);
         }
 
         [HttpPost]
-        public IActionResult CreatePlan([FromBody] VMPlan vmPlan)
+        public IActionResult CreatePlan([FromBody] Plan plan)
         {
             try
             {
-                var plan = _service.CreatePlan(vmPlan);
-                return CreatedAtRoute(null, plan);
+                return CreatedAtRoute(null, _service.CreatePlan(plan));
             }
             catch (Exception ex)
             {
@@ -45,11 +45,11 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdatePlan([FromBody] VMPlan vmPlan)
+        public IActionResult UpdatePlan([FromBody] Plan plan)
         {
             try
             {
-                var plan = _service.UpdatePlan(vmPlan);
+                _service.UpdatePlan(plan);
                 return NoContent();
             }
             catch (Exception ex)

@@ -7,7 +7,9 @@ export const environment = {
   api: {
     url: 'https://localhost:5000/api',
     endpoint: {
+      user: '/User',
       plan: '/Plan',
+      day: '/Day',
       lineNotify: '/LineNotify'
     }
   }

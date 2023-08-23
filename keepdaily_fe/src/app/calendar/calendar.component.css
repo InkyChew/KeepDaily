@@ -1,23 +1,37 @@
+.calendar-header {
+    text-align: center;
+}
+.title {
+    font-size: 1.2em;
+}
 .calendar-body ul {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     list-style: none;
     padding: 0;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
 }
 
 .calendar-body li {
     text-align: center;
     background-color: cornsilk;
+    border-top: 1px solid;
+    border-left: 1px solid;
 }
 
 .img-container {
     position: relative;
     overflow: hidden;
+    background-color: antiquewhite;
+    aspect-ratio: 1 / 1;
 }
 
 .img-container img {
+    display: block;
     width: 100%;
-    max-width: 100px;
+    object-position: center;
+    object-fit: cover;
 }
 .img-container input[type=file] {
     position: absolute;
@@ -27,7 +41,16 @@
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    z-index: 1;
 }
 .img-container input[type=file]:disabled {
     cursor: not-allowed;
+}
+
+.del {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    font-size: 8px;
 }

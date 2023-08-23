@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Calendar, Day, Plan } from '../models/calendar';
 import { HelperService } from '../services/helper.service';
 import { LineNotifyService } from '../services/line-notify.service';
+import { formatDate } from '@angular/common';
+import { PlanService } from '../services/plan.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan',
@@ -10,36 +13,35 @@ import { LineNotifyService } from '../services/line-notify.service';
 })
 export class PlanComponent implements OnInit {
 
-  date = new Date();
-  year = this.date.getFullYear();
-  month = this.date.getMonth();
-  today = this.date.getDate();
-  plan: Plan = new Plan();
-  calendar: Calendar;  
+  planId: number = 0;
+  plan?: Plan;
+  year?: number;
+  month?: number;
+  calendar?: Calendar;
   monthList = this._helper.Month;
 
-  constructor(private _helper: HelperService, private _lineNotifyService: LineNotifyService) {
-    this.calendar = (this.plan.calendars.length > 0) ? this.plan.calendars[0] : new Calendar(this.year, this.month);
-    this.createDayList();
+  constructor(private _helper: HelperService,
+    private _service: PlanService,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _lineNotifyService: LineNotifyService) { }
+
+  ngOnInit(): void {
+    this._route.params.subscribe(params => {
+      this.planId = params['id'];
+      if(this.planId) this.getPlan();
+      else this.goBack();
+    });
   }
 
-  ngOnInit(): void {}
-
-  createDayList(year: number = this.year, month: number = this.month) {
-    this.calendar.days = [];
-    const lastdate = new Date(year, month + 1, 0).getDate();
-    const prelastdate = new Date(year, month, 0).getDate();
-    const firstday = new Date(year, month, 1).getDay();
-    const lastday = new Date(year, month, lastdate).getDay();
-
-    for(let i = firstday; i > 0; i--)
-      this.calendar.days.push(new Day(prelastdate - i + 1));
-    
-    for(let i = 1; i <= lastdate; i++)
-      this.calendar.days.push(new Day(i));
-
-    for(let i = lastday; i < 6; i++)
-      this.calendar.days.push(new Day(i - lastday + 1));      
+  getPlan() {
+    this._service.getPlan(this.planId, this.year, this.month).subscribe(res => {
+      this.plan = res;
+      const sf = this.plan.startFrom.split('-');
+      if(!this.year) this.year = parseInt(sf[0]);
+      if(!this.month) this.month = parseInt(sf[1]);      
+      this.calendar = new Calendar(this.year, this.month, this.plan.days);
+    });
   }
 
   change(type: string, e:any) {
@@ -48,14 +50,14 @@ export class PlanComponent implements OnInit {
     
     if(type == 'year') this.year = v;
     if(type == 'month') this.month = v;
-    this.createDayList();
+    this.getPlan();
   }
 
   GetLineNotify() {
-    this._lineNotifyService.getAuth().subscribe(res => {
-      console.log(res);
-      
-      window.location.href = res;
-    })
+    this._lineNotifyService.getAuth().subscribe(res => window.location.href = res)
+  }
+
+  goBack() {
+    this._router.navigateByUrl('/plans')
   }
 }

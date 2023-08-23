@@ -1,27 +1,33 @@
-<div class="plan">
+<div *ngIf="plan" class="plan">
     <button (click)="GetLineNotify()">Notify</button>
     <div class="plan-info">
-        <label class="title">
-            <input type="text" [(ngModel)]="plan.title">
-        </label>
-        <p class="desc">
-            <input type="text" [(ngModel)]="plan.description">
-        </p>
+        <span class="title">{{ plan.title }}</span>
+        <p class="desc">{{ plan.description }}</p>
+        <span>Start from {{ plan.startFrom | date: 'yyyy/MM/dd' }}</span>
     </div>
 
-    <div class="plan-filter">
-        <label>
-            <input type="number" min="2020" [max]="year" [value]="year" (change)="change('year', $event)">
-        </label>
+    <div class="plan-ctrl">
+        <div class="plan-filter">
+            <label>
+                <input type="number" min="2020" [max]="year" [value]="year" (change)="change('year', $event)">
+            </label>
+            
+            <label>
+                <select [(ngModel)]="month" (change)="change('month', $event)">
+                    <ng-container *ngFor="let m of monthList; index as i">
+                        <option [value]="i">{{ m }}</option>
+                    </ng-container>
+                </select>
+            </label>
+        </div>
         
-        <label>
-            <select [(ngModel)]="month" (change)="change('month', $event)">
-                <ng-container *ngFor="let m of monthList; index as i">
-                    <option [value]="i">{{ m }}</option>
-                </ng-container>
-            </select>
-        </label>
+        <div class="btns">
+            <button (click)="goBack()">Back</button>
+            <button (click)="goBack()">Platte</button>
+        </div>
     </div>
     
-    <app-calendar [calendar]="calendar"></app-calendar>
+    <ng-container *ngIf="calendar">
+        <app-calendar [calendar]="calendar"></app-calendar>
+    </ng-container>
 </div>

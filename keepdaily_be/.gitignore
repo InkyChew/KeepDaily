@@ -5,7 +5,6 @@
 
 appsettings*
 key.pem
-credential.json
 
 # User-specific files
 *.rsuser

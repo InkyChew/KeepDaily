@@ -1,9 +1,35 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EnvService } from './env.service';
+import { Plan } from '../models/calendar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanService {
 
-  constructor() { }
+  constructor(private _http: HttpClient, private _env: EnvService) { }
+
+  getAllPlan() {
+    return this._http.get<Array<Plan>>(this._env.APIOption.PlanEndpoint);
+  }
+
+  getPlan(id: number, year?: number, month?: number) {
+    let params = new HttpParams();
+    if(year) params = params.set('year', year);
+    if(month) params = params.set('month', month);
+    return this._http.get<Plan>(`${this._env.APIOption.PlanEndpoint}/${id}`, { params: params });
+  }
+
+  postPlan(plan: Plan) {
+    return this._http.post<Plan>(this._env.APIOption.PlanEndpoint, plan);
+  }
+
+  putPlan(plan: Plan) {
+    return this._http.put(this._env.APIOption.PlanEndpoint, plan);
+  }
+
+  deletePlan(id: number) {
+    return this._http.delete(`${this._env.APIOption.PlanEndpoint}/${id}`);
+  }
 }

@@ -10,8 +10,4 @@
     <ProjectReference Include="..\DataLayer\DomainLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repos\" />
-  </ItemGroup>
-
 </Project>

@@ -7,9 +7,9 @@ namespace DomainLayer.Data
     {
         public KeepDailyContext(DbContextOptions<KeepDailyContext> options) : base(options) { }
 
-        public DbSet<Plan> Plan { get; set; }
-        public DbSet<Day> Day { get; set; }
-        public DbSet<User> AppUser { get; set; }
+        public DbSet<Plan> Plan { get; set; } = null!;
+        public DbSet<Day> Day { get; set; } = null!;
+        public DbSet<User> AppUser { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

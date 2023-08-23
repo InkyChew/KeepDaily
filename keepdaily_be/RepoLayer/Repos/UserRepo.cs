@@ -27,11 +27,6 @@ namespace RepoLayer.Repos
                        ?? throw new KeyNotFoundException($"User(Email:{email}) does not exist.");
         }
 
-        public void InActiveUser(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public User InsertUser(User user)
         {
             _users.Add(user);
@@ -39,15 +34,19 @@ namespace RepoLayer.Repos
             return user;
         }
 
+        public User FindUser(int id)
+        {
+            return _users.Find(id) ?? throw new KeyNotFoundException($"User(Id:{id}) does not exist.");
+        }
+
         public void SaveChanges()
         {
             _db.SaveChanges();
         }
 
-        public User FindUser(int id)
+        public void InActiveUser(int id)
         {
-            var user = _users.Find(id);
-            return user ?? throw new KeyNotFoundException($"User(Id:{id}) does not exist.");
+            throw new NotImplementedException();
         }
     }
 }

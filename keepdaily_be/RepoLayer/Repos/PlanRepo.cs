@@ -1,6 +1,5 @@
 ﻿using DomainLayer.Data;
 using DomainLayer.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepoLayer.IRepos;
 
@@ -17,9 +16,36 @@ namespace RepoLayer.Repos
             _plans = db.Plan;
         }
 
-        public Plan CreatePlan(Plan plan)
+        public IEnumerable<Plan> GetAllPlan()
+        {
+            return _plans;
+        }
+
+        public IEnumerable<Plan> GetAllPlanWithDetail()
+        {
+            return _plans.Include(_ => _.Days);
+        }
+
+        public Plan? GetPlan(int id)
+        {
+            return _plans.SingleOrDefault(_ => _.Id == id);
+        }
+
+        public Plan? GetPlanWithDetail(int id)
+        {
+            return _plans.Include(_ => _.Days).SingleOrDefault(_ => _.Id == id);
+        }
+
+        public Plan InsertPlan(Plan plan)
         {
             _plans.Add(plan);
+            _db.SaveChanges();
+            return plan;
+        }
+
+        public Plan UpdatePlan(Plan plan)
+        {
+            _db.Update(plan);
             _db.SaveChanges();
             return plan;
         }
@@ -31,30 +57,9 @@ namespace RepoLayer.Repos
             _db.SaveChanges();
         }
 
-        public IEnumerable<Plan> GetAllPlan()
-        {
-            return _plans.Include(_ => _.Days);
-        }
-
-        public Plan? GetPlan(int id)
-        {
-            return _plans.Include(_ => _.Days).SingleOrDefault(_ => _.Id == id);
-        }
-
-        public Plan UpdatePlan(Plan plan)
-        {
-            var dbPlan = FindPlan(plan.Id);
-            dbPlan.Title = plan.Title;
-            dbPlan.Description = plan.Description;
-            _db.SaveChanges();
-            return plan;
-        }
-
         public Plan FindPlan(int id)
         {
-            var plan = _plans.Find(id);
-            if (plan == null) throw new KeyNotFoundException($"Plan(id:{id}) not found.");
-            return plan;
+            return _plans.Find(id) ?? throw new KeyNotFoundException($"Plan(id:{id}) not found.");
         }
     }
 }

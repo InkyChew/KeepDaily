@@ -11,8 +11,10 @@ namespace DomainLayer.Models
         public int Year { get; set; }
         public int Month { get; set; }
         public int Date { get; set; }
-        [Column(TypeName = "nvarchar(100)")]
-        public string ImgUrl { get; set; } = null!;
+        [Column(TypeName = "nvarchar(20)")]
+        public string ImgName { get; set; } = null!;
+        [Column(TypeName = "nvarchar(10)")]
+        public string ImgType { get; set; } = null!;
         public int PlanId { get; set; }
     }
 }

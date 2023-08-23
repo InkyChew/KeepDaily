@@ -1,10 +1,15 @@
-
 export class Plan {
     id: number = 0;
     title: string = "My Big plan";
     description: string = "Descript your big plan here!";
-    startFrom: Date = new Date();
-    calendars: Calendar[] = [];
+    startFrom: string;
+    updateTime: Date = new Date();    
+    days: Day[] = [];
+    // calendars: Calendar[] = [];
+
+    constructor(today: string) {
+        this.startFrom = today;
+    }
 }
 
 export class Calendar {
@@ -12,19 +17,19 @@ export class Calendar {
     month: number;
     days: Day[] = [];
 
-    constructor(year: number, month: number) {
+    constructor(year: number, month: number, days: Day[]) {
         this.year = year;
         this.month = month;
+        this.days = days;
     }
 }
 
-export class Day {
-    id: number = 0;
+export interface Day {
+    id: number;
+    year: number;
+    month: number;
     date: number;
-    imgUrl?: string
-    planId: number = 0;
-    
-    constructor(date: number) {
-        this.date = date;
-    }
+    imgName?: string;
+    imgType?: string;
+    planId: number;
 }

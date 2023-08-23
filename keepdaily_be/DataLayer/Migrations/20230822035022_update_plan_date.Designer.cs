@@ -4,6 +4,7 @@ using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    partial class KeepDailyContextModelSnapshot : ModelSnapshot
+    [Migration("20230822035022_update_plan_date")]
+    partial class update_plan_date
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,13 +35,9 @@ namespace DomainLayer.Migrations
                     b.Property<int>("Date")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgName")
+                    b.Property<string>("ImgUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("ImgType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Month")
                         .HasColumnType("int");
@@ -75,7 +73,7 @@ namespace DomainLayer.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("UpdateTime")
                         .HasColumnType("datetime2");
