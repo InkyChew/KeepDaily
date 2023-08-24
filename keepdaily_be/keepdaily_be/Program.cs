@@ -1,5 +1,8 @@
 using DomainLayer.Data;
+using DomainLayer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Mymvc.Services;
 using RepoLayer.IRepos;
 using RepoLayer.Repos;
 using Serilog;
@@ -49,6 +52,7 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ILineNotifyService, LineNotifyService>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -57,6 +61,10 @@ builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IPlanRepo, PlanRepo>();
 builder.Services.AddScoped<IDayService, DayService>();
 builder.Services.AddScoped<IDayRepo, DayRepo>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddTransient<IConfirmEmailService, ConfirmEmailService>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+
 
 builder.Services.AddControllers()
     .AddJsonOptions(config =>

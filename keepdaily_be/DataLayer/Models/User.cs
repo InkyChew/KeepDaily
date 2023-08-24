@@ -14,9 +14,9 @@ namespace DomainLayer.Models
         
         [Column(TypeName = "nvarchar(10)")]
         public string Name { get; set; } = null!;
-        [Column(TypeName = "nvarchar(30)")]
-        public string Email { get; set; } = null!;
         [Column(TypeName = "nvarchar(50)")]
+        public string Email { get; set; } = null!;
+        [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; } = null!;
         public bool EmailConfirmed { get; set; } = false;
         [Column(TypeName = "nvarchar(50)")]
@@ -27,6 +27,7 @@ namespace DomainLayer.Models
         public UserLevel Level { get; set; } = UserLevel.General;
         public NotifyType Notify { get; set; } = NotifyType.Email;
         public List<User> Friends { get; set; } = new List<User>();
+        public List<Plan> Plans { get; set; } = new List<Plan>();
     }
 
     public enum UserLevel

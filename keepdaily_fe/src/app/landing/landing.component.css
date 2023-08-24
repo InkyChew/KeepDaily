@@ -1,0 +1,32 @@
+.landing {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section {
+    width: 50%;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.intro .tab {
+    display: inline-block;
+    width: calc(50% - 5px);
+    padding: 1em;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    color: var(--primary);
+    text-decoration: none;
+}
+.tab:first-child {
+    margin-right: 5px;
+}
+.tab:last-child {
+    margin-left: 5px;
+}
+.intro .tab.active {
+    background-color: var(--primary);
+    color: var(--light);
+}

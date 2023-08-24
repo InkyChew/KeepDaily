@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DomainLayer.Data
@@ -13,7 +14,9 @@ namespace DomainLayer.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<User>().HasData(new User { Id = 1, Name = "Inky", Email = "a@a", Password = "123" });
+            var admin = new User { Id = 1, Name = "Inky", Email = "a@a", Password = "123" };
+            admin.Password = new PasswordHasher<User>().HashPassword(admin, admin.Password);
+            builder.Entity<User>().HasData(admin);
         }
     }
 }

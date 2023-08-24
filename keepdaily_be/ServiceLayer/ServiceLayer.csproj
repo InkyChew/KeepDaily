@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.61.0.3120" />
+    <PackageReference Include="SendGrid" Version="9.28.1" />
   </ItemGroup>
 
 </Project>

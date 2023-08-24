@@ -5,7 +5,7 @@ namespace ServiceLayer.IServices
 {
     public interface IPlanService
     {
-        public List<Plan> GetAllPlan();
+        public IEnumerable<Plan> GetAllPlan();
         public List<VMPlan> GetAllPlanWithDetail();
         public Plan? GetPlan(int id);
         public Plan? GetPlanWithDetail(int id, int? year = null, int? month = null);

@@ -30,9 +30,9 @@ namespace ServiceLayer.Services
             _repo.DeletePlan(id);
         }
 
-        public List<Plan> GetAllPlan()
+        public IEnumerable<Plan> GetAllPlan()
         {
-            return _repo.GetAllPlan().OrderByDescending(_ => _.UpdateTime).ToList();
+            return _repo.GetAllPlan().OrderByDescending(_ => _.UpdateTime);
         }
 
         public List<VMPlan> GetAllPlanWithDetail()

@@ -2,4 +2,39 @@
 
 :root {
     --primary: #ffa6a6;
+    --light: #fff;
+    --info: #048eff;
+    --danger: #ff0000;
+}
+
+/* Form */
+.field {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.field-title {
+    display: block;
+}
+
+.field input:not([type="checkbox"]) {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.field-msg {
+    color: var(--danger);
+}
+
+/* Btn */
+.btn-link {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgb(0, 0, 238);
+    text-decoration: underline;
+}
+.btn-link:active {
+    color: rgb(255, 0, 0);
 }

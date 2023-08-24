@@ -20,9 +20,9 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpGet]
-        public IActionResult RedirectToExternalLink()
+        public IActionResult RedirectToExternalLink(string email)
         {
-            return Content(_service.GetAuthorizationUrl("a@a"));
+            return Content(_service.GetAuthorizationUrl(email));
         }
 
         [HttpPost]

@@ -1,0 +1,25 @@
+<section class="login">
+    <h2>Login</h2>
+
+    <form [formGroup]="login" (ngSubmit)="submit()">
+        <label class="field">
+            <span class="field-title">Email</span>
+            <input type="email" required formControlName="email" maxlength="50">
+            <small class="field-msg">{{ getErrorMsg('email') }}</small>
+        </label>
+
+        <label class="field">
+            <span class="field-title">Password</span>            
+            <input type="password" required formControlName="pwd" maxlength="50">
+            <small class="field-msg">{{ getErrorMsg('pwd') }}</small>
+        </label>
+
+        <label class="field">
+            <input type="checkbox" formControlName="remember">Remember me
+        </label>
+
+        <button>Submit</button>
+
+        <a href="">Forgot password</a>
+    </form>
+</section>

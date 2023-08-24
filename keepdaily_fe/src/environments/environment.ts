@@ -10,7 +10,8 @@ export const environment = {
       user: '/User',
       plan: '/Plan',
       day: '/Day',
-      lineNotify: '/LineNotify'
+      lineNotify: '/LineNotify',
+      confirmEmail: '/ConfirmEmail'
     }
   }
 };

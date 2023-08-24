@@ -21,10 +21,9 @@ namespace RepoLayer.Repos
             return _users.SingleOrDefault(_ => _.Id == id);
         }
 
-        public User GetUser(string email)
+        public User? GetUser(string email)
         {
-            return _users.SingleOrDefault(_ => _.Email == email)
-                       ?? throw new KeyNotFoundException($"User(Email:{email}) does not exist.");
+            return _users.SingleOrDefault(_ => _.Email == email);
         }
 
         public User InsertUser(User user)

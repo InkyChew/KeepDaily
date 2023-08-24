@@ -5,11 +5,11 @@ import { EnvService } from './env.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LineNotifyService {
+export class ConfirmEmailService {
 
   constructor(private _http: HttpClient, private _env: EnvService) { }
 
-  getAuth(email: string) {
-    return this._http.get(`${this._env.APIOption.LineNotifyEndpoint}?email=${email}`, { responseType: 'text' });
+  sendConfirmEmail(uid: number) {
+    return this._http.post(this._env.APIOption.ConfirmEmailEndpoint, uid);
   }
 }

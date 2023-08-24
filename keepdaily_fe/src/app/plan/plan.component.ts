@@ -54,7 +54,7 @@ export class PlanComponent implements OnInit {
   }
 
   GetLineNotify() {
-    this._lineNotifyService.getAuth().subscribe(res => window.location.href = res)
+    this._lineNotifyService.getAuth("a@a").subscribe(res => window.location.href = res)
   }
 
   goBack() {

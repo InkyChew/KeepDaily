@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { MonthPipe } from './pipes/month.pipe';
 import { PlansComponent } from './plans/plans.component';
 import { PlanComponent } from './plan/plan.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { LandingComponent } from './landing/landing.component';
+import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +20,18 @@ import { PlanComponent } from './plan/plan.component';
     CalendarComponent,
     MonthPipe,
     PlansComponent,
-    PlanComponent
+    PlanComponent,
+    RegisterComponent,
+    LoginComponent,
+    LandingComponent,
+    EmailConfirmComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

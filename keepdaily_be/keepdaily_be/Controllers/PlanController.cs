@@ -1,5 +1,4 @@
-﻿using DomainLayer.Dto;
-using DomainLayer.Models;
+﻿using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ServiceLayer.IServices;
@@ -18,9 +17,11 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllPlan()
+        public IActionResult GetAllPlan(int? uid)
         {
-            return Ok(_service.GetAllPlan());
+            var plans = _service.GetAllPlan();
+            if(uid.HasValue) { plans = plans.Where(_ => _.UserId == uid); }
+            return Ok(plans.ToList());
         }
 
         [HttpGet("{id}")]
