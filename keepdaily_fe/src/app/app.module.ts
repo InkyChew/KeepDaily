@@ -13,6 +13,9 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
+import { MainComponent } from './main/main.component';
+import { UserSettingComponent } from './user-setting/user-setting.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
     RegisterComponent,
     LoginComponent,
     LandingComponent,
-    EmailConfirmComponent
+    EmailConfirmComponent,
+    MainComponent,
+    UserSettingComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,10 @@ export class PlanService {
 
   constructor(private _http: HttpClient, private _env: EnvService) { }
 
-  getAllPlan() {
-    return this._http.get<Array<Plan>>(this._env.APIOption.PlanEndpoint);
+  getAllPlan(uid?: number) {
+    let params = new HttpParams();
+    if(uid) params = params.set('uid', uid);
+    return this._http.get<Array<Plan>>(this._env.APIOption.PlanEndpoint, { params: params });
   }
 
   getPlan(id: number, year?: number, month?: number) {

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { IUser } from '../models/user';
+import { FormService } from '../services/form.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   login: FormGroup;
+  formService: FormService;
   
   constructor(private _userService: UserService,
     private _router: Router) {
@@ -20,21 +23,10 @@ export class LoginComponent implements OnInit {
       pwd: new FormControl('', [Validators.required]),
       remember: new FormControl('')
     });
+    this.formService = new FormService(this.login);
   }
 
   ngOnInit(): void { }
-
-  getErrorMsg(field: string) {
-    let msg = '';
-    if(field) {
-      const control: FormControl = (this.login.controls as any)[field];      
-      if(control.dirty) {
-        if(control.hasError('required'))
-          msg = `${field.charAt(0).toUpperCase()}${field.slice(1)} is required`;
-      }
-    }
-    return msg;
-  }
 
   submit() {    
     if(this.login.valid) {
@@ -42,14 +34,15 @@ export class LoginComponent implements OnInit {
       data.append('email', this.login.value.email);
       data.append('password', this.login.value.pwd);
       this._userService.login(data).subscribe({
-        next: () => {
+        next: (user: IUser) => {
+          localStorage.setItem('user', JSON.stringify(user));
           this._router.navigateByUrl('/plans');
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
           
-          if(err.status == 405)
-            this._router.navigateByUrl(`/email_confirm/4?uid=${err.error}`);
+          if(err.status == 401)
+            this._router.navigateByUrl(`/email_confirm/4?uid=${err.error.id}`);
         }
       });
     }

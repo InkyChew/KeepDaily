@@ -1,0 +1,36 @@
+<div *ngIf="user" class="user-setting">
+    <form [formGroup]="info" (ngSubmit)="save()">
+        <label class="field">
+            <span class="field-title">Name</span>
+            <input type="text" formControlName="name" maxlength="10">
+        </label>
+
+        <label class="field">
+            <span class="field-title">Email</span>
+            {{ user.email }}
+        </label>
+
+        <label class="field">
+            <span class="field-title">Password</span>
+            <input type="password" formControlName="password" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
+        </label>
+
+        <label class="field">
+            <span class="field-title">ConfirmPassword</span>
+            <input type="password" formControlName="confirmpassword" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
+        </label>
+
+        <div class="field">
+            <span class="field-title">Notification</span>
+            <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
+            <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
+            <button *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
+        </div>
+
+        <button>💾</button>
+    </form>
+
+
+</div>

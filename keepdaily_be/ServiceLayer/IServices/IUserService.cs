@@ -8,7 +8,7 @@ namespace ServiceLayer.IServices
         public User Login(string email, string password);
         public User? GetUser(int id);
         public User FindUser(int id);
-        public User UpdateUser(User user);
+        public User UpdateUserInfo(User user);
         public void UpdateUserLineToken(string email, string token);
         public void InActiveUser(int id);
         public void SaveChanges();

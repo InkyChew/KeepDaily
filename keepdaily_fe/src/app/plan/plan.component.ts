@@ -23,8 +23,7 @@ export class PlanComponent implements OnInit {
   constructor(private _helper: HelperService,
     private _service: PlanService,
     private _route: ActivatedRoute,
-    private _router: Router,
-    private _lineNotifyService: LineNotifyService) { }
+    private _router: Router) { }
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
@@ -51,10 +50,6 @@ export class PlanComponent implements OnInit {
     if(type == 'year') this.year = v;
     if(type == 'month') this.month = v;
     this.getPlan();
-  }
-
-  GetLineNotify() {
-    this._lineNotifyService.getAuth("a@a").subscribe(res => window.location.href = res)
   }
 
   goBack() {

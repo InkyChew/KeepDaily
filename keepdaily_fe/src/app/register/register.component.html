@@ -5,25 +5,25 @@
         <label class="field">
             <span class="field-title">Name</span>
             <input type="text" required formControlName="name" maxlength="10">
-            <small class="field-msg">{{ getErrorMsg('name') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('name') }}</small>
         </label>
 
         <label class="field">
             <span class="field-title">Email</span>
             <input type="email" required formControlName="email" maxlength="50">
-            <small class="field-msg">{{ getErrorMsg('email') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('email') }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Password</span>            
-            <input type="password" required formControlName="pwd" maxlength="50">
-            <small class="field-msg">{{ getErrorMsg('pwd') }}</small>
+            <span class="field-title">Password</span>
+            <input type="password" required formControlName="password" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">ConfirmPassword</span>            
-            <input type="password" required formControlName="cfpwd" maxlength="50">
-            <small class="field-msg">{{ getErrorMsg('cfpwd') }}</small>
+            <span class="field-title">Confirm Password</span>
+            <input type="password" required formControlName="confirmpassword" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
         </label>
 
         <button>Submit</button>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DomainLayer.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class initdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,24 +16,30 @@ namespace DomainLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(10)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(30)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     LineId = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     LineAccessToken = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Level = table.Column<int>(type: "int", nullable: false),
-                    Notify = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    Notify = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppUser_AppUser_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AppUser",
-                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Friend",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FriendId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friend", x => new { x.UserId, x.FriendId });
                 });
 
             migrationBuilder.CreateTable(
@@ -42,13 +48,21 @@ namespace DomainLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    StartFrom = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartFrom = table.Column<string>(type: "nvarchar(16)", nullable: false),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plan", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Plan_AppUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +74,8 @@ namespace DomainLayer.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<int>(type: "int", nullable: false),
-                    ImgUrl = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    ImgName = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    ImgType = table.Column<string>(type: "nvarchar(10)", nullable: false),
                     PlanId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -76,8 +91,8 @@ namespace DomainLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "AppUser",
-                columns: new[] { "Id", "Email", "EmailConfirmed", "IsActive", "Level", "LineAccessToken", "LineId", "Name", "Notify", "Password", "UserId" },
-                values: new object[] { 1, "a@a", false, false, 1, null, null, "Inky", 1, "123", null });
+                columns: new[] { "Id", "Email", "EmailConfirmed", "IsActive", "Level", "LineAccessToken", "LineId", "Name", "Notify", "Password" },
+                values: new object[] { 1, "a@a", false, false, 1, null, null, "Inky", 1, "AQAAAAEAACcQAAAAEC/2HbbS1a3CX3i+86ReHA1pu6p3Gq+3MJr4uetpbPgg53zkqsz9HSnicSWkDLrkcQ==" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUser_Email",
@@ -93,26 +108,29 @@ namespace DomainLayer.Migrations
                 filter: "[LineId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppUser_UserId",
-                table: "AppUser",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Day_PlanId",
                 table: "Day",
                 column: "PlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Plan_UserId",
+                table: "Plan",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AppUser");
-
-            migrationBuilder.DropTable(
                 name: "Day");
 
             migrationBuilder.DropTable(
+                name: "Friend");
+
+            migrationBuilder.DropTable(
                 name: "Plan");
+
+            migrationBuilder.DropTable(
+                name: "AppUser");
         }
     }
 }

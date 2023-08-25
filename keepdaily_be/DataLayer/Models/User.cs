@@ -24,23 +24,15 @@ namespace DomainLayer.Models
         [Column(TypeName = "nvarchar(50)")]
         public string? LineAccessToken { get; set; }
         public bool IsActive { get; set; } = false;
-        public UserLevel Level { get; set; } = UserLevel.General;
-        public NotifyType Notify { get; set; } = NotifyType.Email;
-        public List<User> Friends { get; set; } = new List<User>();
-        public List<Plan> Plans { get; set; } = new List<Plan>();
+        public UserLevel UserLevel { get; set; } = UserLevel.General;
+        public bool EmailNotify { get; set; } = true;
+        public bool LineNotify { get; set; } = false;
+        public virtual List<Plan> Plans { get; set; } = new List<Plan>();
     }
 
     public enum UserLevel
     {
         General = 1,
         Premium = 2,
-    }
-
-    public enum NotifyType
-    {
-        None = 0,
-        Email = 1,
-        Line = 2,
-        All = 3
     }
 }

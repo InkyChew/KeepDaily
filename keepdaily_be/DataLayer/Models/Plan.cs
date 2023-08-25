@@ -15,7 +15,8 @@ namespace DomainLayer.Models
         [Column(TypeName = "nvarchar(16)")]
         public string StartFrom { get; set; } = null!;
         public DateTime UpdateTime { get; set; }
-        public List<Day> Days { get; set; } = new List<Day>();
+        public virtual List<Day> Days { get; set; } = new List<Day>();
         public int UserId { get; set; }
+        public virtual User? User { get; set; }
     }
 }

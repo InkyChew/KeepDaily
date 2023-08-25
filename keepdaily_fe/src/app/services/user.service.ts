@@ -15,6 +15,14 @@ export class UserService {
   }
 
   login(data: FormData) {
-    return this._http.post(`${this._env.APIOption.UserEndpoint}/Login`, data);
+    return this._http.post<IUser>(`${this._env.APIOption.UserEndpoint}/Login`, data);
+  }
+
+  getUser(id: number) {
+    return this._http.get<IUser>(`${this._env.APIOption.UserEndpoint}/${id}`);
+  }
+
+  updateUser(user: IUser) {
+    return this._http.put(this._env.APIOption.UserEndpoint, user);
   }
 }

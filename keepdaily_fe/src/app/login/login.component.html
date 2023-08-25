@@ -5,13 +5,13 @@
         <label class="field">
             <span class="field-title">Email</span>
             <input type="email" required formControlName="email" maxlength="50">
-            <small class="field-msg">{{ getErrorMsg('email') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('email') }}</small>
         </label>
 
         <label class="field">
             <span class="field-title">Password</span>            
             <input type="password" required formControlName="pwd" maxlength="50">
-            <small class="field-msg">{{ getErrorMsg('pwd') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('pwd') }}</small>
         </label>
 
         <label class="field">

@@ -50,9 +50,13 @@ namespace keepdaily_be.Controllers
                 var res = new User { Id = user.Id, Name = user.Name, Email = user.Email };
                 return CreatedAtAction(null, res);
             }
+            catch (UnauthorizedException ex)
+            {
+                return Unauthorized(new { id = ex.Message });
+            }
             catch (ForbiddenException ex)
             {
-                return StatusCode(StatusCodes.Status405MethodNotAllowed, ex.Message);
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
             }
             catch (BadRequestException ex)
             {
@@ -65,6 +69,26 @@ namespace keepdaily_be.Controllers
             }
         }
 
-        
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
+        {
+            var user = _service.GetUser(id);
+            return user == null ? NotFound() : Ok(user);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUser([FromBody] User user)
+        {
+            try
+            {
+                _service.UpdateUserInfo(user);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

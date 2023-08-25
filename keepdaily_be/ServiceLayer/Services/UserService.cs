@@ -30,7 +30,8 @@ namespace ServiceLayer.Services
         {
             var user = _repo.GetUser(email);
             if (user == null) throw new BadRequestException("Email does not exist.");
-            if (!user.EmailConfirmed) throw new ForbiddenException($"{user.Id}");
+            if (!user.EmailConfirmed) throw new UnauthorizedException($"{user.Id}");
+            if (!user.IsActive) throw new ForbiddenException("Your account is banned by keepdaily due to against the rule.");
 
             var res = new PasswordHasher<User>().VerifyHashedPassword(user, user.Password, password);
             if(res == PasswordVerificationResult.Failed)
@@ -64,11 +65,13 @@ namespace ServiceLayer.Services
             return user;
         }
 
-        public User UpdateUser(User user)
+        public User UpdateUserInfo(User user)
         {
             var dbUser = _repo.FindUser(user.Id);
             dbUser.Name = user.Name;
             dbUser.Password = user.Password;
+            dbUser.EmailNotify = user.EmailNotify;
+            dbUser.LineNotify = user.LineNotify;
             _repo.SaveChanges();
             return dbUser;
         }
@@ -77,6 +80,7 @@ namespace ServiceLayer.Services
         {
             var user = _repo.GetUser(email) ?? throw new KeyNotFoundException($"User(Email:{email}) does not exist.");
             user.LineAccessToken = token;
+            user.LineNotify = true;
             _repo.SaveChanges();
         }
 

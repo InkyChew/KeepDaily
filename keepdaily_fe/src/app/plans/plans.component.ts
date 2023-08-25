@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Plan } from '../models/calendar';
 import { PlanService } from '../services/plan.service';
 import { formatDate } from '@angular/common';
+import { IUser } from '../models/user';
 
 @Component({
   selector: 'app-plans',
@@ -10,6 +11,7 @@ import { formatDate } from '@angular/common';
 })
 export class PlansComponent implements OnInit {
 
+  user: IUser = JSON.parse(localStorage.getItem('user')!);
   planList: Plan[] = [];
   edit: number = -1;
   today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');

@@ -57,6 +57,19 @@ namespace DomainLayer.Migrations
                     b.ToTable("Day");
                 });
 
+            modelBuilder.Entity("DomainLayer.Models.Friend", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "FriendId");
+
+                    b.ToTable("Friend");
+                });
+
             modelBuilder.Entity("DomainLayer.Models.Plan", b =>
                 {
                     b.Property<int>("Id")
@@ -80,7 +93,12 @@ namespace DomainLayer.Migrations
                     b.Property<DateTime>("UpdateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Plan");
                 });
@@ -100,11 +118,11 @@ namespace DomainLayer.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("EmailNotify")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LineAccessToken")
                         .HasColumnType("nvarchar(50)");
@@ -112,18 +130,18 @@ namespace DomainLayer.Migrations
                     b.Property<string>("LineId")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("LineNotify")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("Notify")
-                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserLevel")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -135,8 +153,6 @@ namespace DomainLayer.Migrations
                         .IsUnique()
                         .HasFilter("[LineId] IS NOT NULL");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AppUser");
 
                     b.HasData(
@@ -145,11 +161,12 @@ namespace DomainLayer.Migrations
                             Id = 1,
                             Email = "a@a",
                             EmailConfirmed = false,
+                            EmailNotify = true,
                             IsActive = false,
-                            Level = 1,
+                            LineNotify = true,
                             Name = "Inky",
-                            Notify = 1,
-                            Password = "123"
+                            Password = "AQAAAAEAACcQAAAAEPboLmdMsd7JGPgbh2bFnZuUE6xAP4rH9t1x8/WVCAYIu83jGf/aMf6JDLUOyjs48g==",
+                            UserLevel = 1
                         });
                 });
 
@@ -162,11 +179,15 @@ namespace DomainLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DomainLayer.Models.User", b =>
+            modelBuilder.Entity("DomainLayer.Models.Plan", b =>
                 {
-                    b.HasOne("DomainLayer.Models.User", null)
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
+                    b.HasOne("DomainLayer.Models.User", "User")
+                        .WithMany("Plans")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Plan", b =>
@@ -176,7 +197,7 @@ namespace DomainLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.User", b =>
                 {
-                    b.Navigation("Friends");
+                    b.Navigation("Plans");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,21 +4,22 @@
     <ul *ngFor="let plan of planList; index as i">
         <li>
             <ng-container *ngIf="edit==i else readonly">
-                <label>
-                    <input type="text" [(ngModel)]="plan.title">
+                <label class="field">
+                    <input type="text" [(ngModel)]="plan.title" maxlength="20">
                 </label>
     
-                <label>
-                    <input type="text" [(ngModel)]="plan.description">
+                <label class="field">
+                    <input type="text" [(ngModel)]="plan.description" maxlength="50">
                 </label>
 
-                <label>
+                <label class="field">
+                    <span class="field-title">Start From</span>
                     <input type="date" [(ngModel)]="plan.startFrom" [min]="today">
                 </label>
 
                 <div class="btns">
-                    <button (click)="save(plan)">Save</button>
-                    <button (click)="closeEditor(plan)">Cancel</button>
+                    <button (click)="save(plan)">💾</button>
+                    <button (click)="closeEditor(plan)">❌</button>
                 </div>
             </ng-container>
             <ng-template #readonly>
@@ -35,8 +36,8 @@
                 </label>
 
                 <div class="btns">
-                    <button (click)="edit = i">Edit</button>
-                    <button (click)="delete(plan.id, i)">Del</button>                
+                    <button (click)="edit = i">✏️</button>
+                    <button (click)="delete(plan.id, i)">🗑️</button>
                 </div>
             </ng-template>
         </li>

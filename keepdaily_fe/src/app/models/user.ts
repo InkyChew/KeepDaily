@@ -7,19 +7,13 @@ export interface IUser {
     lineId: string | null;
     lineAccessToken: string | null;
     isActive: boolean;
-    level: UserLevel;
-    notify: NotifyType;
+    userLevel: UserLevel;
+    emailNotify: boolean;
+    lineNotify: boolean;
     friends: IUser[];
 }
 
 export enum UserLevel {
     General = 1,
     Premium = 2
-}
-
-export enum NotifyType {
-    None = 0,
-    Email = 1,
-    Line = 2,
-    All = 3
 }
