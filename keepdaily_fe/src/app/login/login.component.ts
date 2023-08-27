@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IUser } from '../models/user';
 import { FormService } from '../services/form.service';
+import { ConfirmEmailService } from '../services/confirm-email.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   formService: FormService;
   
   constructor(private _userService: UserService,
+    private _email: ConfirmEmailService,
     private _router: Router) {
     this.login  = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
       this._userService.login(data).subscribe({
         next: (user: IUser) => {
           localStorage.setItem('user', JSON.stringify(user));
-          this._router.navigateByUrl('/plans');
+          this._router.navigateByUrl('/main/plans');
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
@@ -46,5 +48,11 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  forgotPwd() {
+    const email = prompt("Please enter your email");
+    // if(email)
+      
   }
 }

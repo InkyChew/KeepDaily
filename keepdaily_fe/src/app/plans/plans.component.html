@@ -1,20 +1,27 @@
 <div class="plans">
-    <button (click)="add()">Add</button>
+    <button (click)="add()">➕</button>
 
     <ul *ngFor="let plan of planList; index as i">
         <li>
             <ng-container *ngIf="edit==i else readonly">
-                <label class="field">
+                <label class="field required">
                     <input type="text" [(ngModel)]="plan.title" maxlength="20">
                 </label>
     
-                <label class="field">
+                <label class="field required">
                     <input type="text" [(ngModel)]="plan.description" maxlength="50">
                 </label>
 
                 <label class="field">
-                    <span class="field-title">Start From</span>
+                    <span class="field-title required">Start From</span>
                     <input type="date" [(ngModel)]="plan.startFrom" [min]="today">
+                </label>
+                
+                <label class="field">
+                    <span class="field-title">Category</span>
+                    <select [(ngModel)]="plan.categoryId">
+                        <option value="null">Select a category</option>
+                    </select>   
                 </label>
 
                 <div class="btns">
@@ -33,6 +40,10 @@
 
                 <label>
                     {{ plan.startFrom }}
+                </label>
+
+                <label>
+                    {{ plan.categoryId }}
                 </label>
 
                 <div class="btns">

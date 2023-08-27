@@ -23,6 +23,10 @@ export class UserService {
   }
 
   updateUser(user: IUser) {
-    return this._http.put(this._env.APIOption.UserEndpoint, user);
+    return this._http.put<IUser>(this._env.APIOption.UserEndpoint, user);
+  }
+
+  updatePassword(id: number, pwd: string) {
+    return this._http.patch(`${this._env.APIOption.UserEndpoint}/${id}`, pwd);
   }
 }

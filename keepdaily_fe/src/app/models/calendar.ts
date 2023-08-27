@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export class Plan {
     id: number = 0;
     title: string = "My Big plan";
@@ -5,9 +7,13 @@ export class Plan {
     startFrom: string;
     updateTime: Date = new Date();    
     days: Day[] = [];
-    // calendars: Calendar[] = [];
+    userId: number;
+    user?: IUser;
+    categoryId: number | null = null;
+    category?: ICategory;
 
-    constructor(today: string) {
+    constructor(uid: number, today: string) {
+        this.userId = uid;
         this.startFrom = today;
     }
 }
@@ -32,4 +38,9 @@ export interface Day {
     imgName?: string;
     imgType?: string;
     planId: number;
+}
+
+export interface ICategory {
+    id: number;
+    name: string;
 }

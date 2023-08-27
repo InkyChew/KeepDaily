@@ -21,7 +21,6 @@ export class UserSettingComponent implements OnInit {
     private _userService: UserService,
     private _lineNotifyService: LineNotifyService) {
     this.info  = new FormGroup({
-      name: new FormControl(''),
       password: new FormControl(''),
       confirmpassword: new FormControl('')
     });
@@ -46,10 +45,9 @@ export class UserSettingComponent implements OnInit {
 
   save() {
     if(this.info.valid) {
-      if(this.info.value.name) this.user.name = this.info.value.name;
       if(this.info.value.password) this.user.password = this.info.value.password;
 
-      this._userService.updateUser(this.user).subscribe();
+      this._userService.updateUser(this.user).subscribe((res) => this.user = res);
     }
   }
 

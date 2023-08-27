@@ -18,6 +18,13 @@ namespace DomainLayer.Models
         public string Email { get; set; } = null!;
         [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; } = null!;
+
+        [Column(TypeName = "nvarchar(100)")]
+        public string? Description { get; set; }
+        [Column(TypeName = "nvarchar(20)")]
+        public string? ImgName { get; set; }
+        [Column(TypeName = "nvarchar(10)")]
+        public string? ImgType { get; set; }
         public bool EmailConfirmed { get; set; } = false;
         [Column(TypeName = "nvarchar(50)")]
         public string? LineId { get; set; }

@@ -9,6 +9,7 @@ namespace DomainLayer.Data
         public KeepDailyContext(DbContextOptions<KeepDailyContext> options) : base(options) { }
 
         public DbSet<Plan> Plan { get; set; } = null!;
+        public DbSet<Category> Category { get; set; } = null!;
         public DbSet<Day> Day { get; set; } = null!;
         public DbSet<User> AppUser { get; set; } = null!;
         public DbSet<Friend> Friend { get; set; } = null!;

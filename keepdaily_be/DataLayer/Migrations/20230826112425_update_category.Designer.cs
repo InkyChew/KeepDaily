@@ -4,6 +4,7 @@ using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    partial class KeepDailyContextModelSnapshot : ModelSnapshot
+    [Migration("20230826112425_update_category")]
+    partial class update_category
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace DomainLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Day", b =>
@@ -71,7 +73,7 @@ namespace DomainLayer.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("Day", (string)null);
+                    b.ToTable("Day");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Friend", b =>
@@ -84,7 +86,7 @@ namespace DomainLayer.Migrations
 
                     b.HasKey("UserId", "FriendId");
 
-                    b.ToTable("Friend", (string)null);
+                    b.ToTable("Friend");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Plan", b =>
@@ -95,7 +97,7 @@ namespace DomainLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -122,7 +124,7 @@ namespace DomainLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Plan", (string)null);
+                    b.ToTable("Plan");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.User", b =>
@@ -133,9 +135,6 @@ namespace DomainLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -145,12 +144,6 @@ namespace DomainLayer.Migrations
 
                     b.Property<bool>("EmailNotify")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ImgName")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("ImgType")
-                        .HasColumnType("nvarchar(10)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -184,7 +177,7 @@ namespace DomainLayer.Migrations
                         .IsUnique()
                         .HasFilter("[LineId] IS NOT NULL");
 
-                    b.ToTable("AppUser", (string)null);
+                    b.ToTable("AppUser");
 
                     b.HasData(
                         new
@@ -196,7 +189,7 @@ namespace DomainLayer.Migrations
                             IsActive = false,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAEKyVHwz+VNL/+v4fEFZtVH/Y8KRuF2Zkh3scCOz9LtjjZXg2EB0KEfUGxSyrP6wDow==",
+                            Password = "AQAAAAEAACcQAAAAEA/0dFd1il2Jlz/ephs8a8lopVVfu/i5SJ1t9jGs6MrUPc4keDIV4qXw+AggrMS1EA==",
                             UserLevel = 1
                         });
                 });
@@ -214,7 +207,9 @@ namespace DomainLayer.Migrations
                 {
                     b.HasOne("DomainLayer.Models.Category", "Category")
                         .WithMany("Plans")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DomainLayer.Models.User", "User")
                         .WithMany("Plans")

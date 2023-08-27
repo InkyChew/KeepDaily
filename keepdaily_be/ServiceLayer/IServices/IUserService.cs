@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 
 namespace ServiceLayer.IServices
 {
@@ -8,7 +9,9 @@ namespace ServiceLayer.IServices
         public User Login(string email, string password);
         public User? GetUser(int id);
         public User FindUser(int id);
-        public User UpdateUserInfo(User user);
+        public User? GetUser(string email);
+        public User UpdateUserInfo(VUser user);
+        public void UpdatePassword(int id, string password);
         public void UpdateUserLineToken(string email, string token);
         public void InActiveUser(int id);
         public void SaveChanges();

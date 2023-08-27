@@ -10,17 +10,19 @@ namespace keepdaily_be.Controllers
     public class PlanController : ControllerBase
     {
         private readonly IPlanService _service;
+        private readonly IUserService _userService;
 
-        public PlanController(IPlanService service)
+        public PlanController(IPlanService service, IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
 
         [HttpGet]
         public IActionResult GetAllPlan(int? uid)
         {
             var plans = _service.GetAllPlan();
-            if(uid.HasValue) { plans = plans.Where(_ => _.UserId == uid); }
+            if(uid.HasValue) plans = plans.Where(_ => _.UserId == uid);
             return Ok(plans.ToList());
         }
 

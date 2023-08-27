@@ -9,6 +9,7 @@ export const environment = {
     endpoint: {
       user: '/User',
       plan: '/Plan',
+      category: '/Category',
       day: '/Day',
       lineNotify: '/LineNotify',
       confirmEmail: '/ConfirmEmail'

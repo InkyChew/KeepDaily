@@ -49,5 +49,12 @@ namespace ServiceLayer.Services
             _cache.Remove(email);
             return code == verifycode;
         }
+
+        public async Task SendConfirmChangePasswordEmailAsync(User user)
+        {
+            var callbackUrl = $"http://localhost:4200/forgot_password/{user.Id}";
+            await _emailService.SendEmailAsync(user.Email, "Change Password",
+                        $"Change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+        }
     }
 }

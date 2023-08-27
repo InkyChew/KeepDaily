@@ -1,5 +1,7 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.Caching.Memory;
 using SendGrid.Helpers.Errors.Model;
 using Serilog;
@@ -73,15 +75,40 @@ namespace keepdaily_be.Controllers
         public IActionResult GetUser(int id)
         {
             var user = _service.GetUser(id);
-            return user == null ? NotFound() : Ok(user);
+            return user == null ? NotFound() : Ok(new VUser
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Description = user.Description,
+                ImgName = user.ImgName,
+                ImgType = user.ImgType,
+                LineAccessToken = user.LineAccessToken,
+                LineNotify = user.LineNotify,
+                EmailNotify = user.EmailNotify,
+            });
         }
 
         [HttpPut]
-        public IActionResult UpdateUser([FromBody] User user)
+        public IActionResult UpdateUser([FromBody] VUser user)
         {
             try
             {
-                _service.UpdateUserInfo(user);
+                return CreatedAtAction(null, _service.UpdateUserInfo(user));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdatePassword(int id, [FromBody] string password)
+        {
+            try
+            {
+                _service.UpdatePassword(id, password);
                 return NoContent();
             }
             catch (Exception ex)

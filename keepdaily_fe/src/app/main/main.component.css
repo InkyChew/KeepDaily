@@ -1,0 +1,17 @@
+article {
+    display: flex;
+}
+
+section {
+    padding: 1em;
+}
+
+.user {
+    width: 30%;
+    background: coral;
+}
+
+.content {
+    flex: 1;
+    background: cornflowerblue;
+}

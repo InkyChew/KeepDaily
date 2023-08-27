@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Dto;
+using DomainLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using RepoLayer.IRepos;
 using SendGrid.Helpers.Errors.Model;
@@ -24,6 +25,11 @@ namespace ServiceLayer.Services
         public User FindUser(int id)
         {
             return _repo.FindUser(id);
+        }
+
+        public User? GetUser(string email)
+        {
+            return _repo.GetUser(email);
         }
 
         public User Login(string email, string password)
@@ -65,15 +71,25 @@ namespace ServiceLayer.Services
             return user;
         }
 
-        public User UpdateUserInfo(User user)
+        public User UpdateUserInfo(VUser user)
         {
             var dbUser = _repo.FindUser(user.Id);
             dbUser.Name = user.Name;
-            dbUser.Password = user.Password;
+            if(user.Password != null)
+                dbUser.Password = new PasswordHasher<User>().HashPassword(dbUser, user.Password);
+            dbUser.Description = user.Description;
             dbUser.EmailNotify = user.EmailNotify;
             dbUser.LineNotify = user.LineNotify;
             _repo.SaveChanges();
             return dbUser;
+        }
+
+        public void UpdatePassword(int id, string password)
+        {
+
+            var user = _repo.FindUser(id);
+            user.Password = new PasswordHasher<User>().HashPassword(user, password);
+            _repo.SaveChanges();
         }
 
         public void UpdateUserLineToken(string email, string token)

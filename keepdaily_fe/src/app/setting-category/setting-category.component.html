@@ -1,0 +1,20 @@
+<article>
+    <section>
+        <label class="field">
+            Name
+            <input type="text" #addCtg>
+        </label>
+        <button (click)="create(addCtg)">➕</button>
+    </section>
+    <section>
+        <ul *ngFor="let ctg of ctgList; index as i">
+            <li>
+                <label class="field">
+                    <input type="text" [(ngModel)]="ctg.name">
+                </label>
+                <button (click)="edit(ctg, i)">💾</button>
+                <button (click)="delete(ctg.id, i)">🗑️</button>
+            </li>
+        </ul>
+    </section>
+</article>

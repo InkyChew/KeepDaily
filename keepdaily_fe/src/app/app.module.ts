@@ -16,6 +16,8 @@ import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
 import { MainComponent } from './main/main.component';
 import { UserSettingComponent } from './user-setting/user-setting.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SettingCategoryComponent } from './setting-category/setting-category.component';
+import { FriendsComponent } from './friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     EmailConfirmComponent,
     MainComponent,
     UserSettingComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SettingCategoryComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

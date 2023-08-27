@@ -1,12 +1,17 @@
-<article *ngIf="user" class="main">
+<article *ngIf="user">
 
     <section class="user">
         <div class="photo">
             <img src="" alt="">
         </div>
         <span>{{ user.name }}</span>
+        <span>{{ user.description }}</span>
         
+        <a routerLink="/user_setting">✏️</a>
     </section>
 
+    <section class="content">
+        <router-outlet></router-outlet>
+    </section>
     
 </article>

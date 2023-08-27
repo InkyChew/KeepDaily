@@ -63,5 +63,22 @@ namespace keepdaily_be.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> SendConfirmChangePasswordEmailAsync([FromBody] string email)
+        {
+            try
+            {
+                var user = _userService.GetUser(email);
+                if (user == null) return NotFound(email);
+                await _service.SendConfirmChangePasswordEmailAsync(user);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

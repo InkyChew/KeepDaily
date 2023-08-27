@@ -59,6 +59,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IPlanRepo, PlanRepo>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<IDayService, DayService>();
 builder.Services.AddScoped<IDayRepo, DayRepo>();
 builder.Services.AddTransient<IEmailService, EmailService>();

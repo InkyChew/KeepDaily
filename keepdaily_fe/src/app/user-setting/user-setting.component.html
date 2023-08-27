@@ -1,8 +1,8 @@
 <div *ngIf="user" class="user-setting">
-    <form [formGroup]="info" (ngSubmit)="save()">
+    <!-- <form [formGroup]="info" (ngSubmit)="save()"> -->
         <label class="field">
             <span class="field-title">Name</span>
-            <input type="text" formControlName="name" maxlength="10">
+            <input type="text" [(ngModel)]="user.name" maxlength="10">
         </label>
 
         <label class="field">
@@ -11,16 +11,23 @@
         </label>
 
         <label class="field">
-            <span class="field-title">Password</span>
-            <input type="password" formControlName="password" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
+            <span class="field-title">Description</span>
+            <input type="text" [(ngModel)]="user.description" maxlength="50">
         </label>
 
-        <label class="field">
-            <span class="field-title">ConfirmPassword</span>
-            <input type="password" formControlName="confirmpassword" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
-        </label>
+        <form [formGroup]="info">
+            <label class="field">
+                <span class="field-title">Password</span>
+                <input type="password" formControlName="password" maxlength="50">
+                <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
+            </label>
+    
+            <label class="field">
+                <span class="field-title">ConfirmPassword</span>
+                <input type="password" formControlName="confirmpassword" maxlength="50">
+                <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
+            </label>
+        </form>
 
         <div class="field">
             <span class="field-title">Notification</span>
@@ -29,8 +36,9 @@
             <button *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
         </div>
 
-        <button>💾</button>
-    </form>
+        <button (click)="save()">💾</button>
+        <a routerLink="/main/plans">🔙</a>
+    <!-- </form> -->
 
 
 </div>

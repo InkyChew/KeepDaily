@@ -12,4 +12,8 @@ export class ConfirmEmailService {
   sendConfirmEmail(uid: number) {
     return this._http.post(this._env.APIOption.ConfirmEmailEndpoint, uid);
   }
+
+  sendChangePasswordConfirmEmail(email: string) {
+    return this._http.post(`${this._env.APIOption.ConfirmEmailEndpoint}/ChangePassword`, email);
+  }
 }

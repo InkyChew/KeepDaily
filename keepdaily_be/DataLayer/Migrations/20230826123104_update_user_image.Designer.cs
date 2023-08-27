@@ -4,6 +4,7 @@ using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    partial class KeepDailyContextModelSnapshot : ModelSnapshot
+    [Migration("20230826123104_update_user_image")]
+    partial class update_user_image
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace DomainLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Day", b =>
@@ -71,7 +73,7 @@ namespace DomainLayer.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("Day", (string)null);
+                    b.ToTable("Day");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Friend", b =>
@@ -84,7 +86,7 @@ namespace DomainLayer.Migrations
 
                     b.HasKey("UserId", "FriendId");
 
-                    b.ToTable("Friend", (string)null);
+                    b.ToTable("Friend");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Plan", b =>
@@ -122,7 +124,7 @@ namespace DomainLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Plan", (string)null);
+                    b.ToTable("Plan");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.User", b =>
@@ -184,7 +186,7 @@ namespace DomainLayer.Migrations
                         .IsUnique()
                         .HasFilter("[LineId] IS NOT NULL");
 
-                    b.ToTable("AppUser", (string)null);
+                    b.ToTable("AppUser");
 
                     b.HasData(
                         new

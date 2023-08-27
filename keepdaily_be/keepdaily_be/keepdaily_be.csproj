@@ -8,14 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="key.pem" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="key.pem" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.21">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,12 +19,5 @@
 		<ProjectReference Include="..\DataLayer\DomainLayer.csproj" />
 		<ProjectReference Include="..\RepoLayer\RepoLayer.csproj" />
 		<ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="key.pem">
-			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 </Project>

@@ -18,5 +18,7 @@ namespace DomainLayer.Models
         public virtual List<Day> Days { get; set; } = new List<Day>();
         public int UserId { get; set; }
         public virtual User? User { get; set; }
+        public int? CategoryId { get; set; }
+        public virtual Category? Category { get; set; }
     }
 }

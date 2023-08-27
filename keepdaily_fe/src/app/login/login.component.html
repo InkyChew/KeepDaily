@@ -14,12 +14,8 @@
             <small class="field-msg">{{ formService.getErrorMsg('pwd') }}</small>
         </label>
 
-        <label class="field">
-            <input type="checkbox" formControlName="remember">Remember me
-        </label>
+        <button class="field">Submit</button>
 
-        <button>Submit</button>
-
-        <a href="">Forgot password</a>
+        <button class="btn-link" (click)="forgotPwd()">Forgot password</button>
     </form>
 </section>

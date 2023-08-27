@@ -18,7 +18,7 @@ namespace RepoLayer.Repos
 
         public IEnumerable<Plan> GetAllPlan()
         {
-            return _plans;
+            return _plans.Include(_ => _.Category);
         }
 
         public IEnumerable<Plan> GetAllPlanWithDetail()

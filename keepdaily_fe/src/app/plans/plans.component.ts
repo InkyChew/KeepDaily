@@ -27,7 +27,7 @@ export class PlansComponent implements OnInit {
   }
 
   add() {
-    this.planList.unshift(new Plan(this.today));
+    this.planList.unshift(new Plan(this.user.id, this.today));
     this.edit = 0;
   }
 

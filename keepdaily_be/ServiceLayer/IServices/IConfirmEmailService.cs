@@ -6,5 +6,6 @@ namespace ServiceLayer.IServices
     {
         public Task SendConfirmEmailAsync(User user);
         public bool IsEmailConfirm(string email, string code);
+        public Task SendConfirmChangePasswordEmailAsync(User user);
     }
 }

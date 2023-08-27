@@ -3,6 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
+    description: string;
     emailConfirmed: boolean;
     lineId: string | null;
     lineAccessToken: string | null;
