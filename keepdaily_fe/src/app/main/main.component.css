@@ -1,17 +1,19 @@
 article {
     display: flex;
+    height: calc(100vh - 2*var(--unit));
 }
 
 section {
-    padding: 1em;
+    padding: var(--unit);
 }
 
 .user {
     width: 30%;
-    background: coral;
+    background: rgb(255, 233, 225);
 }
 
 .content {
     flex: 1;
-    background: cornflowerblue;
+    background: rgb(213, 227, 255);
+    overflow-y: auto;
 }

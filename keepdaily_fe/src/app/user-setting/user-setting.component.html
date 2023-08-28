@@ -1,44 +1,42 @@
 <div *ngIf="user" class="user-setting">
-    <!-- <form [formGroup]="info" (ngSubmit)="save()"> -->
+    <label class="field">
+        <span class="field-title">Name</span>
+        <input type="text" [(ngModel)]="user.name" maxlength="10">
+    </label>
+
+    <label class="field">
+        <span class="field-title">Email</span>
+        {{ user.email }}
+    </label>
+
+    <label class="field">
+        <span class="field-title">Description</span>
+        <input type="text" [(ngModel)]="user.description" maxlength="50">
+    </label>
+
+    <form [formGroup]="info">
         <label class="field">
-            <span class="field-title">Name</span>
-            <input type="text" [(ngModel)]="user.name" maxlength="10">
+            <span class="field-title">Password</span>
+            <input type="password" formControlName="password" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Email</span>
-            {{ user.email }}
+            <span class="field-title">ConfirmPassword</span>
+            <input type="password" formControlName="confirmpassword" maxlength="50">
+            <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
         </label>
+    </form>
 
-        <label class="field">
-            <span class="field-title">Description</span>
-            <input type="text" [(ngModel)]="user.description" maxlength="50">
-        </label>
+    <div class="field">
+        <span class="field-title">Notification</span>
+        <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
+        <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
+        <button *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
+    </div>
 
-        <form [formGroup]="info">
-            <label class="field">
-                <span class="field-title">Password</span>
-                <input type="password" formControlName="password" maxlength="50">
-                <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
-            </label>
-    
-            <label class="field">
-                <span class="field-title">ConfirmPassword</span>
-                <input type="password" formControlName="confirmpassword" maxlength="50">
-                <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
-            </label>
-        </form>
-
-        <div class="field">
-            <span class="field-title">Notification</span>
-            <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
-            <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
-            <button *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
-        </div>
-
+    <div class="btns">
         <button (click)="save()">💾</button>
-        <a routerLink="/main/plans">🔙</a>
-    <!-- </form> -->
-
-
+        <a routerLink="/main/plans">⬅</a>
+    </div>
 </div>

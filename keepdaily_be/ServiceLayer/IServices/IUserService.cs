@@ -1,16 +1,16 @@
-﻿using DomainLayer.Dto;
-using DomainLayer.Models;
+﻿using DomainLayer.Models;
 
 namespace ServiceLayer.IServices
 {
     public interface IUserService
     {
         public Task<User> RegisterAsync(string name, string email, string password);
-        public User Login(string email, string password);
+        public AuthenticateResponse Login(string email, string password);
+        public AuthenticateResponse RefreshToken(User user);
         public User? GetUser(int id);
         public User FindUser(int id);
         public User? GetUser(string email);
-        public User UpdateUserInfo(VUser user);
+        public User UpdateUserInfo(User user);
         public void UpdatePassword(int id, string password);
         public void UpdateUserLineToken(string email, string token);
         public void InActiveUser(int id);

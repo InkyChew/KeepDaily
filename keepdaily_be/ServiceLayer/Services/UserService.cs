@@ -1,9 +1,12 @@
-﻿using DomainLayer.Dto;
-using DomainLayer.Models;
+﻿using DomainLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json.Linq;
 using RepoLayer.IRepos;
+using SendGrid;
 using SendGrid.Helpers.Errors.Model;
 using ServiceLayer.IServices;
+using ServiceLayer.Utils;
 
 namespace ServiceLayer.Services
 {
@@ -11,11 +14,14 @@ namespace ServiceLayer.Services
     {
         private readonly IUserRepo _repo;
         private readonly IConfirmEmailService _emailService;
+        private readonly IJwtUtil _jwtUtil;
 
-        public UserService(IUserRepo repo, IConfirmEmailService emailService)
+        public UserService(IUserRepo repo, IConfirmEmailService emailService,
+            IJwtUtil jwtUtil)
         {
             _repo = repo;
             _emailService = emailService;
+            _jwtUtil = jwtUtil;
         }
 
         public User? GetUser(int id)
@@ -32,7 +38,7 @@ namespace ServiceLayer.Services
             return _repo.GetUser(email);
         }
 
-        public User Login(string email, string password)
+        public AuthenticateResponse Login(string email, string password)
         {
             var user = _repo.GetUser(email);
             if (user == null) throw new BadRequestException("Email does not exist.");
@@ -40,7 +46,7 @@ namespace ServiceLayer.Services
             if (!user.IsActive) throw new ForbiddenException("Your account is banned by keepdaily due to against the rule.");
 
             var res = new PasswordHasher<User>().VerifyHashedPassword(user, user.Password, password);
-            if(res == PasswordVerificationResult.Failed)
+            if (res == PasswordVerificationResult.Failed)
             {
                 throw new BadRequestException("Invalid password.");
             }
@@ -50,7 +56,14 @@ namespace ServiceLayer.Services
                 _repo.SaveChanges();
             }
 
-            return user;
+            return RefreshToken(user);
+        }
+
+        public AuthenticateResponse RefreshToken(User user)
+        {
+            var jwtToken = _jwtUtil.GenerateJwtToken(user);
+            var refreshToken = _jwtUtil.GenerateRefreshToken(user);
+            return new AuthenticateResponse(user, jwtToken, refreshToken);
         }
 
         public async Task<User> RegisterAsync(string name, string email, string password)
@@ -71,7 +84,7 @@ namespace ServiceLayer.Services
             return user;
         }
 
-        public User UpdateUserInfo(VUser user)
+        public User UpdateUserInfo(User user)
         {
             var dbUser = _repo.FindUser(user.Id);
             dbUser.Name = user.Name;
@@ -86,7 +99,6 @@ namespace ServiceLayer.Services
 
         public void UpdatePassword(int id, string password)
         {
-
             var user = _repo.FindUser(id);
             user.Password = new PasswordHasher<User>().HashPassword(user, password);
             _repo.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace DomainLayer.Models
 {
@@ -16,6 +17,7 @@ namespace DomainLayer.Models
         public string Name { get; set; } = null!;
         [Column(TypeName = "nvarchar(50)")]
         public string Email { get; set; } = null!;
+        [JsonIgnore]
         [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; } = null!;
 

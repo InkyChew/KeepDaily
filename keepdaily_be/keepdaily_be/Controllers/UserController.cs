@@ -1,8 +1,8 @@
 ﻿using DomainLayer.Dto;
 using DomainLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.Extensions.Caching.Memory;
+using SendGrid;
 using SendGrid.Helpers.Errors.Model;
 using Serilog;
 using ServiceLayer.IServices;
@@ -14,13 +14,9 @@ namespace keepdaily_be.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-        private readonly IEmailService _emailService;
-        private readonly IMemoryCache _cache;
-        public UserController(IUserService service, IEmailService emailService, IMemoryCache cache)
+        public UserController(IUserService service)
         {
             _service = service;
-            _emailService = emailService;
-            _cache = cache;
         }
 
         [HttpPost("Register")]
@@ -48,8 +44,8 @@ namespace keepdaily_be.Controllers
         {
             try
             {
-                var user = _service.Login(email, password);
-                var res = new User { Id = user.Id, Name = user.Name, Email = user.Email };
+                var res = _service.Login(email, password);
+                setTokenCookie(res.RefreshToken);
                 return CreatedAtAction(null, res);
             }
             catch (UnauthorizedException ex)
@@ -71,26 +67,34 @@ namespace keepdaily_be.Controllers
             }
         }
 
+        [HttpPost("RefreshToken")]
+        public IActionResult RefreshToken([FromBody] User user)
+        {
+            try
+            {
+                var refreshToken = Request.Cookies["refreshToken"];
+                if (refreshToken == null) throw new Exception("Refresh token is expired.");
+                var res = _service.RefreshToken(user);
+                setTokenCookie(res.RefreshToken);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
             var user = _service.GetUser(id);
-            return user == null ? NotFound() : Ok(new VUser
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Description = user.Description,
-                ImgName = user.ImgName,
-                ImgType = user.ImgType,
-                LineAccessToken = user.LineAccessToken,
-                LineNotify = user.LineNotify,
-                EmailNotify = user.EmailNotify,
-            });
+            return user == null ? NotFound() : Ok(user);
         }
 
+        [Authorize]
         [HttpPut]
-        public IActionResult UpdateUser([FromBody] VUser user)
+        public IActionResult UpdateUser([FromBody] User user)
         {
             try
             {
@@ -104,7 +108,7 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult UpdatePassword(int id, [FromBody] string password)
+        public IActionResult UpdatePassword(int id, [FromForm] string password)
         {
             try
             {
@@ -116,6 +120,17 @@ namespace keepdaily_be.Controllers
                 Log.Error(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        private void setTokenCookie(string token)
+        {
+            // append cookie with refresh token to the http response
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
     }
 }

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   formService: FormService;
   
   constructor(private _userService: UserService,
-    private _email: ConfirmEmailService,
+    private _emailService: ConfirmEmailService,
     private _router: Router) {
     this.login  = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
 
   forgotPwd() {
     const email = prompt("Please enter your email");
-    // if(email)
-      
+    if(email) {
+      this._emailService.sendChangePasswordConfirmEmail(email).subscribe(() => this._router.navigateByUrl(`/forgot_password/4?email=${email}`));
+    }      
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Plan } from '../models/calendar';
+import { ICategory, Plan } from '../models/calendar';
 import { PlanService } from '../services/plan.service';
 import { formatDate } from '@angular/common';
 import { IUser } from '../models/user';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-plans',
@@ -13,17 +14,24 @@ export class PlansComponent implements OnInit {
 
   user: IUser = JSON.parse(localStorage.getItem('user')!);
   planList: Plan[] = [];
+  ctgList: ICategory[] = [];
   edit: number = -1;
   today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 
-  constructor(private _service: PlanService) { }
+  constructor(private _service: PlanService,
+    private _ctgService: CategoryService) { }
 
   ngOnInit(): void {
     this.getPlans();
+    this.getCtgList();
   }
 
   getPlans() {
     this._service.getAllPlan().subscribe(res => this.planList = res);
+  }
+
+  getCtgList() {
+    this._ctgService.getAllCategory().subscribe(res => this.ctgList = res);
   }
 
   add() {
@@ -31,7 +39,7 @@ export class PlansComponent implements OnInit {
     this.edit = 0;
   }
 
-  save(plan: Plan) {
+  save(plan: Plan) {    
     if(plan.id == 0) {
       this._service.postPlan(plan).subscribe(res => {
         this.planList[0] = res;

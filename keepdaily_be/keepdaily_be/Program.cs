@@ -1,6 +1,5 @@
 using DomainLayer.Data;
-using DomainLayer.Models;
-using Microsoft.AspNetCore.Identity;
+using keepdaily_be.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Mymvc.Services;
 using RepoLayer.IRepos;
@@ -54,6 +53,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<IJwtUtil, JwtUtil>();
 builder.Services.AddScoped<ILineNotifyService, LineNotifyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
@@ -92,6 +92,8 @@ app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ServiceLayer.IServices;
-using ServiceLayer.Services;
 using System.Net;
-using System.Text.Json;
 
 namespace keepdaily_be.Controllers
 {

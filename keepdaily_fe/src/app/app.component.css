@@ -7,7 +7,7 @@
     width: 100%;
     max-width: 1024px;
     min-height: 100vh;
-    padding: 1em;
+    padding: var(--unit);
     margin: auto;
     box-sizing: border-box;
 }

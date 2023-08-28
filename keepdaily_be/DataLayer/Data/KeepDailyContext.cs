@@ -21,6 +21,18 @@ namespace DomainLayer.Data
             builder.Entity<User>().HasData(admin);
 
             builder.Entity<Friend>().HasKey(t => new { t.UserId, t.FriendId });
+
+            builder.Entity<Category>().HasData(new List<Category>
+            {
+                new Category { Id = 1, Name = "Sports" },
+                new Category { Id = 2, Name = "Diet" },
+                new Category { Id = 3, Name = "Cooking" },
+                new Category { Id = 4, Name = "Baking" },
+                new Category { Id = 5, Name = "Planting" },
+                new Category { Id = 6, Name = "Painting" },
+                new Category { Id = 7, Name = "Traveling" },
+                new Category { Id = 8, Name = "Learning" }
+            });
         }
     }
 }

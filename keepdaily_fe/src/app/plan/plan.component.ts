@@ -53,6 +53,6 @@ export class PlanComponent implements OnInit {
   }
 
   goBack() {
-    this._router.navigateByUrl('/plans')
+    this._router.navigateByUrl('/main/plans')
   }
 }

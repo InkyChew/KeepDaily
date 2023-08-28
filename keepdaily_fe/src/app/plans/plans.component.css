@@ -1,0 +1,25 @@
+
+.plans {
+    padding: 0;
+    list-style: none;
+}
+
+.plan {
+    background: var(--light);
+    border-radius: 8px;
+    padding: var(--unit);
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-footer {
+    margin-top: var(--unit);
+}
+
+.plan-footer button {
+    margin-right: var(--unit);
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 
@@ -14,6 +14,8 @@ export class ConfirmEmailService {
   }
 
   sendChangePasswordConfirmEmail(email: string) {
-    return this._http.post(`${this._env.APIOption.ConfirmEmailEndpoint}/ChangePassword`, email);
+    const data = new FormData();
+    data.append('email', email);
+    return this._http.post(`${this._env.APIOption.ConfirmEmailEndpoint}/ChangePassword`, data);
   }
 }

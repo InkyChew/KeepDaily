@@ -18,3 +18,9 @@ export enum UserLevel {
     General = 1,
     Premium = 2
 }
+
+export interface IAuthenticateUser {
+    id: number;
+    level: UserLevel;
+    accessToken: string;
+}

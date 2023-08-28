@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { ICategory } from '../models/calendar';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-setting-category',
@@ -10,6 +11,7 @@ import { ICategory } from '../models/calendar';
 export class SettingCategoryComponent implements OnInit {
 
   ctgList: ICategory[] = [];
+  name: string | null = null;
 
   constructor(private _service: CategoryService) { }
 
@@ -21,13 +23,14 @@ export class SettingCategoryComponent implements OnInit {
     this._service.getAllCategory().subscribe(res => this.ctgList = res);
   }
 
-  create(e: HTMLInputElement) {
-    const name = e.value;
-    const ctg: ICategory = {id:0, name: name};
-    this._service.postCategory(ctg).subscribe(res => {
-      this.ctgList.push(res);
-      e.value = '';
-    });
+  create(model: NgModel) {
+    if(this.name) {
+      const ctg: ICategory = {id:0, name: this.name};
+      this._service.postCategory(ctg).subscribe(res => {
+        this.ctgList.push(res);
+        model.reset();
+      });
+    }
   }
 
   edit(ctg: ICategory, i: number) {

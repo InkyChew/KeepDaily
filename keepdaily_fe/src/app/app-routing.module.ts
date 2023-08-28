@@ -19,7 +19,7 @@ const routes: Routes = [
     {path: 'register', component: RegisterComponent, pathMatch: 'full'},
   ]},
   {path: 'email_confirm/:status', component: EmailConfirmComponent, pathMatch: 'full'},
-  {path: 'forgot_password/:uid', component: ForgotPasswordComponent, pathMatch: 'full'},
+  {path: 'forgot_password/:status', component: ForgotPasswordComponent, pathMatch: 'full'},
   {path: 'user_setting', component: UserSettingComponent, pathMatch: 'full'},
   {path: 'main', component: MainComponent, children: [
     {path:'', redirectTo: 'plans', pathMatch: 'full'},

@@ -1,8 +1,8 @@
 <div class="plans">
     <button (click)="add()">➕</button>
 
-    <ul *ngFor="let plan of planList; index as i">
-        <li>
+    <ul *ngFor="let plan of planList; index as i" class="plans">
+        <li class="plan">
             <ng-container *ngIf="edit==i else readonly">
                 <label class="field required">
                     <input type="text" [(ngModel)]="plan.title" maxlength="20">
@@ -20,7 +20,8 @@
                 <label class="field">
                     <span class="field-title">Category</span>
                     <select [(ngModel)]="plan.categoryId">
-                        <option value="null">Select a category</option>
+                        <option value="null">- Select a category -</option>
+                        <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg.name }}</option>
                     </select>   
                 </label>
 
@@ -30,23 +31,16 @@
                 </div>
             </ng-container>
             <ng-template #readonly>
-                <label>
+                <div class="plan-header">
                     <a [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
-                </label>
+                    <span class="ctg">{{ plan.category?.name }}</span>
+                </div>
 
-                <label>
-                    {{ plan.description }}
-                </label>
+                <p>{{ plan.description }}</p>
 
-                <label>
-                    {{ plan.startFrom }}
-                </label>
+                <span>{{ plan.startFrom }}</span>
 
-                <label>
-                    {{ plan.categoryId }}
-                </label>
-
-                <div class="btns">
+                <div class="plan-footer">
                     <button (click)="edit = i">✏️</button>
                     <button (click)="delete(plan.id, i)">🗑️</button>
                 </div>

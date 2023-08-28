@@ -64,8 +64,33 @@ namespace keepdaily_be.Controllers
             }
         }
 
+        [HttpGet("ChangePassword")]
+        public IActionResult GetConfirmChangePasswordEmail(int uid, string code)
+        {
+            var user = _userService.FindUser(uid);
+            try
+            {
+                var isConfirmed = _service.IsEmailConfirm($"CP{user.Email}", code);
+                if (isConfirmed)
+                {
+                    return Redirect($"http://localhost:4200/forgot_password/1?uid={uid}&email={user.Email}");
+                }
+                else throw new Exception($"Error confirming email {user.Email}.");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                Log.Error(ex.Message);
+                return Redirect($"http://localhost:4200/forgot_password/2?uid={uid}&email={user.Email}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return Redirect($"http://localhost:4200/forgot_password/3?uid={uid}&email={user.Email}");
+            }
+        }
+
         [HttpPost("ChangePassword")]
-        public async Task<IActionResult> SendConfirmChangePasswordEmailAsync([FromBody] string email)
+        public async Task<IActionResult> SendConfirmChangePasswordEmailAsync([FromForm] string email)
         {
             try
             {

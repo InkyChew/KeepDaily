@@ -1,8 +1,9 @@
 <article>
     <section>
-        <label class="field">
+        <label class="field required">
             Name
-            <input type="text" #addCtg>
+            <input type="text" [(ngModel)]="name" required #addCtg="ngModel">
+            <small class="field-msg" *ngIf="addCtg.dirty && addCtg.invalid">Name is required.</small>
         </label>
         <button (click)="create(addCtg)">➕</button>
     </section>

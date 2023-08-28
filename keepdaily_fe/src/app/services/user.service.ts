@@ -27,6 +27,8 @@ export class UserService {
   }
 
   updatePassword(id: number, pwd: string) {
-    return this._http.patch(`${this._env.APIOption.UserEndpoint}/${id}`, pwd);
+    const data = new FormData();
+    data.append('password', pwd);
+    return this._http.patch(`${this._env.APIOption.UserEndpoint}/${id}`, data);
   }
 }
