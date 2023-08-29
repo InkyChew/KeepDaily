@@ -6,8 +6,24 @@
 .content {
     width: 100%;
     max-width: 1024px;
-    min-height: 100vh;
+    min-height: calc(100vh - 150px);
     padding: var(--unit);
     margin: auto;
     box-sizing: border-box;
+}
+
+.app-header {
+    padding: 1em;
+}
+.logo {
+    margin: 0;
+    text-align: center;
+}
+
+.app-footer {
+    padding: var(--unit);
+}
+.copyright {
+    display: block;
+    text-align: center;
 }

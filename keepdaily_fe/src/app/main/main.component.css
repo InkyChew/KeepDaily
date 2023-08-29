@@ -9,11 +9,12 @@ section {
 
 .user {
     width: 30%;
-    background: rgb(255, 233, 225);
+    color: var(--light);
+    background: var(--primary);
 }
 
 .content {
     flex: 1;
-    background: rgb(213, 227, 255);
+    background: var(--secondary);
     overflow-y: auto;
 }

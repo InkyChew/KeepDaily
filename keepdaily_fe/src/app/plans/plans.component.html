@@ -32,7 +32,7 @@
             </ng-container>
             <ng-template #readonly>
                 <div class="plan-header">
-                    <a [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
+                    <a class="btn-link" [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
                     <span class="ctg">{{ plan.category?.name }}</span>
                 </div>
 

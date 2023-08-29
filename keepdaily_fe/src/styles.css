@@ -1,14 +1,25 @@
 @import '~normalize.css';
 
 :root {
-    --primary: #ffa6a6;
+    --primary: #a15c38;
+    --primary-dark: #653a23;
+    --secondary: #c3a6a0;
+    --secondary-dark: #897470;
+    --light: #f7f1f0;
+    --dark: #262220;
+    /* --primary: #ffa6a6;
     --primary-dark: #ff7b7b;
     --secondary: #8eccff;
     --secondary-dark: #65baff;
-    --light: #fff;
+    --light: #fff; */
     --info: #048eff;
     --danger: #ff0000;
     --unit: 1em;
+}
+
+body {
+    color: var(--dark);
+    background: var(--light);
 }
 
 /* Form */
@@ -19,6 +30,7 @@
 
 .field-title {
     display: block;
+    font-weight: bold;
 }
 
 .field input:not([type="checkbox"]) {
@@ -74,12 +86,14 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: rgb(0, 0, 238);
+    color: var(--primary);
     text-decoration: underline;
 }
-
+.btn-link:hover {
+    color: var(--primary-dark);
+}
 .btn-link:active {
-    color: rgb(255, 0, 0);
+    color: var(--secondary);
 }
 
 .btns {
