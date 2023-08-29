@@ -2,6 +2,9 @@
 
 :root {
     --primary: #ffa6a6;
+    --primary-dark: #ff7b7b;
+    --secondary: #8eccff;
+    --secondary-dark: #65baff;
     --light: #fff;
     --info: #048eff;
     --danger: #ff0000;
@@ -28,6 +31,44 @@
 }
 
 /* Btn */
+.btn {
+    background: transparent;
+    padding: .5em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:disabled {
+    pointer-events: none;
+    filter: grayscale(1);
+    opacity: .8;
+}
+
+.btn-primary {
+    background: var(--light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--light);
+    color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: var(--light);
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.btn-secondary:hover {
+    background: var(--light);
+    color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+}
+
 .btn-link {
     background: transparent;
     border: none;
@@ -36,6 +77,37 @@
     color: rgb(0, 0, 238);
     text-decoration: underline;
 }
+
 .btn-link:active {
     color: rgb(255, 0, 0);
+}
+
+.btns {
+    margin-top: var(--unit);
+}
+
+.btns .btn {
+    margin-right: var(--unit);
+}
+
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #aeaeae;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #9d9d9d;
 }

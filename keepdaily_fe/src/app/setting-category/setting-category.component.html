@@ -5,7 +5,7 @@
             <input type="text" [(ngModel)]="name" required #addCtg="ngModel">
             <small class="field-msg" *ngIf="addCtg.dirty && addCtg.invalid">Name is required.</small>
         </label>
-        <button (click)="create(addCtg)">➕</button>
+        <button class="btn btn-primary" (click)="create(addCtg)">➕</button>
     </section>
     <section>
         <ul *ngFor="let ctg of ctgList; index as i">
@@ -13,8 +13,8 @@
                 <label class="field">
                     <input type="text" [(ngModel)]="ctg.name">
                 </label>
-                <button (click)="edit(ctg, i)">💾</button>
-                <button (click)="delete(ctg.id, i)">🗑️</button>
+                <button class="btn btn-primary" (click)="edit(ctg, i)">💾</button>
+                <button class="btn btn-secondary" (click)="delete(ctg.id, i)">🗑️</button>
             </li>
         </ul>
     </section>

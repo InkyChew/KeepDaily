@@ -13,16 +13,16 @@
             
             <label>
                 <select [(ngModel)]="month" (change)="change('month', $event)">
-                    <ng-container *ngFor="let m of monthList; index as i">
-                        <option [value]="i">{{ m }}</option>
+                    <ng-container *ngFor="let m of monthList; index as i; first as isfirst">
+                        <option *ngIf="!isfirst" [value]="i">{{ m }}</option>
                     </ng-container>
                 </select>
             </label>
         </div>
         
         <div class="btns">
-            <button (click)="goBack()">Back</button>
-            <button (click)="goBack()">🎨</button>
+            <button class="btn btn-secondary" (click)="goBack()">Back</button>
+            <button class="btn btn-primary" (click)="goBack()">🎨</button>
         </div>
     </div>
     

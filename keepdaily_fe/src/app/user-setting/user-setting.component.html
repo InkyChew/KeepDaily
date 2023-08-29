@@ -32,11 +32,11 @@
         <span class="field-title">Notification</span>
         <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
         <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
-        <button *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
+        <button class="btn btn-primary" *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
     </div>
 
     <div class="btns">
-        <button (click)="save()">💾</button>
-        <a routerLink="/main/plans">⬅</a>
+        <button class="btn btn-primary" (click)="save()">💾</button>
+        <a class="btn btn-secondary" routerLink="/main/plans">Back</a>
     </div>
 </div>

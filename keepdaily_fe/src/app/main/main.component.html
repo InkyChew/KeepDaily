@@ -7,9 +7,11 @@
         <span>{{ user.name }}</span>
         <p>{{ user.description }}</p>
         
-        <button>Follow</button>
-        <a routerLink="/user_setting">✏️</a>
-        <button>Logout</button>
+        <div class="btns">
+            <a  class="btn btn-primary" routerLink="/user_setting">✏️</a>
+            <button class="btn btn-primary">Follow</button>
+            <button class="btn btn-secondary">Logout</button>
+        </div>
     </section>
 
     <section class="content">

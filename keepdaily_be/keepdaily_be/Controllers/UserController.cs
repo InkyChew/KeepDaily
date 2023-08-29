@@ -1,6 +1,5 @@
-﻿using DomainLayer.Dto;
-using DomainLayer.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using DomainLayer.Models;
+using keepdaily_be.Filters;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid;
 using SendGrid.Helpers.Errors.Model;
@@ -84,7 +83,7 @@ namespace keepdaily_be.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
@@ -92,7 +91,7 @@ namespace keepdaily_be.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut]
         public IActionResult UpdateUser([FromBody] User user)
         {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { UserSettingComponent } from './user-setting/user-setting.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SettingCategoryComponent } from './setting-category/setting-category.component';
 import { FriendsComponent } from './friends/friends.component';
+import { NetworkInterceptor } from './helps/network.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { FriendsComponent } from './friends/friends.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

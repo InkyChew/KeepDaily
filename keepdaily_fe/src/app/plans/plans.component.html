@@ -1,5 +1,5 @@
 <div class="plans">
-    <button (click)="add()">➕</button>
+    <button class="btn btn-secondary" (click)="add()">➕</button>
 
     <ul *ngFor="let plan of planList; index as i" class="plans">
         <li class="plan">
@@ -26,8 +26,8 @@
                 </label>
 
                 <div class="btns">
-                    <button (click)="save(plan)">💾</button>
-                    <button (click)="closeEditor(plan)">❌</button>
+                    <button class="btn btn-primary" (click)="save(plan)">💾</button>
+                    <button class="btn btn-secondary" (click)="closeEditor(plan)">❌</button>
                 </div>
             </ng-container>
             <ng-template #readonly>
@@ -40,9 +40,9 @@
 
                 <span>{{ plan.startFrom }}</span>
 
-                <div class="plan-footer">
-                    <button (click)="edit = i">✏️</button>
-                    <button (click)="delete(plan.id, i)">🗑️</button>
+                <div class="btns">
+                    <button class="btn btn-primary" (click)="edit = i">✏️</button>
+                    <button class="btn btn-secondary" (click)="delete(plan.id, i)">🗑️</button>
                 </div>
             </ng-template>
         </li>
