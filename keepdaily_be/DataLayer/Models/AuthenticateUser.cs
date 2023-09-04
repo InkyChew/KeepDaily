@@ -2,16 +2,16 @@
 
 namespace DomainLayer.Models
 {
-    public class AuthenticateResponse
+    public class AuthenticateUser
     {
         public int Id { get; set; }
         public UserLevel Level { get; set; }
         public string AccessToken { get; set; }
 
-        [JsonIgnore] // refresh token is returned in http only cookie
+        [JsonIgnore]
         public string RefreshToken { get; set; }
 
-        public AuthenticateResponse(User user, string jwtToken, string refreshToken)
+        public AuthenticateUser(User user, string jwtToken, string refreshToken)
         {
             Id = user.Id;
             Level = user.UserLevel;

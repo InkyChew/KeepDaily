@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { IUser } from '../models/user';
+import { IAuthenticateUser, IUser } from '../models/user';
 import { FormService } from '../services/form.service';
 import { ConfirmEmailService } from '../services/confirm-email.service';
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       data.append('email', this.login.value.email);
       data.append('password', this.login.value.pwd);
       this._userService.login(data).subscribe({
-        next: (user: IUser) => {
+        next: (user: IAuthenticateUser) => {
           localStorage.setItem('user', JSON.stringify(user));
           this._router.navigateByUrl('/main/plans');
         },

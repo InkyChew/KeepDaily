@@ -1,7 +1,8 @@
-﻿using DomainLayer.Models;
+﻿using AutoMapper;
+using DomainLayer.Dto;
+using DomainLayer.Models;
 using keepdaily_be.Filters;
 using Microsoft.AspNetCore.Mvc;
-using SendGrid;
 using SendGrid.Helpers.Errors.Model;
 using Serilog;
 using ServiceLayer.IServices;
@@ -13,9 +14,11 @@ namespace keepdaily_be.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-        public UserController(IUserService service)
+        private readonly IMapper _mapper;
+        public UserController(IUserService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpPost("Register")]
@@ -67,23 +70,25 @@ namespace keepdaily_be.Controllers
         }
 
         [HttpPost("RefreshToken")]
-        public IActionResult RefreshToken([FromBody] User user)
+        public IActionResult RefreshToken([FromBody] UserDto userdto)
         {
             try
             {
+                var user = _mapper.Map<User>(userdto);
                 var refreshToken = Request.Cookies["refreshToken"];
-                if (refreshToken == null) throw new Exception("Refresh token is expired.");
+                if (refreshToken == null) return BadRequest();
                 var res = _service.RefreshToken(user);
                 setTokenCookie(res.RefreshToken);
                 return Ok(res);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
@@ -91,12 +96,13 @@ namespace keepdaily_be.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut]
-        public IActionResult UpdateUser([FromBody] User user)
+        public IActionResult UpdateUser([FromBody] UserDto userdto)
         {
             try
             {
+                var user = _mapper.Map<User>(userdto);
                 return CreatedAtAction(null, _service.UpdateUserInfo(user));
             }
             catch (Exception ex)
@@ -127,7 +133,11 @@ namespace keepdaily_be.Controllers
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7)
+                Expires = DateTime.UtcNow.AddDays(7),
+                SameSite = SameSiteMode.None,
+                Secure = true,
+                Domain = "localhost",
+                IsEssential = true,
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }

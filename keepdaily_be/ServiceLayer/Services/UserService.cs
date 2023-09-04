@@ -38,7 +38,7 @@ namespace ServiceLayer.Services
             return _repo.GetUser(email);
         }
 
-        public AuthenticateResponse Login(string email, string password)
+        public AuthenticateUser Login(string email, string password)
         {
             var user = _repo.GetUser(email);
             if (user == null) throw new BadRequestException("Email does not exist.");
@@ -59,11 +59,11 @@ namespace ServiceLayer.Services
             return RefreshToken(user);
         }
 
-        public AuthenticateResponse RefreshToken(User user)
+        public AuthenticateUser RefreshToken(User user)
         {
             var jwtToken = _jwtUtil.GenerateJwtToken(user);
             var refreshToken = _jwtUtil.GenerateRefreshToken(user);
-            return new AuthenticateResponse(user, jwtToken, refreshToken);
+            return new AuthenticateUser(user, jwtToken, refreshToken);
         }
 
         public async Task<User> RegisterAsync(string name, string email, string password)

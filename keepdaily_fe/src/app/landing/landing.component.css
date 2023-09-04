@@ -30,3 +30,9 @@
     background-color: var(--primary);
     color: var(--light);
 }
+
+@media only screen and (max-width: 576px) {
+    .section {
+        width: 100%;
+    }
+}

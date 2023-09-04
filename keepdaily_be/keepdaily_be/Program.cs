@@ -1,4 +1,5 @@
 using DomainLayer.Data;
+using DomainLayer.Dto;
 using keepdaily_be.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Mymvc.Services;
@@ -43,14 +44,18 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
-                          policy.WithOrigins("https://notify-bot.line.me",
+                          policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                          //policy
+                                .WithOrigins("http://localhost:4200",
+                                                "https://notify-bot.line.me",
                                               "http://10.199.15.44")
                                 .AllowAnyHeader()
-                                .AllowAnyMethod();
+                                .AllowAnyMethod()
+                                .AllowCredentials();
                       });
 });
 
+builder.Services.AddAutoMapper(typeof(AppMapperProfile));
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IJwtUtil, JwtUtil>();

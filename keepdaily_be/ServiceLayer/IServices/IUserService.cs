@@ -5,8 +5,8 @@ namespace ServiceLayer.IServices
     public interface IUserService
     {
         public Task<User> RegisterAsync(string name, string email, string password);
-        public AuthenticateResponse Login(string email, string password);
-        public AuthenticateResponse RefreshToken(User user);
+        public AuthenticateUser Login(string email, string password);
+        public AuthenticateUser RefreshToken(User user);
         public User? GetUser(int id);
         public User FindUser(int id);
         public User? GetUser(string email);

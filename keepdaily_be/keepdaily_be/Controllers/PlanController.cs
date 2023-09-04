@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using keepdaily_be.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ServiceLayer.IServices;
@@ -7,6 +8,7 @@ namespace keepdaily_be.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PlanController : ControllerBase
     {
         private readonly IPlanService _service;

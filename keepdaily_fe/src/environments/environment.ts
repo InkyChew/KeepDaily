@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'https://localhost:5000/api',
+    url: 'http://localhost:5000/api',
     endpoint: {
       user: '/User',
       plan: '/Plan',
