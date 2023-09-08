@@ -19,6 +19,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SettingCategoryComponent } from './setting-category/setting-category.component';
 import { FriendsComponent } from './friends/friends.component';
 import { NetworkInterceptor } from './helps/network.interceptor';
+import { FriendComponent } from './friend/friend.component';
+import { FriendPlansComponent } from './friend-plans/friend-plans.component';
+import { MsgModalComponent } from './msg-modal/msg-modal.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { NetworkInterceptor } from './helps/network.interceptor';
     UserSettingComponent,
     ForgotPasswordComponent,
     SettingCategoryComponent,
-    FriendsComponent
+    FriendsComponent,
+    FriendComponent,
+    FriendPlansComponent,
+    MsgModalComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

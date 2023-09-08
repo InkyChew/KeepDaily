@@ -1,1 +1,53 @@
-<p>friends works!</p>
+<div class="friends">
+
+    <div class="search">
+        <div class="field">
+            <input type="search" placeholder="friend's email" #qry/>
+            <button (click)="search(qry)">Search</button>
+        </div>
+        <ul class="friend-list">
+            <li *ngFor="let friend of searchFriends">
+                <a class="friend-item" [routerLink]="['/friend', friend.id]">
+                    <div class="photo">
+                        <img src="https://picsum.photos/300/200/?random=10">
+                        <!-- <img src="" alt=""> -->
+                    </div>
+                    <div class="info">
+                        <div class="id">
+                            <span class="name">{{ friend.name }}</span>
+                            <span class="email">{{ friend.email }}</span>
+                        </div>
+                        <p class="desc">{{ friend.description }}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <ng-container *ngIf="friendList.length == 0 else list">
+            <p>No friends.</p>
+        </ng-container>
+    
+        <ng-template #list>
+            <ul class="friend-list">
+                <li *ngFor="let friend of friendList" class="friend-item">
+                    <a  [routerLink]="['/friend', friend.id]"></a>
+                    <div class="photo">
+                        <img [src]="getPhoto(friend)" [alt]="friend.name + '\'s photo'">
+                    </div>
+                    <div class="info">
+                        <span class="name">{{ friend.name }}</span>
+                    </div>
+
+                    <div class="plan">
+                        <ng-container *ngIf="friend.plans[0] as plan">
+                            <div class="title">{{ plan.title }}</div>
+                            <div class="cate">#{{ plan.category?.name }}</div>
+                        </ng-container>
+                    </div>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+</div>

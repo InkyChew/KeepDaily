@@ -7,14 +7,12 @@
     --secondary-dark: #897470;
     --light: #f7f1f0;
     --dark: #262220;
-    /* --primary: #ffa6a6;
-    --primary-dark: #ff7b7b;
-    --secondary: #8eccff;
-    --secondary-dark: #65baff;
-    --light: #fff; */
-    --info: #048eff;
-    --danger: #ff0000;
+    --white: #fff;
+    --info: #3875a1;
+    --warning: #ffa322;
+    --danger: #c32626;
     --unit: 1em;
+    --radius: 5px;
 }
 
 body {
@@ -33,13 +31,42 @@ body {
     font-weight: bold;
 }
 
-.field input:not([type="checkbox"]) {
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .field-msg {
     color: var(--danger);
+}
+
+input:not([type="checkbox"]),
+select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--secondary);
+    border-radius: var(--radius);
+    padding: 8px;
+}
+input:not([type="checkbox"]):focus,
+select:focus {
+    outline-color: var(--primary);
+}
+
+input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    width: 1em;
+    aspect-ratio:  1 / 1;
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+}
+input[type="checkbox"]:checked{
+    background-color: var(--primary);
+}
+input[type="checkbox"]:checked:after {
+    content: '\1F5F8';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-size: .5em;
+    font-weight: bold;
+    color: #fff;
 }
 
 /* Btn */
@@ -53,32 +80,36 @@ body {
 
 .btn:disabled {
     pointer-events: none;
-    filter: grayscale(1);
     opacity: .8;
+    border-color: transparent;
 }
 
 .btn-primary {
+    background-color: var(--primary);
+    color: var(--light);
+    border-color: var(--primary-dark);
+    border-radius: var(--radius);
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+.btn-primary.active {
+    background: var(--primary-dark);
+}
+
+.btn-primary-outline {
     background: var(--light);
     color: var(--primary);
     border-color: var(--primary);
 }
 
-.btn-primary:hover {
-    background: var(--light);
+.btn-primary-outline:hover {
     color: var(--primary-dark);
     border-color: var(--primary-dark);
 }
-
-.btn-secondary {
-    background: var(--light);
-    color: var(--secondary);
-    border-color: var(--secondary);
-}
-
-.btn-secondary:hover {
-    background: var(--light);
-    color: var(--secondary-dark);
-    border-color: var(--secondary-dark);
+.btn-primary-outline.active {
+    color: var(--light);
+    background: var(--primary-dark);
 }
 
 .btn-link {
@@ -104,7 +135,6 @@ body {
     margin-right: var(--unit);
 }
 
-
 /* Scrollbar */
 /* width */
 ::-webkit-scrollbar {
@@ -124,4 +154,15 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #9d9d9d;
+}
+
+/* M    odal */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1000;
 }

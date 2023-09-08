@@ -7,26 +7,26 @@
 
     <div class="plan-ctrl">
         <div class="plan-filter">
-            <label>
+            <label class="field">
                 <input type="number" min="2020" [max]="year" [value]="year" (change)="change('year', $event)">
             </label>
             
-            <label>
+            <label class="field">
                 <select [(ngModel)]="month" (change)="change('month', $event)">
-                    <ng-container *ngFor="let m of monthList; index as i; first as isfirst">
-                        <option *ngIf="!isfirst" [value]="i">{{ m }}</option>
+                    <ng-container *ngFor="let m of monthList; index as i;">
+                        <option [value]="i">{{ m }}</option>
                     </ng-container>
                 </select>
             </label>
         </div>
         
         <div class="btns">
-            <button class="btn btn-secondary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+            <button title="goBack" class="btn btn-primary-outline" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
             <button class="btn btn-primary" (click)="goBack()">🎨</button>
         </div>
     </div>
     
     <ng-container *ngIf="calendar">
-        <app-calendar [calendar]="calendar"></app-calendar>
+        <app-calendar [calendar]="calendar" [editable]="editable"></app-calendar>
     </ng-container>
 </div>

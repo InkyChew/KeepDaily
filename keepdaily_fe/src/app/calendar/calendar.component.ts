@@ -11,11 +11,17 @@ import { formatDate } from '@angular/common';
 export class CalendarComponent implements OnInit {
 
   @Input() calendar!: Calendar;
+  @Input() editable: boolean = false;
   fileUploading: boolean = false;
 
   constructor(private _dayService: DayService) {}
   
   ngOnInit(): void {}
+
+  ngAfterContentInit() {
+    console.log(this.calendar);
+    
+  }
 
   canUpload(date: number) {
     const today = new Date();

@@ -4,6 +4,7 @@ import { PlanService } from '../services/plan.service';
 import { formatDate } from '@angular/common';
 import { IUser } from '../models/user';
 import { CategoryService } from '../services/category.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-plans',
@@ -12,14 +13,15 @@ import { CategoryService } from '../services/category.service';
 })
 export class PlansComponent implements OnInit {
 
-  user: IUser = JSON.parse(localStorage.getItem('user')!);
+  user: IUser = this._userService.getCurrentUser();
   planList: Plan[] = [];
   ctgList: ICategory[] = [];
   edit: number = -1;
   today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 
   constructor(private _service: PlanService,
-    private _ctgService: CategoryService) { }
+    private _ctgService: CategoryService,
+    private _userService: UserService) { }
 
   ngOnInit(): void {
     this.getPlans();
@@ -27,7 +29,7 @@ export class PlansComponent implements OnInit {
   }
 
   getPlans() {
-    this._service.getAllPlan().subscribe(res => this.planList = res);
+    this._service.getAllPlan(this.user.id).subscribe(res => this.planList = res);
   }
 
   getCtgList() {
@@ -39,13 +41,18 @@ export class PlansComponent implements OnInit {
     this.edit = 0;
   }
 
-  save(plan: Plan) {    
+  save(plan: Plan, i: number) {    
     if(plan.id == 0) {
       this._service.postPlan(plan).subscribe(res => {
-        this.planList[0] = res;
+        this.planList[i] = res;
         this.closeEditor();
       });
-    } else this._service.putPlan(plan).subscribe(() => this.closeEditor());
+    } else {
+      this._service.putPlan(plan).subscribe(() => {
+        this.planList[i] = plan;
+        this.closeEditor();
+      });
+    }
   }
 
   delete(id: number, i: number) {

@@ -38,11 +38,11 @@ namespace ServiceLayer.Services
         public List<VMPlan> GetAllPlanWithDetail()
         {
             var vmPlans = new List<VMPlan>();
-            var plans = _repo.GetAllPlan();
-            foreach (var plan in plans)
-            {
-                vmPlans.Add(TransformToVMPlan(plan));
-            }
+            //var plans = _repo.GetAllPlan();
+            //foreach (var plan in plans)
+            //{
+            //    vmPlans.Add(TransformToVMPlan(plan));
+            //}
             return vmPlans;
         }
 
@@ -56,9 +56,8 @@ namespace ServiceLayer.Services
             var plan = _repo.GetPlanWithDetail(id);
             if(plan != null)
             {
-                var sf = plan.StartFrom.Split('-');
-                int y = year ?? int.Parse(sf[0]);
-                int m = month ?? int.Parse(sf[1]);
+                int y = year ?? plan.UpdateTime.Year;
+                int m = month ?? plan.UpdateTime.Month;
                 plan.Days = CreateDayList(plan, y, m);
             }
             return plan;

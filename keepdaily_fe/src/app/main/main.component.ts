@@ -29,6 +29,10 @@ export class MainComponent implements OnInit {
     });
   }
   
+  getPhoto(user: IUser) {
+    return this._userService.getPhoto(user);
+  }
+  
   goToLogin() {
     this._router.navigateByUrl('/login');
   }

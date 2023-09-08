@@ -1,50 +1,56 @@
 <div class="plans">
-    <button class="btn btn-secondary" (click)="add()"><i class="fa-solid fa-plus"></i></button>
+    <button class="btn btn-primary-outline" (click)="add()"><i class="fa-solid fa-plus"></i></button>
 
-    <ul *ngFor="let plan of planList; index as i" class="plans">
-        <li class="plan">
-            <ng-container *ngIf="edit==i else readonly">
-                <label class="field required">
-                    <input type="text" [(ngModel)]="plan.title" maxlength="20">
-                </label>
+    <ng-container *ngIf="planList.length == 0 else list">
+        <p>No plan now. Click add to create a new plan!</p>
+    </ng-container>
+
+    <ng-template #list>
+        <ul *ngFor="let plan of planList; index as i" class="plan-list">
+            <li class="plan-item">
+                <ng-container *ngIf="edit==i else readonly">
+                    <label class="field required">
+                        <input type="text" [(ngModel)]="plan.title" maxlength="20">
+                    </label>
+        
+                    <label class="field required">
+                        <input type="text" [(ngModel)]="plan.description" maxlength="50">
+                    </label>
     
-                <label class="field required">
-                    <input type="text" [(ngModel)]="plan.description" maxlength="50">
-                </label>
-
-                <label class="field">
-                    <span class="field-title required">Start From</span>
-                    <input type="date" [(ngModel)]="plan.startFrom" [min]="today">
-                </label>
-                
-                <label class="field">
-                    <span class="field-title">Category</span>
-                    <select [(ngModel)]="plan.categoryId">
-                        <option value="null">- Select a category -</option>
-                        <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg.name }}</option>
-                    </select>   
-                </label>
-
-                <div class="btns">
-                    <button class="btn btn-primary" (click)="save(plan)"><i class="fa-solid fa-floppy-disk"></i></button>
-                    <button class="btn btn-secondary" (click)="closeEditor(plan)"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </ng-container>
-            <ng-template #readonly>
-                <div class="plan-header">
-                    <a class="btn-link" [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
-                    <span class="ctg">{{ plan.category?.name }}</span>
-                </div>
-
-                <p>{{ plan.description }}</p>
-
-                <span>{{ plan.startFrom }}</span>
-
-                <div class="btns">
-                    <button class="btn btn-primary" (click)="edit = i"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="btn btn-secondary" (click)="delete(plan.id, i)"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            </ng-template>
-        </li>
-    </ul>
+                    <label class="field">
+                        <span class="field-title required">Start From</span>
+                        <input type="date" [(ngModel)]="plan.startFrom" [min]="today">
+                    </label>
+                    
+                    <label class="field">
+                        <span class="field-title">Category</span>
+                        <select [(ngModel)]="plan.categoryId">
+                            <option value="null">- Select a category -</option>
+                            <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg.name }}</option>
+                        </select>   
+                    </label>
+    
+                    <div class="btns">
+                        <button title="save" class="btn btn-primary" (click)="save(plan, i)"><i class="fa-solid fa-floppy-disk"></i></button>
+                        <button title="cancel" class="btn btn-primary-outline" (click)="closeEditor(plan)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </ng-container>
+                <ng-template #readonly>
+                    <div class="plan-header">
+                        <a class="btn-link title" [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
+                        <span class="ctg">{{ plan.category?.name }}</span>
+                    </div>
+    
+                    <p>{{ plan.description }}</p>
+    
+                    <span>{{ plan.startFrom }}</span>
+    
+                    <div class="btns">
+                        <button title="edit" class="btn btn-primary" (click)="edit = i"><i class="fa-solid fa-pencil"></i></button>
+                        <button title="delete" class="btn btn-primary-outline" (click)="delete(plan.id, i)"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+    </ng-template>
 </div>

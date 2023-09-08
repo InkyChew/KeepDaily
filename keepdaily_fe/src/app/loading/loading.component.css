@@ -1,0 +1,14 @@
+.loading {
+    position: absolute;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    border: 10px solid var(--secondary);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: 2s linear infinite spin;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

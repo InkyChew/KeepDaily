@@ -4,6 +4,7 @@ namespace RepoLayer.IRepos
 {
     public interface IUserRepo
     {
+        public IEnumerable<User> GetAllUser();
         public User? GetUser(int id);
         public User? GetUser(string email);
         public User InsertUser(User user);

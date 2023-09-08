@@ -6,15 +6,17 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, finalize, switchMap, tap, throwError, timeout } from 'rxjs';
 import { IAuthenticateUser, IUser } from '../models/user';
 import { UserService } from '../services/user.service';
+import { HelperService } from '../services/helper.service';
 
 @Injectable()
 export class NetworkInterceptor implements HttpInterceptor {
 
   
-  constructor(private _userService: UserService) {}
+  constructor(private _userService: UserService,
+    private _helperService: HelperService) {}
   
   private addTokenToRequest(user: IAuthenticateUser, request: HttpRequest<unknown>): HttpRequest<unknown> {
     if (user && user.accessToken){
@@ -29,22 +31,34 @@ export class NetworkInterceptor implements HttpInterceptor {
   }
   
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this._helperService.startLoading();
     const user: IAuthenticateUser = JSON.parse(localStorage.getItem("user")!);
     return next.handle(this.addTokenToRequest(user, request)).pipe(
+      timeout(60000),
       catchError((err: any) => {
         if(err instanceof HttpErrorResponse) {
           switch(err.status) {
+            case 0:
+              this._helperService.showMsg("無法與伺服器連線。");
+              break;
+            case 400:
+              this._helperService.showMsg(err.error);
+              break;
             case 401:
-              return this.handleUnauthorizedError(user, request, next);
+              if(user) return this.refreshToken(user, request, next);
+              break;
+            case 500:
+              this._helperService.showMsg("伺服器錯誤，請稍後再試。");
+              break;
           }
         }
-        // console.log(err);
         return throwError(() => err);
-      })
+      }),
+      finalize(() => this._helperService.stopLoading())
     );
   }
 
-  handleUnauthorizedError(user:IAuthenticateUser, request: HttpRequest<unknown>, next: HttpHandler) {
+  refreshToken(user:IAuthenticateUser, request: HttpRequest<unknown>, next: HttpHandler) {
     return this._userService.refreshToken(user).pipe(
       switchMap(res => {
         user.accessToken = res.accessToken;

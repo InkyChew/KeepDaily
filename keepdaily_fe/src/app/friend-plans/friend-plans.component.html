@@ -1,0 +1,20 @@
+<div class="plans">
+    <ng-container *ngIf="planList.length == 0 else list">
+        <p>No plan now.</p>
+    </ng-container>
+
+    <ng-template #list>
+        <ul *ngFor="let plan of planList; index as i" class="plan-list">
+            <li class="plan-item">
+                <div class="plan-header">
+                    <a class="btn-link title" [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
+                    <span class="ctg">{{ plan.category?.name }}</span>
+                </div>
+    
+                <p>{{ plan.description }}</p>
+    
+                <span>{{ plan.startFrom }}</span>
+            </li>
+        </ul>
+    </ng-template>
+</div>

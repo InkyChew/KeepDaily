@@ -43,6 +43,27 @@ export class UserSettingComponent implements OnInit {
     });
   }
 
+  getPhoto(user: IUser) {
+    return this._userService.getPhoto(user);
+  }
+
+  uploadPhoto(e: any) {
+    const file = e.target.files[0];
+    const data = new FormData();
+    data.append('file', file);
+    this._userService.updatePhoto(this.user.id, data).subscribe({
+      next: () => this.getUser(this.user.id),
+      error: () => e.target.value = null
+    });
+  }
+
+  delPhoto() {
+    const u = this.user;
+    if(u.id && u.imgName && u.imgType) {
+      this._userService.deletePhoto(u.id, u.imgName, u.imgType).subscribe(() => this.getUser(this.user.id));
+    }
+  }
+
   save() {
     if(this.info.valid) {
       if(this.info.value.password) this.user.password = this.info.value.password;

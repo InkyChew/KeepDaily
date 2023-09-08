@@ -1,7 +1,5 @@
 ﻿using DomainLayer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
 using RepoLayer.IRepos;
 using SendGrid;
 using SendGrid.Helpers.Errors.Model;
@@ -22,6 +20,11 @@ namespace ServiceLayer.Services
             _repo = repo;
             _emailService = emailService;
             _jwtUtil = jwtUtil;
+        }
+        
+        public IEnumerable<User> GetAllUser()
+        {
+            return _repo.GetAllUser();
         }
 
         public User? GetUser(int id)
@@ -101,6 +104,14 @@ namespace ServiceLayer.Services
         {
             var user = _repo.FindUser(id);
             user.Password = new PasswordHasher<User>().HashPassword(user, password);
+            _repo.SaveChanges();
+        }
+
+        public void UpdatePhoto(int id, string imgName, string imgType)
+        {
+            var user = _repo.FindUser(id);
+            user.ImgName = imgName;
+            user.ImgType = imgType;
             _repo.SaveChanges();
         }
 

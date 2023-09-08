@@ -16,6 +16,11 @@ namespace RepoLayer.Repos
             _users = db.AppUser;
         }
 
+        public IEnumerable<User> GetAllUser()
+        {
+            return _users;
+        }
+
         public User? GetUser(int id)
         {
             return _users.SingleOrDefault(_ => _.Id == id);

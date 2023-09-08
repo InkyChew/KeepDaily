@@ -1,17 +1,21 @@
+import { Plan } from "./calendar";
+
 export interface IUser {
     id: number;
     name: string;
     email: string;
     password: string;
     description: string;
+    imgName?: string;
+    imgType?: string;
     emailConfirmed: boolean;
-    lineId: string | null;
-    lineAccessToken: string | null;
+    lineId?: string;
+    lineAccessToken?: string;
     isActive: boolean;
     userLevel: UserLevel;
     emailNotify: boolean;
     lineNotify: boolean;
-    friends: IUser[];
+    plans: Plan[];
 }
 
 export enum UserLevel {
@@ -23,4 +27,14 @@ export interface IAuthenticateUser {
     id: number;
     level: UserLevel;
     accessToken: string;
+}
+
+export class Friend {
+    userId: number;
+    friendId: number;
+
+    constructor(uid: number, fid: number) {
+        this.userId = uid;
+        this.friendId = fid;
+    }
 }

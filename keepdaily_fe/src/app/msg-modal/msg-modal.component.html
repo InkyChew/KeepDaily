@@ -1,0 +1,12 @@
+<div class="backdrop" *ngIf="(msg$ | async) as msg">
+    <article class="msg-modal">
+        <header class="modal-header">
+            <button class="btn cancel" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
+        </header>
+        <div class="modal-content">
+            <p [style.color]="color(msg.type)">
+                {{ msg.text }}
+            </p>
+        </div>
+    </article>
+</div>

@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
           this._router.navigateByUrl('/main/plans');
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
-          
           if(err.status == 401)
             this._router.navigateByUrl(`/email_confirm/4?uid=${err.error.id}`);
         }

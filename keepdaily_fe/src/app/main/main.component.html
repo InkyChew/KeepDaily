@@ -2,15 +2,16 @@
 
     <section class="user">
         <div class="photo">
-            <img src="" alt="">
+            <img [src]="getPhoto(user)" [alt]="user.name + '\'s photo'">
         </div>
-        <span>{{ user.name }}</span>
+        <span class="name">{{ user.name }}</span>
         <p>{{ user.description }}</p>
-        
+
         <div class="btns">
-            <a  class="btn btn-primary" routerLink="/user_setting"><i class="fa-solid fa-pencil"></i></a>
-            <button class="btn btn-primary">Follow</button>
-            <button class="btn btn-secondary"><i class="fa-solid fa-right-from-bracket"></i></button>
+            <a class="btn btn-primary" title="plans" routerLink="plans" routerLinkActive="active"><i class="fa-solid fa-flag"></i></a>
+            <a class="btn btn-primary" title="friends" routerLink="friends" routerLinkActive="active"><i class="fa-solid fa-heart"></i></a>
+            <a class="btn btn-primary" title="setting" routerLink="/user_setting"><i class="fa-solid fa-pencil"></i></a>
+            <button title="logout" class="btn btn-primary-outline" (click)="goToLogin()"><i class="fa-solid fa-right-from-bracket"></i></button>
         </div>
     </section>
 

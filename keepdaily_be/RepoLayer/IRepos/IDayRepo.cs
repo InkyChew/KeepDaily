@@ -8,8 +8,6 @@ namespace RepoLayer.IRepos
         public Day InsertDay(Day day);
         public Day UpdateDay(Day day);
         public Day FindDay(int id);
-        public void SaveChanges();
         public Day DeleteDay(int id);
-        public IDbContextTransaction BeginTransaction();
     }
 }

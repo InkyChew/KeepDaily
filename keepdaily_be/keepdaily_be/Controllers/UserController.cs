@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SendGrid.Helpers.Errors.Model;
 using Serilog;
 using ServiceLayer.IServices;
+using ServiceLayer.Services;
 
 namespace keepdaily_be.Controllers
 {
@@ -15,6 +16,7 @@ namespace keepdaily_be.Controllers
     {
         private readonly IUserService _service;
         private readonly IMapper _mapper;
+        private readonly FileService _fileService = new("UserImgs");
         public UserController(IUserService service, IMapper mapper)
         {
             _service = service;
@@ -47,7 +49,7 @@ namespace keepdaily_be.Controllers
             try
             {
                 var res = _service.Login(email, password);
-                setTokenCookie(res.RefreshToken);
+                SetTokenCookie(res.RefreshToken);
                 return CreatedAtAction(null, res);
             }
             catch (UnauthorizedException ex)
@@ -75,10 +77,10 @@ namespace keepdaily_be.Controllers
             try
             {
                 var user = _mapper.Map<User>(userdto);
-                var refreshToken = Request.Cookies["refreshToken"];
-                if (refreshToken == null) return BadRequest();
+                //var refreshToken = Request.Cookies["refreshToken"];
+                //if (refreshToken == null) return BadRequest();
                 var res = _service.RefreshToken(user);
-                setTokenCookie(res.RefreshToken);
+                SetTokenCookie(res.RefreshToken);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -86,6 +88,15 @@ namespace keepdaily_be.Controllers
                 Log.Error(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetAllUser(string? name, string? email)
+        {
+            var users = _service.GetAllUser();
+            if (name != null) users = users.Where(_ => _.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) > -1);
+            if (email != null) users = users.Where(_ => _.Email == email);
+            return Ok(users.ToList());
         }
 
         [Authorize]
@@ -127,7 +138,48 @@ namespace keepdaily_be.Controllers
             }
         }
 
-        private void setTokenCookie(string token)
+        [HttpGet("Img")]
+        public IActionResult GetPhoto(string name, string type)
+        {
+            var filePath = _fileService.GetFilePath(name);
+            Byte[] b = System.IO.File.ReadAllBytes(filePath);
+            return File(b, type);
+        }
+
+        [HttpPatch("{id}/Img")]
+        public async Task<IActionResult> UpdatePhotoAsync(int id, IFormFile file)
+        {
+            try
+            {
+                var ext = file.FileName.Split('.')[1];
+                var fileName = $"{id}.{ext}";
+                await _fileService.Create(file, fileName);
+                _service.UpdatePhoto(id, fileName, file.ContentType);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete("{id}/Img")]
+        public IActionResult DeletePhoto(string name)
+        {
+            try
+            {
+                _fileService.Delete(name);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        private void SetTokenCookie(string token)
         {
             // append cookie with refresh token to the http response
             var cookieOptions = new CookieOptions

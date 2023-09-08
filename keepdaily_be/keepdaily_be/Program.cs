@@ -68,6 +68,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<IDayService, DayService>();
 builder.Services.AddScoped<IDayRepo, DayRepo>();
+builder.Services.AddScoped<IFriendService, FriendService>();
+builder.Services.AddScoped<IFriendRepo, FriendRepo>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IConfirmEmailService, ConfirmEmailService>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
@@ -83,10 +85,24 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "ClientApp/dist";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsProduction())
+{
+    app.UseDefaultFiles();
+    app.UseSpaStaticFiles();
+    app.UseSpa(spa =>
+    {
+        spa.Options.SourcePath = "ClientApp";
+    });
+}
+else if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

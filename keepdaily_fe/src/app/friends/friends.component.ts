@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from '../models/user';
+import { FriendService } from '../services/friend.service';
+import { ActivatedRoute } from '@angular/router';
+import { IUserQuery, UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-friends',
@@ -7,9 +11,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendsComponent implements OnInit {
 
-  constructor() { }
+  uid = this._userService.getCurrentUser().id;
+  friendList: IUser[] = [];
+  searchFriends: IUser[] = [];
+
+  constructor(private _service: FriendService,
+    private _userService: UserService,
+    private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // main
+    if(this._route.parent?.snapshot.url[0].path == 'main')
+      if(this.uid) this.getFriends(this.uid);
+    
+    // friend
+    this._route.parent?.params.subscribe(params => {
+      const fid = params['fid'];
+      if(fid) this.getFriends(fid);
+    })
   }
 
+  getFriends(uid: number) {    
+    this._service.getAllFriend(uid).subscribe(res => this.friendList = res);
+  }
+
+  getPhoto(user: IUser) {
+    return this._userService.getPhoto(user);
+  }
+  
+  search(qry: HTMLInputElement) {
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const isEmailValid = qry.value.match(emailRegex);
+    const query: IUserQuery = isEmailValid ? { email: qry.value } : { name: qry.value };
+    if(qry)
+    this._userService.getAllUser(query).subscribe((res) => {
+      this.searchFriends = res.filter(_ => _.id != this.uid);
+    });
+  }
 }

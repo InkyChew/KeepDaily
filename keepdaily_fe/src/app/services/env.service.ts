@@ -11,6 +11,7 @@ export class EnvService {
   get APIOption(): IRestAPIOption {
     return {
       UserEndpoint: `${environment.api.url}${environment.api.endpoint.user}`,
+      FriendEndpoint: `${environment.api.url}${environment.api.endpoint.friend}`,
       PlanEndpoint: `${environment.api.url}${environment.api.endpoint.plan}`,
       CategoryEndpoint: `${environment.api.url}${environment.api.endpoint.category}`,      
       DayEndpoint: `${environment.api.url}${environment.api.endpoint.day}`,
@@ -22,6 +23,7 @@ export class EnvService {
 
 export interface IRestAPIOption {
   UserEndpoint: string,
+  FriendEndpoint: string,
   PlanEndpoint: string,
   CategoryEndpoint: string,
   DayEndpoint: string,

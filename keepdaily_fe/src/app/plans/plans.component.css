@@ -1,10 +1,9 @@
-
-.plans {
+.plan-list {
     padding: 0;
     list-style: none;
 }
 
-.plan {
+.plan-item {
     background: var(--light);
     border-radius: 8px;
     padding: var(--unit);
@@ -14,4 +13,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.plan-header .title {
+    font-size: 1.5em;
+    font-weight: bold;
 }

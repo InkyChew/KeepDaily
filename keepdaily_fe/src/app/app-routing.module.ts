@@ -11,6 +11,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SettingCategoryComponent } from './setting-category/setting-category.component';
 import { MainComponent } from './main/main.component';
 import { FriendsComponent } from './friends/friends.component';
+import { FriendPlansComponent } from './friend-plans/friend-plans.component';
+import { FriendComponent } from './friend/friend.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent, children: [
@@ -24,6 +26,11 @@ const routes: Routes = [
   {path: 'main', component: MainComponent, children: [
     {path:'', redirectTo: 'plans', pathMatch: 'full'},
     {path: 'plans', component: PlansComponent, pathMatch: 'full'},
+    {path: 'friends', component: FriendsComponent, pathMatch: 'full'}
+  ]},
+  {path: 'friend/:fid', component: FriendComponent, children: [
+    {path:'', redirectTo: 'plans', pathMatch: 'full'},
+    {path: 'plans', component: FriendPlansComponent, pathMatch: 'full'},
     {path: 'friends', component: FriendsComponent, pathMatch: 'full'}
   ]},
   {path: 'plan/:id', component: PlanComponent, pathMatch: 'full'},

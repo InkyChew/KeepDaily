@@ -16,13 +16,20 @@
         <ul class="calendar-dates">
             <li class="date" *ngFor="let day of calendar.days; index as i">
                 <span>{{ day.date }}</span>
-                <div class="img-container">
-                    <ng-container *ngIf="!fileUploading && day.imgName && day.imgType">
-                        <button class="del" (click)="delete(day)">X</button>
+                <ng-container *ngIf="editable else readonly">
+                    <div class="img-container">
+                        <ng-container *ngIf="!fileUploading && day.imgName && day.imgType">
+                            <button class="btn btn-primary del" (click)="delete(day)"><i class="fa-solid fa-trash"></i></button>
+                            <img [src]="getImg(day)" [alt]="day.imgName">
+                        </ng-container>
+                        <input type="file" [disabled]="!canUpload(day.date)" (input)="uploadFile($event, day)">
+                    </div>
+                </ng-container>
+                <ng-template #readonly>
+                    <div class="img-container">
                         <img [src]="getImg(day)" [alt]="day.imgName">
-                    </ng-container>
-                    <input type="file" [disabled]="!canUpload(day.date)" (input)="uploadFile($event, day)">
-                </div>
+                    </div>
+                </ng-template>
             </li>
         </ul>
     </div>

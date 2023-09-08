@@ -1,4 +1,13 @@
 <div *ngIf="user" class="user-setting">
+
+    <div class="field photo">
+        <div class="img-container">
+            <input type="file" (change)="uploadPhoto($event)">
+            <img [src]="getPhoto(user)" [alt]="user.name + '\'s photo'">
+        </div>
+        <button class="btn btn-primary del" (click)="delPhoto()"><i class="fa-solid fa-trash"></i></button> 
+    </div>
+
     <label class="field">
         <span class="field-title">Name</span>
         <input type="text" [(ngModel)]="user.name" maxlength="10">
@@ -31,12 +40,16 @@
     <div class="field">
         <span class="field-title">Notification</span>
         <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
-        <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
-        <button class="btn btn-primary" *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken">Connect</button>
+        <ng-container *ngIf="user.lineAccessToken else apply">
+            <label><input type="checkbox" [(ngModel)]="user.lineNotify"[ngModelOptions]="{standalone: true}">LineNotify</label>
+        </ng-container>
+        <ng-template #apply>
+            <button class="btn btn-link" *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken"><i class="fa-solid fa-link"></i>Apply LineNotify</button>
+        </ng-template>
     </div>
 
     <div class="btns">
-        <button class="btn btn-primary" (click)="save()"><i class="fa-solid fa-floppy-disk"></i></button>
-        <a class="btn btn-secondary" routerLink="/main/plans"><i class="fa-solid fa-arrow-left"></i></a>
+        <button title="save" class="btn btn-primary" (click)="save()"><i class="fa-solid fa-floppy-disk"></i></button>
+        <a title="goBack" class="btn btn-primary-outline" routerLink="/main/plans"><i class="fa-solid fa-arrow-left"></i></a>
     </div>
 </div>
