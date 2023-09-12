@@ -1,0 +1,43 @@
+﻿@using DomainLayer.Models;
+@model AuthenticateUser;
+@{
+    bool err = @ViewBag.err ?? false;
+    string baseUrl = "http://localhost:4200";
+    string loginUrl = $"{baseUrl}/login";
+    string indexUrl = $"{baseUrl}/main";
+    int cntDown = 10000;
+}
+
+@if (err)
+{
+    <h2>😢Fail to Login</h2>
+    <p>Please try again.
+        The page will redirect to login page in <span id="cnt"></span> seconds, or click <a href="@loginUrl">login</a>.</p>
+}
+
+<script type="text/javascript">
+    if (@Json.Serialize(err))
+    {
+        let cnt = @cntDown / 1000;
+        var timer = setInterval(() => {
+            document.getElementById("cnt").innerText = cnt--;
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(timer);
+            redirectTo('@loginUrl');
+        }, @cntDown);
+    }
+    else
+    {
+        localStorage.setItem("user", JSON.stringify(@Json.Serialize(@Model)));
+        redirectTo('@indexUrl');
+    }
+
+    function redirectTo(url)
+    {
+        window.location.href = url;
+    }
+</script>
+
+

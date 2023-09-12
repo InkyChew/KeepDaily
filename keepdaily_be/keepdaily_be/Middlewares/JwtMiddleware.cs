@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using ServiceLayer.IServices;
-using ServiceLayer.Services;
+﻿using ServiceLayer.IServices;
 using ServiceLayer.Utils;
-using System.Threading.Tasks;
 
 namespace keepdaily_be.Middlewares
 {

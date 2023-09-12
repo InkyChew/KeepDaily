@@ -55,7 +55,15 @@ export class UserService {
 
   getPhoto(u: IUser, defImg?: string) {
     const defaultImg = defImg ?? 'https://placehold.co/200';
-    return (u.imgName && u.imgType) ? `https://localhost:5000/api/User/Img?name=${u.imgName}&type=${u.imgType}` : defaultImg;
+    if(u.imgName && u.imgType) {
+      switch(u.imgType) {
+        case "Google":
+        case "Line":
+          return u.imgName;
+        default:
+          return `https://localhost:5000/api/User/Img?name=${u.imgName}&type=${u.imgType}`;
+      }
+    } else return defaultImg;
   }
 
   updatePhoto(id: number, data: FormData) {
@@ -73,6 +81,10 @@ export class UserService {
   logout() {
     localStorage.removeItem("user");
     this._router.navigateByUrl('/login');
+  }
+
+  loginWithGoogle(body: any) {
+    this._http.post<IAuthenticateUser>('https://localhost:5000/api/OAuthGoogle', body);
   }
 }
 

@@ -74,13 +74,14 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IConfirmEmailService, ConfirmEmailService>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
-
+builder.Services.AddRazorPages().WithRazorPagesRoot("/Pages");
 builder.Services.AddControllers()
     .AddJsonOptions(config =>
     {
         config.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         config.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
     });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -117,5 +118,7 @@ app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
+
+app.MapRazorPages();
 
 app.Run();

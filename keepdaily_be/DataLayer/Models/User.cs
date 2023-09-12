@@ -19,7 +19,7 @@ namespace DomainLayer.Models
         public string Email { get; set; } = null!;
         [JsonIgnore]
         [Column(TypeName = "nvarchar(100)")]
-        public string Password { get; set; } = null!;
+        public string? Password { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         public string? Description { get; set; }

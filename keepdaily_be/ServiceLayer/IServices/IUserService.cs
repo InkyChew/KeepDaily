@@ -17,5 +17,7 @@ namespace ServiceLayer.IServices
         public void UpdateUserLineToken(string email, string token);
         public void InActiveUser(int id);
         public void SaveChanges();
+        public AuthenticateUser LoginWithGoogle(User user);
+        public AuthenticateUser RegisterWithGoogle(User user);
     }
 }

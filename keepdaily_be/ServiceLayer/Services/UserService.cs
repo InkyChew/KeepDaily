@@ -1,7 +1,6 @@
 ﻿using DomainLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using RepoLayer.IRepos;
-using SendGrid;
 using SendGrid.Helpers.Errors.Model;
 using ServiceLayer.IServices;
 using ServiceLayer.Utils;
@@ -131,6 +130,21 @@ namespace ServiceLayer.Services
         public void InActiveUser(int id)
         {
             throw new NotImplementedException();
+        }
+
+        /*
+         * Google
+         */
+        public AuthenticateUser LoginWithGoogle(User user)
+        {
+            if (!user.EmailConfirmed) throw new UnauthorizedException($"{user.Id}");
+            if (!user.IsActive) throw new ForbiddenException("Your account is banned by keepdaily due to against the rule.");
+            return RefreshToken(user);
+        }
+        public AuthenticateUser RegisterWithGoogle(User user)
+        {
+            _repo.InsertUser(user);
+            return RefreshToken(user);
         }
     }
 }
