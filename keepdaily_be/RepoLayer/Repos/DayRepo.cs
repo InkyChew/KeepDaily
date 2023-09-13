@@ -20,6 +20,11 @@ namespace RepoLayer.Repos
             _plans = db.Plan;
         }
 
+        public IEnumerable<Day> GetAllDay()
+        {
+            return _days;
+        }
+
         public Day FindDay(int id)
         {
             return _days.Find(id) ?? throw new KeyNotFoundException($"Day(id:{id}) not found.");

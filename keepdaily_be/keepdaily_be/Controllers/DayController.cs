@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ServiceLayer.IServices;
 using ServiceLayer.Services;
+using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
+using System.Xml.Linq;
 
 namespace keepdaily_be.Controllers
 {
@@ -14,18 +16,36 @@ namespace keepdaily_be.Controllers
     {
         private readonly IDayService _service;
         private readonly FileService _fileService = new("DayImgs");
+        private readonly IVideoService _videoService;
 
-        public DayController(IDayService service)
+        public DayController(IDayService service, IVideoService videoService)
         {
             _service = service;
+            _videoService = videoService;
         }
 
         [HttpGet("Img")]
-        public IActionResult Get(string name, string type)
+        public IActionResult GetImage(string name, string type)
         {
             var filePath = _fileService.GetFilePath(name);
             Byte[] b = System.IO.File.ReadAllBytes(filePath);
             return File(b, type);
+        }
+
+        [HttpGet]
+        public void Test()
+        {
+            var x = Directory.EnumerateFiles("D:\\InkyProject\\KeepDaily\\keepdaily_be\\keepdaily_be\\bin\\Debug\\net6.0\\DayImgs");
+        
+        }
+
+        [HttpGet("{planId}/Video")]
+        public IActionResult GetVideo(int planId, string start, string end)
+        {
+            var x = _service.GetDays(planId, start, end).Select(_ => _fileService.GetFilePath(_.ImgName));
+
+            _videoService.ConvertImagesToVideoAsync(x, "test.mp4", 1);
+            return Ok();
         }
 
         [HttpPost]

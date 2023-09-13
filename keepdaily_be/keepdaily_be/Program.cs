@@ -72,6 +72,7 @@ builder.Services.AddScoped<IFriendService, FriendService>();
 builder.Services.AddScoped<IFriendRepo, FriendRepo>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IConfirmEmailService, ConfirmEmailService>();
+builder.Services.AddSingleton<IVideoService, VideoService>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 builder.Services.AddRazorPages().WithRazorPagesRoot("/Pages");
