@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Calendar, Plan } from '../models/calendar';
+import { Calendar, Day, Plan } from '../models/calendar';
 import { HelperService } from '../services/helper.service';
 import { PlanService } from '../services/plan.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class PlanComponent implements OnInit {
   calendar?: Calendar;
   editable: boolean = false;
   monthList = this._helper.Month;
+  showVideo = false;
 
   constructor(private _helper: HelperService,
     private _service: PlanService,
@@ -39,7 +40,7 @@ export class PlanComponent implements OnInit {
       this.editable = res.userId == this._userService.getCurrentUser().id;
       this.plan = res;
       if(!this.year) this.year = new Date(this.plan.updateTime).getFullYear();
-      if(!this.month) this.month = new Date(this.plan.updateTime).getMonth();
+      if(!this.month) this.month = new Date(this.plan.updateTime).getMonth()+1;
       
       this.calendar = new Calendar(this.year, this.month, this.plan.days);
     });
@@ -52,7 +53,7 @@ export class PlanComponent implements OnInit {
     if(type == 'month') this.month = v;
     this.getPlan();
   }
-
+  
   goBack() {
     this._router.navigateByUrl('/main/plans');
   }

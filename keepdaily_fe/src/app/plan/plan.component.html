@@ -13,20 +13,25 @@
             
             <label class="field">
                 <select [(ngModel)]="month" (change)="change('month', $event)">
-                    <ng-container *ngFor="let m of monthList; index as i;">
-                        <option [value]="i">{{ m }}</option>
+                    <ng-container *ngFor="let m of monthList; index as i; first as first">
+                        <option *ngIf="!first" [value]="i">{{ m }}</option>
                     </ng-container>
                 </select>
             </label>
         </div>
         
         <div class="btns">
+            <button title="video" class="btn btn-primary" (click)="showVideo = true"><i class="fa-solid fa-film"></i></button>
             <button title="goBack" class="btn btn-primary-outline" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
-            <button class="btn btn-primary" (click)="goBack()">🎨</button>
+            <!-- <button class="btn btn-primary" (click)="goBack()">🎨</button> -->
         </div>
     </div>
     
     <ng-container *ngIf="calendar">
         <app-calendar [calendar]="calendar" [editable]="editable"></app-calendar>
     </ng-container>
+
+    <video-modal *ngIf="showVideo && year && month"
+        [plan]="plan" [year]="year" [month]="month"
+        (onModalClose)="showVideo = false"></video-modal>
 </div>

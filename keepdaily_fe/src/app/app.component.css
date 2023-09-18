@@ -1,17 +1,15 @@
 .container {
     width: 100%;
     min-height: 100vh;
-    background-color: var(--primary);
 }
 
 .content {
     position: relative;
-    width: 100%;
+    max-width: 1280px;
     min-height: calc(100vh - 125px);
     padding: var(--unit);
     margin: auto;
     box-sizing: border-box;
-    background-color: var(--light);
 }
 
 .app-header {
@@ -19,9 +17,10 @@
     justify-content: center;
     align-items: center;
     height: 75px;
-    color: var(--white);
+    color: var(--primary-dark);
     overflow: hidden;
     box-sizing: border-box;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 3px;
 }
 .app-header .logo {
     flex: 1;
@@ -40,13 +39,17 @@
     display: block;
     padding: 20px;
     text-decoration: none;
-    color: var(--white);
+    color: var(--primary);
+    transition: all .5s;
+}
+.app-header .menu-item-link:hover {
+    color: var(--secondary);
 }
 
 .app-footer {
     height: 50px;
     padding: var(--unit);
-    color: var(--white);
+    color: var(--primary);
     overflow: hidden;
     box-sizing: border-box;
 }

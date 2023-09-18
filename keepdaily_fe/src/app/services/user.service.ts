@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { IAuthenticateUser, IUser } from '../models/user';
 import { Router } from '@angular/router';
-
+import { BehaviorSubject, Subject } from 'rxjs';
 const USER_KEY = "user";
 
 @Injectable({
@@ -11,10 +11,12 @@ const USER_KEY = "user";
 })
 export class UserService {
 
-  constructor(private _http: HttpClient, private _env: EnvService,
-    private _router: Router) { }
+  user$ = new BehaviorSubject<IAuthenticateUser | undefined>(this.getCurrentUser());
 
-  setCurrentUser(user: IUser) {
+  constructor(private _http: HttpClient, private _env: EnvService, private _router: Router) {}
+
+  setCurrentUser(user: IAuthenticateUser) {
+    this.user$.next(user);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
@@ -61,7 +63,7 @@ export class UserService {
         case "Line":
           return u.imgName;
         default:
-          return `https://localhost:5000/api/User/Img?name=${u.imgName}&type=${u.imgType}`;
+          return `${this._env.APIOption.UserEndpoint}/Img?name=${u.imgName}&type=${u.imgType}`;
       }
     } else return defaultImg;
   }
@@ -79,6 +81,7 @@ export class UserService {
   }
 
   logout() {
+    this.user$.next(undefined);
     localStorage.removeItem("user");
     this._router.navigateByUrl('/login');
   }

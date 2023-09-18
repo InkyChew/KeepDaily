@@ -1,0 +1,14 @@
+.modal {
+    max-width: 720px;
+}
+
+.modal-content {
+    height: auto;
+}
+
+video {
+    max-width: 640px;
+    max-height: 360px;
+    width: 100%;
+    height: 100%;
+}

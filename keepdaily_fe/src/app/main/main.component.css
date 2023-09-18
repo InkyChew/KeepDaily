@@ -9,11 +9,8 @@ section {
 
 .user {
     width: 30%;
-    /* color: var(--light); */
     color: var(--primary);
-    /* border: 3px solid var(--secondary); */
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    background: var(--secondary);
+    border-right: 1px solid var(--light);
 }
 
 .user .photo {
@@ -34,15 +31,18 @@ section {
     object-position: center;
 }
 
-.user .name {
+.name {
     display: block;
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
 }
 
+.desc {
+    color: var(--primary-dark);
+}
+
 .content {
     flex: 1;
-    background: var(--secondary);
     overflow-y: auto;
 }

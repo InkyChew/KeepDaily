@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Google.Apis.Auth.AspNetCore3" Version="1.62.0" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.21" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.21">
 			<PrivateAssets>all</PrivateAssets>
@@ -24,6 +25,13 @@
 		<ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Include="ffmpeg\*">
+			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	
 	<Target Name="CreateClientFolder" AfterTargets="AfterPublish">
 		<MakeDir Directories="$(PublishUrl)$(OutputDirectory)" Condition="!Exists('$(PublishUrl)$(OutputDirectory)')" />
 	</Target>

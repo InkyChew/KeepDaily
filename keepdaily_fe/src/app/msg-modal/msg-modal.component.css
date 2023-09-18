@@ -1,31 +1,3 @@
-.msg-modal {
-    background-color: var(--light);
-    width: 480px;
-    border-radius: var(--radius);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-.modal-header {
-    display: block;
-    text-align: right;
-}
-
-.cancel {
-    border: none;
-    color: var(--secondary-dark);
-}
-.cancel:hover {
-    color: var(--primary);
-}
-
-.modal-content {
-    /* height: ; */
-    max-height: 200px;
-    padding: var(--unit);
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
 p {
     margin: 0;
 }

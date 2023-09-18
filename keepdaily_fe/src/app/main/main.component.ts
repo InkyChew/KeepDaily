@@ -15,9 +15,8 @@ export class MainComponent implements OnInit {
     private _userService: UserService) { }
 
   ngOnInit(): void {
-    const uid = JSON.parse(localStorage.getItem("user")!)?.id;
-    if(uid) this.getUser(uid);
-    else this.goToLogin();
+    const uid = this._userService.getCurrentUser().id;
+    this.getUser(uid);
   }
 
   getUser(id: number) {

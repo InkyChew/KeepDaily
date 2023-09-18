@@ -41,18 +41,14 @@ export class PlansComponent implements OnInit {
     this.edit = 0;
   }
 
-  save(plan: Plan, i: number) {    
-    if(plan.id == 0) {
-      this._service.postPlan(plan).subscribe(res => {
-        this.planList[i] = res;
-        this.closeEditor();
-      });
-    } else {
-      this._service.putPlan(plan).subscribe(() => {
-        this.planList[i] = plan;
-        this.closeEditor();
-      });
-    }
+  save(plan: Plan, i: number) {
+    const method = plan.id == 0
+            ? this._service.postPlan(plan)
+            : this._service.putPlan(plan);
+    method.subscribe(res => {
+      this.planList[i] = res;
+      this.closeEditor();
+    });
   }
 
   delete(id: number, i: number) {

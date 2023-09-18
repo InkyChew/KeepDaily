@@ -1,5 +1,4 @@
-﻿using DomainLayer.Dto;
-using DomainLayer.Models;
+﻿using DomainLayer.Models;
 using RepoLayer.IRepos;
 using ServiceLayer.IServices;
 
@@ -14,41 +13,14 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public Plan CreatePlan(Plan plan)
-        {
-            return _repo.InsertPlan(plan);
-        }
-
-        public Plan CreatePlanWithDetail(VMPlan vmPlan)
-        {
-            var plan = TransformToPlan(vmPlan);
-            return _repo.InsertPlan(plan);
-        }
-
-        public void DeletePlan(int id)
-        {
-            _repo.DeletePlan(id);
-        }
-
         public IEnumerable<Plan> GetAllPlan()
         {
             return _repo.GetAllPlan().OrderByDescending(_ => _.UpdateTime);
         }
 
-        public List<VMPlan> GetAllPlanWithDetail()
+        public Plan GetPlan(int id)
         {
-            var vmPlans = new List<VMPlan>();
-            //var plans = _repo.GetAllPlan();
-            //foreach (var plan in plans)
-            //{
-            //    vmPlans.Add(TransformToVMPlan(plan));
-            //}
-            return vmPlans;
-        }
-
-        public Plan? GetPlan(int id)
-        {
-            return _repo.GetPlan(id);
+            return _repo.GetPlan(id) ?? throw new KeyNotFoundException($"Plan(Id:{id}) does not exist.");
         }
 
         public Plan? GetPlanWithDetail(int id, int? year = null, int? month = null)
@@ -63,15 +35,21 @@ namespace ServiceLayer.Services
             return plan;
         }
 
-        public Plan UpdatePlan(Plan plan)
+        public Plan CreatePlan(Plan plan)
         {
-            return _repo.UpdatePlan(plan);
+            _repo.InsertPlan(plan);
+            return GetPlan(plan.Id);
         }
 
-        public Plan UpdatePlanWithDetail(VMPlan vmPlan)
+        public Plan UpdatePlan(Plan plan)
         {
-            var plan = TransformToPlan(vmPlan);
-            return _repo.UpdatePlan(plan);
+            _repo.UpdatePlan(plan);
+            return GetPlan(plan.Id);
+        }
+
+        public void DeletePlan(int id)
+        {
+            _repo.DeletePlan(id);
         }
 
         private List<Day> CreateDayList(Plan plan, int year, int month)
@@ -104,54 +82,6 @@ namespace ServiceLayer.Services
         {
             return plan.Days.SingleOrDefault(_ => _.Year == year && _.Month == month && _.Date == date)
                         ?? new() { Year = year, Month = month, Date = date, PlanId = plan.Id };
-        }
-
-        private VMPlan TransformToVMPlan(Plan plan)
-        {
-            return new VMPlan
-            {
-                Id = plan.Id,
-                Title = plan.Title,
-                Description = plan.Description,
-                StartFrom = plan.StartFrom,
-                Calendars = plan.Days.GroupBy(c => new { c.Year, c.Month })
-                                .Select(g => new VMPlanCalendar
-                                {
-                                    Year = g.Key.Year,
-                                    Month = g.Key.Month,
-                                    Days = g.Select(d => new VMPlanDay
-                                    {
-                                        DayId = d.Id,
-                                        Date = d.Date,
-                                        ImgUrl = d.ImgName
-                                    }).ToList()
-                                }).ToList()
-            };
-        }
-
-        private Plan TransformToPlan(VMPlan vmPlan)
-        {
-            var plan = new Plan
-            {
-                Id = vmPlan.Id,
-                Title = vmPlan.Title,
-                Description = vmPlan.Description
-            };
-            foreach (var c in vmPlan.Calendars)
-            {
-                foreach(var d in c.Days)
-                {
-                    plan.Days.Add(new Day()
-                    {
-                        Id = d.DayId,
-                        Year = c.Year,
-                        Month = c.Month,
-                        Date = d.Date,
-                        ImgName = d.ImgUrl
-                    });
-                }
-            }
-            return plan;
         }
     }
 }

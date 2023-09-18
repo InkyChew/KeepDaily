@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { FriendsComponent } from './friends/friends.component';
 import { FriendPlansComponent } from './friend-plans/friend-plans.component';
 import { FriendComponent } from './friend/friend.component';
+import { VideoModalComponent } from './video-modal/video-modal.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent, children: [
@@ -34,6 +35,7 @@ const routes: Routes = [
     {path: 'friends', component: FriendsComponent, pathMatch: 'full'}
   ]},
   {path: 'plan/:id', component: PlanComponent, pathMatch: 'full'},
+  {path: 'plan/:id/video', component: VideoModalComponent, pathMatch: 'full'},
   {path: 'setting_category', component: SettingCategoryComponent, pathMatch: 'full'}
 ];
 

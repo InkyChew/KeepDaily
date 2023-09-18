@@ -8,7 +8,15 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
 
+  isLogin: boolean = false;
+
   constructor(private _userService: UserService) {}
+
+  ngOnInit() {
+    this._userService.user$.subscribe(res => 
+      this.isLogin = res ? true : false
+    );
+  }
 
   logout() {
     this._userService.logout();

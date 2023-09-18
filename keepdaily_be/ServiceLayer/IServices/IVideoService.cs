@@ -1,7 +1,10 @@
-﻿namespace ServiceLayer.IServices
+﻿using System.Net;
+
+namespace ServiceLayer.IServices
 {
     public interface IVideoService
     {
-        public Task ConvertImagesToVideoAsync(IEnumerable<string> imagePaths, string outputVideoPath, int frameRate);
+        public Task ConvertImagesToVideoAsync(IList<string> imagePaths, IList<string> texts, string outputVideoPath, int frameRate);
+        public void WriteToStream(string filePath, Stream outputStream, HttpContent content, TransportContext transportContext);
     }
 }

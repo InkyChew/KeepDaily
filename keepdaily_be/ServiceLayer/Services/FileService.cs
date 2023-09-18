@@ -14,11 +14,9 @@ namespace ServiceLayer.Services
 
         public async Task Create(IFormFile file, string fileName)
         {
-            var filePath = Path.Combine(dir, fileName);            
-            using (var stream = File.Create(filePath))
-            {
-                await file.CopyToAsync(stream);
-            }
+            var filePath = Path.Combine(dir, fileName);
+            using var stream = File.Create(filePath);
+            await file.CopyToAsync(stream);
         }
 
         public string GetFilePath(string fileName)

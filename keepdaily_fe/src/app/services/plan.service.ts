@@ -23,12 +23,17 @@ export class PlanService {
     return this._http.get<Plan>(`${this._env.APIOption.PlanEndpoint}/${id}`, { params: params });
   }
 
+  getPlanVideo(id: number, start: string, end: string) {
+    // start, end: day.year-day.month-day.date
+    return `${this._env.APIOption.PlanEndpoint}/${id}/Video?start=${start}&end=${end}`;
+  }
+
   postPlan(plan: Plan) {
     return this._http.post<Plan>(this._env.APIOption.PlanEndpoint, plan);
   }
 
   putPlan(plan: Plan) {
-    return this._http.put(this._env.APIOption.PlanEndpoint, plan);
+    return this._http.put<Plan>(this._env.APIOption.PlanEndpoint, plan);
   }
 
   deletePlan(id: number) {

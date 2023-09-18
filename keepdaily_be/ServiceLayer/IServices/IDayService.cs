@@ -1,5 +1,4 @@
 ﻿using DomainLayer.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace ServiceLayer.IServices
 {

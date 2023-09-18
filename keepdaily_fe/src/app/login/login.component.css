@@ -1,0 +1,5 @@
+.sso {
+    margin-top: var(--unit);
+    display: flex;
+    flex-direction: column;
+}

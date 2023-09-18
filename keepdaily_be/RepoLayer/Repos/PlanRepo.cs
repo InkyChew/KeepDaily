@@ -28,12 +28,13 @@ namespace RepoLayer.Repos
 
         public Plan? GetPlan(int id)
         {
-            return _plans.SingleOrDefault(_ => _.Id == id);
+            return _plans.Include(_ => _.Category).SingleOrDefault(_ => _.Id == id);
         }
 
         public Plan? GetPlanWithDetail(int id)
         {
-            return _plans.Include(_ => _.Days).SingleOrDefault(_ => _.Id == id);
+            return _plans.Include(_ => _.Category)
+                         .Include(_ => _.Days).SingleOrDefault(_ => _.Id == id);
         }
 
         public Plan InsertPlan(Plan plan)
@@ -45,6 +46,7 @@ namespace RepoLayer.Repos
 
         public Plan UpdatePlan(Plan plan)
         {
+            if (plan.Category != null) _db.Entry(plan.Category).State = EntityState.Unchanged;
             _db.Update(plan);
             _db.SaveChanges();
             return plan;

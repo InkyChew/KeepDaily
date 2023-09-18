@@ -5,6 +5,7 @@
 
 appsettings*
 key.pem
+ffmpeg/
 
 # User-specific files
 *.rsuser

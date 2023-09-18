@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private _router: Router) {
     this.login  = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      pwd: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       remember: new FormControl('')
     });
     this.formService = new FormService(this.login);
@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
     if(this.login.valid) {
       const data = new FormData();
       data.append('email', this.login.value.email);
-      data.append('password', this.login.value.pwd);
+      data.append('password', this.login.value.password);
       this._userService.login(data).subscribe({
         next: (user: IAuthenticateUser) => {
-          localStorage.setItem('user', JSON.stringify(user));
+          this._userService.setCurrentUser(user);
           this._router.navigateByUrl('/main/plans');
         },
         error: (err: HttpErrorResponse) => {

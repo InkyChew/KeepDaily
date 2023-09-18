@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Calendar, Day } from '../models/calendar';
 import { DayService } from '../services/day.service';
 import { formatDate } from '@angular/common';
+import { HelperService } from '../services/helper.service';
 
 @Component({
   selector: 'app-calendar',
@@ -14,14 +15,10 @@ export class CalendarComponent implements OnInit {
   @Input() editable: boolean = false;
   fileUploading: boolean = false;
 
-  constructor(private _dayService: DayService) {}
+  constructor(private _dayService: DayService,
+    private _helpService: HelperService) {}
   
   ngOnInit(): void {}
-
-  ngAfterContentInit() {
-    console.log(this.calendar);
-    
-  }
 
   canUpload(date: number) {
     const today = new Date();
@@ -29,25 +26,31 @@ export class CalendarComponent implements OnInit {
   }
 
   getImg(day: Day) {
-    return `https://localhost:5000/api/Day/Img?name=${day.imgName}&type=${day.imgType}`;
+    if(day.imgName && day.imgType)
+      return this._dayService.getDayImage(day.imgName, day.imgType);
+    return;
   }
 
   uploadFile(e: any, day: Day) {
-    this.fileUploading = true;
-    const data = new FormData();
+    const MediaTypePattern = /^image\/.*$/;
     const file = e.target.files[0];
-    const ext = file.name.split('.')[1];
-    const dt = formatDate(new Date(day.year, day.month-1, day.date), 'yy_MM_dd', 'en-US');
-    day.imgName = `${day.planId}_${dt}.${ext}`;
-    day.imgType = file.type;
+    if(this.canUpload(day.date) && MediaTypePattern.test(file.type)) {
+      this.fileUploading = true;
+      const data = new FormData();
+      const ext = file.name.split('.')[1];
+      const dt = formatDate(new Date(day.year, day.month-1, day.date), 'yy_MM_dd', 'en-US');
+      day.imgName = `${day.planId}_${dt}.${ext}`;
+      day.imgType = file.type;
 
-    data.append('file', file);
-    data.append('data', JSON.stringify(day));
+      data.append('file', file);
+      data.append('data', JSON.stringify(day));
 
-    this._dayService.postDay(data).subscribe(res => {
-      day.id = res.id;      
-      this.fileUploading = false;
-    });
+      this._dayService.postDay(data).subscribe(res => {
+        day.id = res.id;      
+        this.fileUploading = false;
+      });
+    }
+    else this._helpService.showMsg("Please select an image to upload.");
   }
 
   delete(day: Day) {

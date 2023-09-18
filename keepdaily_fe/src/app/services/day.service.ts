@@ -11,12 +11,12 @@ export class DayService {
 
   constructor(private _http: HttpClient, private _env: EnvService) { }
 
-  postDay(data: FormData) {
-    return this._http.post<Day>(this._env.APIOption.DayEndpoint, data);
+  getDayImage(name: string, type: string) {
+    return `${this._env.APIOption.DayEndpoint}/Img?name=${name}&type=${type}`
   }
 
-  putDay(data: FormData) {
-    return this._http.put(this._env.APIOption.DayEndpoint, data);
+  postDay(data: FormData) {
+    return this._http.post<Day>(this._env.APIOption.DayEndpoint, data);
   }
 
   deleteDay(id: number) {

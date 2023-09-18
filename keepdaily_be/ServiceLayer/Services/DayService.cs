@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models;
 using RepoLayer.IRepos;
 using ServiceLayer.IServices;
+using System.Linq;
 
 namespace ServiceLayer.Services
 {
@@ -17,9 +18,11 @@ namespace ServiceLayer.Services
         {
             return _repo.GetAllDay().Where(_ =>
             {
-                var day = $"{_.Year}-{_.Month}-{_.Date}";
+                var day = DateTime.Parse($"{_.Year}-{_.Month}-{_.Date}");
+                var s = DateTime.Parse(start);
+                var e = DateTime.Parse(end);
                 return _.PlanId == planId
-                        && (day.CompareTo(start) >= 0 && day.CompareTo(end) <= 0);
+                        && day.CompareTo(s) >= 0 && day.CompareTo(e) <= 0;
             }).ToList();
         }
 

@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HelperService {
 
-  Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  Month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   readonly msg$ = new BehaviorSubject<MsgModal | undefined>(undefined);
   readonly loader$ = new BehaviorSubject<boolean>(false);
 

@@ -146,6 +146,7 @@ namespace keepdaily_be.Controllers
             return File(b, type);
         }
 
+        [Authorize]
         [HttpPatch("{id}/Img")]
         public async Task<IActionResult> UpdatePhotoAsync(int id, IFormFile file)
         {
@@ -164,6 +165,7 @@ namespace keepdaily_be.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}/Img")]
         public IActionResult DeletePhoto(string name)
         {
