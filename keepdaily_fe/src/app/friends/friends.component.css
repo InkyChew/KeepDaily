@@ -38,6 +38,7 @@
     max-height: 500px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     overflow-y: auto;
+    z-index: 100;
 }
 
 .search .friend-item {
@@ -75,7 +76,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance:none;
+}
 
 /* Content */
 .content {

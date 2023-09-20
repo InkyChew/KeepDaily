@@ -48,4 +48,8 @@ export class FriendsComponent implements OnInit {
       this.searchFriends = res.filter(_ => _.id != this.uid);
     });
   }
+
+  clear() {
+    this.searchFriends = [];
+  }
 }

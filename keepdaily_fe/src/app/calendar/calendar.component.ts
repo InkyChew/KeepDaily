@@ -22,7 +22,7 @@ export class CalendarComponent implements OnInit {
 
   canUpload(date: number) {
     const today = new Date();
-    return (this.calendar.year == today.getFullYear() && this.calendar.month == today.getMonth()+1 && date == today.getDate());
+    return this.editable && (this.calendar.year == today.getFullYear() && this.calendar.month == today.getMonth()+1 && date == today.getDate());
   }
 
   getImg(day: Day) {

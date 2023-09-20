@@ -28,7 +28,9 @@
                     </ng-container>
                     <ng-template #readonly>
                         <div class="img-container">
-                            <img [src]="getImg(day)" [alt]="day.imgName">
+                            <ng-container *ngIf="day.imgName && day.imgType">
+                                <img [src]="getImg(day)" [alt]="day.imgName">
+                            </ng-container>
                         </div>
                     </ng-template>
                 </li>

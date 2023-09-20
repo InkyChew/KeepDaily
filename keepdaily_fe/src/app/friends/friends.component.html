@@ -3,14 +3,15 @@
     <div class="search">
         <div class="field">
             <input type="search" placeholder="friend's email" #qry/>
-            <button (click)="search(qry)">Search</button>
+            <button (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button (click)="clear()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <ul class="friend-list">
+            <!-- length == 0; no result, show = false -->
             <li *ngFor="let friend of searchFriends">
                 <a class="friend-item" [routerLink]="['/friend', friend.id]">
                     <div class="photo">
-                        <img src="https://picsum.photos/300/200/?random=10">
-                        <!-- <img src="" alt=""> -->
+                        <img [src]="getPhoto(friend)" [alt]="friend.name + '\'s photo'">
                     </div>
                     <div class="info">
                         <div class="id">
