@@ -31,8 +31,12 @@ builder.Logging.AddSerilog(Log.Logger);
  */
 builder.Services.AddDbContext<KeepDailyContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                            ?? throw new NullReferenceException("Null DefaultConnection.");
+    var dev = builder.Configuration.GetConnectionString("DefaultConnection");
+    var prod = builder.Configuration.GetConnectionString("DefaultConnection");                           
+
+    var connectionString = (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                            ? prod : dev;
+    if(connectionString == null) throw new NullReferenceException("Null Database ConnectionString.");
     options.UseSqlServer(connectionString);
 });
 
