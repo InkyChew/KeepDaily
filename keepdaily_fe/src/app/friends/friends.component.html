@@ -4,24 +4,27 @@
         <div class="field">
             <input type="search" placeholder="friend's email" #qry/>
             <button (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button (click)="clear()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <ul class="friend-list">
-            <!-- length == 0; no result, show = false -->
-            <li *ngFor="let friend of searchFriends">
-                <a class="friend-item" [routerLink]="['/friend', friend.id]">
-                    <div class="photo">
-                        <img [src]="getPhoto(friend)" [alt]="friend.name + '\'s photo'">
-                    </div>
-                    <div class="info">
-                        <div class="id">
-                            <span class="name">{{ friend.name }}</span>
-                            <span class="email">{{ friend.email }}</span>
+        <ul class="friend-list" *ngIf="searchFriends" (mouseleave)="searchFriends=undefined">
+            <ng-container *ngIf="searchFriends.length == 0; else display">
+                <li class="friend-item">No results.</li>
+            </ng-container>
+            <ng-template #display>
+                <li *ngFor="let friend of searchFriends">
+                    <a class="friend-item" [routerLink]="['/friend', friend.id]">
+                        <div class="photo">
+                            <img [src]="getPhoto(friend)" [alt]="friend.name + '\'s photo'">
                         </div>
-                        <p class="desc">{{ friend.description }}</p>
-                    </div>
-                </a>
-            </li>
+                        <div class="info">
+                            <div class="id">
+                                <span class="name">{{ friend.name }}</span>
+                                <span class="email">{{ friend.email }}</span>
+                            </div>
+                            <p class="desc">{{ friend.description }}</p>
+                        </div>
+                    </a>
+                </li>
+            </ng-template>            
         </ul>
     </div>
 

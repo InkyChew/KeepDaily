@@ -13,7 +13,7 @@ export class FriendsComponent implements OnInit {
 
   uid = this._userService.getCurrentUser().id;
   friendList: IUser[] = [];
-  searchFriends: IUser[] = [];
+  searchFriends?: IUser[];
 
   constructor(private _service: FriendService,
     private _userService: UserService,
@@ -44,12 +44,8 @@ export class FriendsComponent implements OnInit {
     const isEmailValid = qry.value.match(emailRegex);
     const query: IUserQuery = isEmailValid ? { email: qry.value } : { name: qry.value };
     if(qry)
-    this._userService.getAllUser(query).subscribe((res) => {
-      this.searchFriends = res.filter(_ => _.id != this.uid);
-    });
-  }
-
-  clear() {
-    this.searchFriends = [];
+      this._userService.getAllUser(query).subscribe((res) => {
+        this.searchFriends = res.filter(_ => _.id != this.uid);
+      });
   }
 }

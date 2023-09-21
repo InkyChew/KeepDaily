@@ -31,13 +31,14 @@ builder.Logging.AddSerilog(Log.Logger);
  */
 builder.Services.AddDbContext<KeepDailyContext>(options =>
 {
-    var dev = builder.Configuration.GetConnectionString("DefaultConnection");
-    var prod = builder.Configuration.GetConnectionString("DefaultConnection");                           
-
-    var connectionString = (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                            ? prod : dev;
-    if(connectionString == null) throw new NullReferenceException("Null Database ConnectionString.");
+    var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")
+                            ?? throw new NullReferenceException("Null Database ConnectionString.");
     options.UseSqlServer(connectionString);
+});
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+    options.InstanceName = "KeepdailyInstance";
 });
 
 /*
