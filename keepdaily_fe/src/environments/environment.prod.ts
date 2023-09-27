@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: {
-    url: 'https://localhost:5000/api',
+    url: 'https://keepdaily.azurewebsites.net/api',
     endpoint: {
       user: '/User',
       friend: '/Friend',
@@ -9,6 +9,7 @@ export const environment = {
       category: '/Category',
       day: '/Day',
       lineNotify: '/LineNotify',
+      oAuthGoogle: '/OAuthGoogle',
       confirmEmail: '/ConfirmEmail'
     }
   }

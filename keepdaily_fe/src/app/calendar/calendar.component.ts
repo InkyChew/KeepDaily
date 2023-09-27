@@ -20,21 +20,20 @@ export class CalendarComponent implements OnInit {
   
   ngOnInit(): void {}
 
-  canUpload(date: number) {
+  canUpload(day: Day) {
     const today = new Date();
-    return this.editable && (this.calendar.year == today.getFullYear() && this.calendar.month == today.getMonth()+1 && date == today.getDate());
+    return this.editable && (day.year == today.getFullYear() && day.month == today.getMonth()+1 && day.date == today.getDate());
   }
 
   getImg(day: Day) {
-    if(day.imgName && day.imgType)
-      return this._dayService.getDayImage(day.imgName, day.imgType);
-    return;
+    return (day.imgName && day.imgType)
+            ? this._dayService.getDayImage(day.imgName, day.imgType) : void(0);
   }
 
-  uploadFile(e: any, day: Day) {
+  uploadFile(e: any, day: Day) {    
     const MediaTypePattern = /^image\/.*$/;
     const file = e.target.files[0];
-    if(this.canUpload(day.date) && MediaTypePattern.test(file.type)) {
+    if(this.canUpload(day) && MediaTypePattern.test(file.type)) {
       this.fileUploading = true;
       const data = new FormData();
       const ext = file.name.split('.')[1];
@@ -51,6 +50,8 @@ export class CalendarComponent implements OnInit {
       });
     }
     else this._helpService.showMsg("Please select an image to upload.");
+    
+    e.target.value = null;
   }
 
   delete(day: Day) {

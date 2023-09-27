@@ -54,14 +54,17 @@ namespace keepdaily_be.Controllers
             }
             catch (UnauthorizedException ex)
             {
+                Log.Error(ex.Message);
                 return Unauthorized(new { id = ex.Message });
             }
             catch (ForbiddenException ex)
             {
+                Log.Error(ex.Message);
                 return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
             }
             catch (BadRequestException ex)
             {
+                Log.Error(ex.Message);
                 return BadRequest(ex.Message);
             }
             catch (Exception ex)
@@ -167,10 +170,11 @@ namespace keepdaily_be.Controllers
 
         [Authorize]
         [HttpDelete("{id}/Img")]
-        public IActionResult DeletePhoto(string name)
+        public IActionResult DeletePhoto(int id, string name)
         {
             try
             {
+                _service.UpdatePhoto(id, null, null);
                 _fileService.Delete(name);
                 return Ok();
             }

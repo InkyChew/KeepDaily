@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'http://localhost:5000/api',
+    url: 'https://localhost:5000/api',
     endpoint: {
       user: '/User',
       friend: '/Friend',
@@ -13,6 +13,7 @@ export const environment = {
       category: '/Category',
       day: '/Day',
       lineNotify: '/LineNotify',
+      oAuthGoogle: '/OAuthGoogle',
       confirmEmail: '/ConfirmEmail'
     }
   }

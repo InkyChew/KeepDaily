@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Caching.Memory;
 using ServiceLayer.IServices;
@@ -11,11 +12,14 @@ namespace ServiceLayer.Services
     {
         private readonly IEmailService _emailService;
         private readonly IMemoryCache _cache;
+        private readonly string _baseurl;
 
-        public ConfirmEmailService(IEmailService emailService, IMemoryCache cache)
+        public ConfirmEmailService(IEmailService emailService, IMemoryCache cache, IHttpContextAccessor httpContextAccessor)
         {
             _emailService = emailService;
             _cache = cache;
+            var _httpContext = httpContextAccessor.HttpContext ?? throw new NullReferenceException("HttpContext is null.");
+            _baseurl = $"{_httpContext.Request.Scheme}://{_httpContext.Request.Host}";
         }
 
         public async Task SendConfirmEmailAsync(User user)
@@ -23,7 +27,7 @@ namespace ServiceLayer.Services
             var code = GenerateCode();
             _cache.Set(user.Email, code, TimeSpan.FromDays(1));
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = $"https://localhost:5000/api/ConfirmEmail?uid={user.Id}&code={code}";
+            var callbackUrl = $"{_baseurl}/api/ConfirmEmail?uid={user.Id}&code={code}";
             await _emailService.SendEmailAsync(user.Email, "Confirm your email",
                         $"Please confirm your account in a day by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
         }
@@ -33,7 +37,7 @@ namespace ServiceLayer.Services
             var code = GenerateCode();
             _cache.Set($"CP{user.Email}", code, TimeSpan.FromMinutes(10));
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = $"https://localhost:5000/api/ConfirmEmail/ChangePassword?uid={user.Id}&code={code}";
+            var callbackUrl = $"{_baseurl}/api/ConfirmEmail/ChangePassword?uid={user.Id}&code={code}";
             await _emailService.SendEmailAsync(user.Email, "Change Password",
                         $"Change your password in 10 minutes by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
         }

@@ -1,0 +1,29 @@
+.setting-ctg {
+    padding: var(--unit);
+}
+
+.field-group {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: var(--unit);
+}
+.field-group input {
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+}
+.field-group .btn:not(:last-child) {
+    border-radius: unset;
+}
+.field-group .btn:last-child {
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+}
+
+.field {
+    flex: 1;
+}
+
+.field, .btns, .btns .btn {
+    margin: 0;
+}

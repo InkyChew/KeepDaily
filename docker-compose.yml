@@ -1,0 +1,13 @@
+services:
+  web:
+    image: keepdaily
+    ports:
+      - "9001:80"
+    volumes:
+      - dayimgs-volume:/app/DayImgs
+      - usrimgs-volume:/app/UserImgs
+      - videos-volume:/app/Videos
+volumes:
+  dayimgs-volume:
+  usrimgs-volume:
+  videos-volume:

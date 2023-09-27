@@ -3,7 +3,7 @@
     <div class="field photo">
         <div class="img-container">
             <input type="file" (change)="uploadPhoto($event)">
-            <img [src]="getPhoto(user)" [alt]="user.name + '\'s photo'">
+            <img #usrimg [alt]="user.name + '\'s photo'">
         </div>
         <button class="btn btn-primary del" (click)="delPhoto()"><i class="fa-solid fa-trash"></i></button> 
     </div>
@@ -37,7 +37,7 @@
         </label>
     </form>
 
-    <div class="field">
+    <!-- <div class="field">
         <span class="field-title">Notification</span>
         <label class="field"><input type="checkbox" [(ngModel)]="user.emailNotify" [ngModelOptions]="{standalone: true}">Email</label>
         <ng-container *ngIf="user.lineAccessToken else apply">
@@ -46,7 +46,7 @@
         <ng-template #apply>
             <button class="btn btn-link" *ngIf="!user.lineAccessToken" (click)="getLineNotify()" [disabled]="user.lineAccessToken"><i class="fa-solid fa-link"></i>Apply LineNotify</button>
         </ng-template>
-    </div>
+    </div> -->
 
     <div class="btns">
         <button title="save" class="btn btn-primary" (click)="save()"><i class="fa-solid fa-floppy-disk"></i></button>

@@ -13,7 +13,7 @@ namespace ServiceLayer.IServices
         public User? GetUser(string email);
         public User UpdateUserInfo(User user);
         public void UpdatePassword(int id, string password);
-        public void UpdatePhoto(int id, string imgName, string imgType);
+        public void UpdatePhoto(int id, string? imgName, string? imgType);
         public void UpdateUserLineToken(string email, string token);
         public void InActiveUser(int id);
         public void SaveChanges();

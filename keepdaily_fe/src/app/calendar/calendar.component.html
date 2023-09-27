@@ -15,7 +15,7 @@
         </ul>
         <ul class="calendar-dates">
             <ng-container *ngFor="let day of calendar.days; index as i">
-                <li class="date" [ngClass]="{'active' : canUpload(day.date)}">
+                <li class="date" [ngClass]="{'active' : canUpload(day)}">
                     <span>{{ day.date }}</span>
                     <ng-container *ngIf="editable else readonly">
                         <div class="img-container">
@@ -23,7 +23,7 @@
                                 <button class="btn btn-primary del" (click)="delete(day)"><i class="fa-solid fa-trash"></i></button>
                                 <img [src]="getImg(day)" [alt]="day.imgName">
                             </ng-container>
-                            <input type="file" [disabled]="!canUpload(day.date)" (input)="uploadFile($event, day)">
+                            <input type="file" [disabled]="!canUpload(day)" (input)="uploadFile($event, day)">
                         </div>
                     </ng-container>
                     <ng-template #readonly>

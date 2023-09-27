@@ -6,6 +6,7 @@
 .plan-item {
     border-radius: 8px;
     padding: var(--unit);
+    margin-bottom: var(--unit);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 

@@ -106,7 +106,7 @@ namespace ServiceLayer.Services
             _repo.SaveChanges();
         }
 
-        public void UpdatePhoto(int id, string imgName, string imgType)
+        public void UpdatePhoto(int id, string? imgName, string? imgType)
         {
             var user = _repo.FindUser(id);
             user.ImgName = imgName;

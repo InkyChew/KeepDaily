@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { FormService } from '../services/form.service';
@@ -13,6 +13,12 @@ import { LineNotifyService } from '../services/line-notify.service';
 })
 export class UserSettingComponent implements OnInit {
 
+  _usrimg?: ElementRef;
+  @ViewChild('usrimg') 
+  set usrimg(e: ElementRef) {
+    this._usrimg = e;
+    this.setPhoto();
+  }
   info: FormGroup;
   formService: FormService;
   user!: IUser;
@@ -43,8 +49,9 @@ export class UserSettingComponent implements OnInit {
     });
   }
 
-  getPhoto(user: IUser) {
-    return this._userService.getPhoto(user);
+  setPhoto() {
+    if(this._usrimg) 
+      this._usrimg.nativeElement.src = this._userService.getPhoto(this.user);
   }
 
   uploadPhoto(e: any) {
@@ -52,7 +59,10 @@ export class UserSettingComponent implements OnInit {
     const data = new FormData();
     data.append('file', file);
     this._userService.updatePhoto(this.user.id, data).subscribe({
-      next: () => this.getUser(this.user.id),
+      next: () => {
+        this.getUser(this.user.id);
+        this.setPhoto();
+      },
       error: () => e.target.value = null
     });
   }

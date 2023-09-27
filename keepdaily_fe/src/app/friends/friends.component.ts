@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../models/user';
 import { FriendService } from '../services/friend.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IUserQuery, UserService } from '../services/user.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class FriendsComponent implements OnInit {
 
   constructor(private _service: FriendService,
     private _userService: UserService,
-    private _route: ActivatedRoute) { }
+    private _route: ActivatedRoute,
+    private _router: Router) { }
 
   ngOnInit(): void {
     // main
@@ -45,7 +46,12 @@ export class FriendsComponent implements OnInit {
     const query: IUserQuery = isEmailValid ? { email: qry.value } : { name: qry.value };
     if(qry)
       this._userService.getAllUser(query).subscribe((res) => {
-        this.searchFriends = res.filter(_ => _.id != this.uid);
+        this.searchFriends = res.filter(_ => _.id != this.uid && _.email != 'a@a');
       });
+  }
+
+  goToUserPage(id: number) {
+    if(id === this.uid) this._router.navigateByUrl('main');
+    else this._router.navigateByUrl(`/friend/${id}`);
   }
 }

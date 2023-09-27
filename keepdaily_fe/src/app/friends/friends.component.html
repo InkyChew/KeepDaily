@@ -3,7 +3,7 @@
     <div class="search">
         <div class="field">
             <input type="search" placeholder="friend's email" #qry/>
-            <button (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="btn btn-primary" (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <ul class="friend-list" *ngIf="searchFriends" (mouseleave)="searchFriends=undefined">
             <ng-container *ngIf="searchFriends.length == 0; else display">
@@ -36,7 +36,7 @@
         <ng-template #list>
             <ul class="friend-list">
                 <li *ngFor="let friend of friendList" class="friend-item">
-                    <a  [routerLink]="['/friend', friend.id]"></a>
+                    <a (click)="goToUserPage(friend.id)"></a>
                     <div class="photo">
                         <img [src]="getPhoto(friend)" [alt]="friend.name + '\'s photo'">
                     </div>

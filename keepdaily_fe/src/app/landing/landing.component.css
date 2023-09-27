@@ -1,17 +1,13 @@
 .landing {
-    position: absolute;
-    inset: 0;
+    min-height: calc(100vh - 125px - 2*var(--unit));
 }
 
 .landing article {
     max-width: 1024px;
-    height: fit-content;
-    min-height: 480px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: var(--unit);
     border-radius: var(--radius);
     margin: auto;
 }

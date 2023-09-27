@@ -41,7 +41,8 @@ namespace DomainLayer.Models
 
     public enum UserLevel
     {
-        General = 1,
-        Premium = 2,
+        Admin,
+        General,
+        Premium
     }
 }

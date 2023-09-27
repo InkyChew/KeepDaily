@@ -19,6 +19,7 @@ namespace keepdaily_be.Controllers
         [HttpGet]
         public IActionResult GetConfirmEmail(int uid, string code)
         {
+            var email_confirm_url = $"{Request.Scheme}://{Request.Host}/email_confirm";
             var user = _userService.FindUser(uid);
             try
             {
@@ -27,19 +28,19 @@ namespace keepdaily_be.Controllers
                 {
                     user.EmailConfirmed = true;
                     _userService.SaveChanges();
-                    return Redirect($"http://localhost:4200/email_confirm/1?uid={uid}&email={user.Email}");
+                    return Redirect($"{email_confirm_url}/1?uid={uid}&email={user.Email}");
                 }
                 else throw new Exception($"Error confirming email {user.Email}.");
             }
             catch (KeyNotFoundException ex)
             {
                 Log.Error(ex.Message);
-                return Redirect($"http://localhost:4200/email_confirm/2?uid={uid}&email={user.Email}");
+                return Redirect($"{email_confirm_url}/2?uid={uid}&email={user.Email}");
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return Redirect($"http://localhost:4200/email_confirm/3?uid={uid}&email={user.Email}");
+                return Redirect($"{email_confirm_url}/3?uid={uid}&email={user.Email}");
             }
         }
 
@@ -67,25 +68,26 @@ namespace keepdaily_be.Controllers
         [HttpGet("ChangePassword")]
         public IActionResult GetConfirmChangePasswordEmail(int uid, string code)
         {
+            var forgot_pwd_url = $"{Request.Scheme}://{Request.Host}/forgot_password";
             var user = _userService.FindUser(uid);
             try
             {
                 var isConfirmed = _service.IsEmailConfirm($"CP{user.Email}", code);
                 if (isConfirmed)
                 {
-                    return Redirect($"http://localhost:4200/forgot_password/1?uid={uid}&email={user.Email}");
+                    return Redirect($"{forgot_pwd_url}/1?uid={uid}&email={user.Email}");
                 }
                 else throw new Exception($"Error confirming email {user.Email}.");
             }
             catch (KeyNotFoundException ex)
             {
                 Log.Error(ex.Message);
-                return Redirect($"http://localhost:4200/forgot_password/2?uid={uid}&email={user.Email}");
+                return Redirect($"{forgot_pwd_url}/2?uid={uid}&email={user.Email}");
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return Redirect($"http://localhost:4200/forgot_password/3?uid={uid}&email={user.Email}");
+                return Redirect($"{forgot_pwd_url}/3?uid={uid}&email={user.Email}");
             }
         }
 

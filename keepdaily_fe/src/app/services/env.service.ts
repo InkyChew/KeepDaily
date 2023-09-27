@@ -16,6 +16,7 @@ export class EnvService {
       CategoryEndpoint: `${environment.api.url}${environment.api.endpoint.category}`,      
       DayEndpoint: `${environment.api.url}${environment.api.endpoint.day}`,
       LineNotifyEndpoint: `${environment.api.url}${environment.api.endpoint.lineNotify}`,
+      OAuthGoogleEndpoint: `${environment.api.url}${environment.api.endpoint.oAuthGoogle}`,
       ConfirmEmailEndpoint: `${environment.api.url}${environment.api.endpoint.confirmEmail}`
     }
   }
@@ -28,5 +29,6 @@ export interface IRestAPIOption {
   CategoryEndpoint: string,
   DayEndpoint: string,
   LineNotifyEndpoint: string,
+  OAuthGoogleEndpoint: string,
   ConfirmEmailEndpoint: string
 }

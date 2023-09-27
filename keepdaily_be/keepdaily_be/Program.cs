@@ -31,14 +31,9 @@ builder.Logging.AddSerilog(Log.Logger);
  */
 builder.Services.AddDbContext<KeepDailyContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                             ?? throw new NullReferenceException("Null Database ConnectionString.");
     options.UseSqlServer(connectionString);
-});
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
-    options.InstanceName = "KeepdailyInstance";
 });
 
 /*
@@ -54,6 +49,7 @@ builder.Services.AddCors(options =>
                                 .WithOrigins("http://localhost:4200",
                                                 "https://notify-bot.line.me",
                                               "http://10.199.15.44")
+                                .WithExposedHeaders("Content-Range")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials();
@@ -63,6 +59,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddAutoMapper(typeof(AppMapperProfile));
 builder.Services.AddMemoryCache();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IJwtUtil, JwtUtil>();
 builder.Services.AddScoped<ILineNotifyService, LineNotifyService>();
 builder.Services.AddScoped<IUserService, UserService>();

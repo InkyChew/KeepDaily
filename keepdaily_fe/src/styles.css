@@ -101,6 +101,7 @@ input[type="checkbox"]:checked:after {
     background: var(--white);
     color: var(--primary);
     border-color: var(--primary);
+    border-radius: var(--radius);
 }
 
 .btn-primary-outline:hover {

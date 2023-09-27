@@ -1,3 +1,7 @@
+.backdrop {
+    z-index: 999;
+}
+
 .modal {
     max-width: 720px;
 }

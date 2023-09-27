@@ -46,7 +46,8 @@ namespace RepoLayer.Repos
 
         public Plan UpdatePlan(Plan plan)
         {
-            if (plan.Category != null) _db.Entry(plan.Category).State = EntityState.Unchanged;
+            plan.Category = null;
+            plan.User = null;
             _db.Update(plan);
             _db.SaveChanges();
             return plan;

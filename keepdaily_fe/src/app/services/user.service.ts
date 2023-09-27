@@ -23,7 +23,6 @@ export class UserService {
   getCurrentUser() {
     const userstr = localStorage.getItem(USER_KEY);
     if(userstr) return JSON.parse(userstr);
-    else this._router.navigateByUrl('/login');
   }
   
   register(data: FormData) {
@@ -55,9 +54,9 @@ export class UserService {
     return this._http.patch(`${this._env.APIOption.UserEndpoint}/${id}`, data);
   }
 
-  getPhoto(u: IUser, defImg?: string) {
+  getPhoto(u?: IUser, defImg?: string) {
     const defaultImg = defImg ?? 'https://placehold.co/200';
-    if(u.imgName && u.imgType) {
+    if(u && u.imgName && u.imgType) {
       switch(u.imgType) {
         case "Google":
         case "Line":

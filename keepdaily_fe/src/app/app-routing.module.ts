@@ -14,6 +14,8 @@ import { FriendsComponent } from './friends/friends.component';
 import { FriendPlansComponent } from './friend-plans/friend-plans.component';
 import { FriendComponent } from './friend/friend.component';
 import { VideoModalComponent } from './video-modal/video-modal.component';
+import { AuthGuard } from './helps/auth.guard';
+import { UserLevel } from './models/user';
 
 const routes: Routes = [
   {path: '', component: LandingComponent, children: [
@@ -23,8 +25,8 @@ const routes: Routes = [
   ]},
   {path: 'email_confirm/:status', component: EmailConfirmComponent, pathMatch: 'full'},
   {path: 'forgot_password/:status', component: ForgotPasswordComponent, pathMatch: 'full'},
-  {path: 'user_setting', component: UserSettingComponent, pathMatch: 'full'},
-  {path: 'main', component: MainComponent, children: [
+  {path: 'user_setting', component: UserSettingComponent, pathMatch: 'full', canActivate:[AuthGuard]},
+  {path: 'main', component: MainComponent, canActivate:[AuthGuard], children: [
     {path:'', redirectTo: 'plans', pathMatch: 'full'},
     {path: 'plans', component: PlansComponent, pathMatch: 'full'},
     {path: 'friends', component: FriendsComponent, pathMatch: 'full'}
@@ -34,9 +36,9 @@ const routes: Routes = [
     {path: 'plans', component: FriendPlansComponent, pathMatch: 'full'},
     {path: 'friends', component: FriendsComponent, pathMatch: 'full'}
   ]},
-  {path: 'plan/:id', component: PlanComponent, pathMatch: 'full'},
-  {path: 'plan/:id/video', component: VideoModalComponent, pathMatch: 'full'},
-  {path: 'setting_category', component: SettingCategoryComponent, pathMatch: 'full'}
+  {path: 'plan/:id', component: PlanComponent, pathMatch: 'full', canActivate:[AuthGuard]},
+  {path: 'plan/:id/video', component: VideoModalComponent, pathMatch: 'full', canActivate:[AuthGuard]},
+  {path: 'setting_category', component: SettingCategoryComponent, pathMatch: 'full', canActivate:[AuthGuard], data: {role: UserLevel.Admin}}
 ];
 
 @NgModule({

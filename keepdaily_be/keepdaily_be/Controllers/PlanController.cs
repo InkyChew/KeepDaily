@@ -5,6 +5,7 @@ using Serilog;
 using ServiceLayer.IServices;
 using ServiceLayer.Services;
 using System.Net;
+using System.Net.Http.Headers;
 
 namespace keepdaily_be.Controllers
 {
@@ -41,7 +42,8 @@ namespace keepdaily_be.Controllers
         [HttpGet("{id}/Video")]
         public async Task<IActionResult> GetPlanVideoAsync(int id, string start, string end)
         {
-            var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Videos", $"{id}.mp4");
+            var fileName = $"{id}.mp4";
+            var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Videos", fileName);
             try
             {
                 if (System.IO.File.Exists(videoPath)) System.IO.File.Delete(videoPath);
@@ -54,6 +56,8 @@ namespace keepdaily_be.Controllers
 
                 await _videoService.ConvertImagesToVideoAsync(imgs, txts, videoPath, 1);
 
+                //return Ok(fileName);
+
                 var memory = new MemoryStream();
 
                 using (var file = new FileStream(videoPath, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -61,13 +65,55 @@ namespace keepdaily_be.Controllers
                     await file.CopyToAsync(memory);
                 }
                 memory.Position = 0;
-
-                return File(memory, "video/mp4");
+                return File(memory, "video/mp4", true);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpGet("Video")]
+        public async Task<HttpResponse> StreamVideoAsync(string name)
+        {
+            try
+            {
+                var videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Videos", name);
+                var stream = new MemoryStream();
+                var video = new FileInfo(videoPath);
+                var videoSize = video.Length;
+                var rangeHeader = RangeHeaderValue.Parse(Request.Headers.Range);
+                var range = new List<RangeItemHeaderValue>(rangeHeader.Ranges)[0];
+                var startpos = range.From ?? 0;
+                var endpos = range.To ?? videoSize;
+                endpos = endpos > videoSize ? videoSize : endpos;
+                //var response = new HttpResponseMessage(HttpStatusCode.PartialContent);
+                //response.Content = new PushStreamContent(async (stream, httpContent, transportContext) =>
+                //{
+                //    await _videoService.PartialWriteToStream(video, startpos, endpos, stream);
+                //}, "video/mp4");
+                //response.Headers.AcceptRanges.Add("bytes");
+                //response.Content.Headers.ContentType = new MediaTypeHeaderValue("video/mp4");
+                //response.Content.Headers.Add("Content-Range", $"bytes {startpos}-{endpos}/{videoSize}");
+                await _videoService.PartialWriteToStream(video, startpos, endpos, stream);
+                HttpContext.Response.Body = stream;
+                HttpContext.Response.ContentType = "video/mp4";
+                HttpContext.Response.ContentLength = endpos - startpos + 1;
+                HttpContext.Response.Headers.Add("Accept-Ranges", "bytes");
+                HttpContext.Response.Headers.Add("Content-Range", $"bytes {startpos}-{endpos}/{videoSize}");
+                //return response;
+                //return File(stream, "video/mp4", true);
+                return HttpContext.Response;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+                HttpContext.Response.StatusCode = 500;
+                //return StatusCode((int)HttpStatusCode.InternalServerError);
+                return HttpContext.Response;
+                //return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
 

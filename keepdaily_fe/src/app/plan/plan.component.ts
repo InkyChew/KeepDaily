@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Calendar, Day, Plan } from '../models/calendar';
+import { Calendar, Plan } from '../models/calendar';
 import { HelperService } from '../services/helper.service';
 import { PlanService } from '../services/plan.service';
 import { ActivatedRoute, Router } from '@angular/router';

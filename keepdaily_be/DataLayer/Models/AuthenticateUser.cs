@@ -5,7 +5,7 @@ namespace DomainLayer.Models
     public class AuthenticateUser
     {
         public int Id { get; set; }
-        public UserLevel Level { get; set; }
+        public UserLevel UserLevel { get; set; }
         public string AccessToken { get; set; }
 
         [JsonIgnore]
@@ -14,7 +14,7 @@ namespace DomainLayer.Models
         public AuthenticateUser(User user, string jwtToken, string refreshToken)
         {
             Id = user.Id;
-            Level = user.UserLevel;
+            UserLevel = user.UserLevel;
             AccessToken = jwtToken;
             RefreshToken = refreshToken;
         }

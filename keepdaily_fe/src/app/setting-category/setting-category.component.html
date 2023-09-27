@@ -1,20 +1,27 @@
-<article>
+<article class="setting-ctg">
+    <h2>類別設定</h2>
     <section>
-        <label class="field required">
-            Name
-            <input type="text" [(ngModel)]="name" required #addCtg="ngModel">
-            <small class="field-msg" *ngIf="addCtg.dirty && addCtg.invalid">Name is required.</small>
-        </label>
-        <button class="btn btn-primary" (click)="create(addCtg)">➕</button>
+        <div class="field-group">
+            <label class="field required">
+                Name
+                <input type="text" [(ngModel)]="name" required #addCtg="ngModel">
+                <small class="field-msg" *ngIf="addCtg.dirty && addCtg.invalid">Name is required.</small>
+            </label>
+            <button class="btn btn-primary btn-add" (click)="create(addCtg)"><i class="fa-solid fa-plus"></i></button>
+        </div>
     </section>
     <section>
         <ul *ngFor="let ctg of ctgList; index as i">
             <li>
-                <label class="field">
-                    <input type="text" [(ngModel)]="ctg.name">
-                </label>
-                <button class="btn btn-primary" (click)="edit(ctg, i)">💾</button>
-                <button class="btn btn-primary-outline" (click)="delete(ctg.id, i)">🗑️</button>
+                <div class="field-group">
+                    <label class="field">
+                        <input type="text" [(ngModel)]="ctg.name">
+                    </label>
+                    <div class="btns">
+                        <button class="btn btn-primary" (click)="edit(ctg, i)"><i class="fa-solid fa-floppy-disk"></i></button>
+                        <button class="btn btn-primary-outline" (click)="delete(ctg.id, i)"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
             </li>
         </ul>
     </section>

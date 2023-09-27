@@ -19,8 +19,9 @@ export interface IUser {
 }
 
 export enum UserLevel {
-    General = 1,
-    Premium = 2
+    Admin,
+    General,
+    Premium
 }
 
 export interface IAuthenticateUser {

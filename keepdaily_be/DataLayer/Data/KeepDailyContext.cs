@@ -16,7 +16,7 @@ namespace DomainLayer.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            var admin = new User { Id = 1, Name = "Inky", Email = "a@a", Password = "123" };
+            var admin = new User { Id = 1, Name = "Inky", Email = "a@a", Password = "123@456", UserLevel = UserLevel.Admin, IsActive = true, EmailConfirmed = true };
             admin.Password = new PasswordHasher<User>().HashPassword(admin, admin.Password);
             builder.Entity<User>().HasData(admin);
 
