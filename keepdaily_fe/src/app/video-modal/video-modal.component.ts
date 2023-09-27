@@ -25,7 +25,6 @@ export class VideoModalComponent implements OnInit {
     const monthLastDate = new Date(this.year, this.month, 0).getDate();
     const start = `${this.year}-${this.month}-${1}`;
     const end = `${this.year}-${this.month}-${monthLastDate}`;
-    // this._service.loadVideo(this.plan.id, start, end).subscribe(url => this.src = url);
     this.src = this._service.getPlanVideo(this.plan.id, start, end);
   }
 
