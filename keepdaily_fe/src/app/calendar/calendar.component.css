@@ -49,7 +49,7 @@
     z-index: 1;
 }
 .img-container input[type=file]:disabled {
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .del {

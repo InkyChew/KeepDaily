@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using ServiceLayer.IServices;
-using System.IO;
+﻿using ServiceLayer.IServices;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using Xabe.FFmpeg;
-using System;
-using System.Net.Mail;
 
 namespace ServiceLayer.Services
 {
@@ -28,8 +23,8 @@ namespace ServiceLayer.Services
                 if (count > 0)
                 {
                     await new Conversion()
-                        .BuildVideoFromImages(imagePaths)
                         .SetInputFrameRate(frameRate)
+                        .BuildVideoFromImages(imagePaths)
                         .SetFrameRate(count)
                         .SetPixelFormat(PixelFormat.yuv420p)
                         .SetOutput(outputVideoPath)

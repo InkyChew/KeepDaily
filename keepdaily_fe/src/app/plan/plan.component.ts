@@ -14,11 +14,13 @@ export class PlanComponent implements OnInit {
 
   planId: number = 0;
   plan?: Plan;
+  startYear?: number;
+  currentYear: number = new Date().getFullYear();
   year?: number;
   month?: number;
   calendar?: Calendar;
   editable: boolean = false;
-  monthList = this._helper.Month;
+  monthList: string[] = this._helper.Month;
   showVideo = false;
 
   constructor(private _helper: HelperService,
@@ -39,7 +41,8 @@ export class PlanComponent implements OnInit {
     this._service.getPlan(this.planId, this.year, this.month).subscribe(res => {
       this.editable = res.userId == this._userService.getCurrentUser().id;
       this.plan = res;
-      if(!this.year) this.year = new Date(this.plan.updateTime).getFullYear();
+      this.startYear = new Date(this.plan.updateTime).getFullYear();
+      if(!this.year) this.year = this.startYear;
       if(!this.month) this.month = new Date(this.plan.updateTime).getMonth()+1;
       
       this.calendar = new Calendar(this.year, this.month, this.plan.days);

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    [Migration("20230826123104_update_user_image")]
-    partial class update_user_image
+    [Migration("20231004081430_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,48 @@ namespace DomainLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sports"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Diet"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Cooking"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Baking"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Planting"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Painting"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Traveling"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Learning"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Day", b =>
@@ -171,7 +213,6 @@ namespace DomainLayer.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("UserLevel")
@@ -193,13 +234,13 @@ namespace DomainLayer.Migrations
                         {
                             Id = 1,
                             Email = "a@a",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             EmailNotify = true,
-                            IsActive = false,
+                            IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAEKyVHwz+VNL/+v4fEFZtVH/Y8KRuF2Zkh3scCOz9LtjjZXg2EB0KEfUGxSyrP6wDow==",
-                            UserLevel = 1
+                            Password = "AQAAAAEAACcQAAAAENk3ER4kMC43gMG5YgtaX2FgWLI5++Jd/GfVJBEobZyhAJXfWa95LyDPjltCranGqw==",
+                            UserLevel = 0
                         });
                 });
 

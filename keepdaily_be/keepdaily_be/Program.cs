@@ -49,7 +49,6 @@ builder.Services.AddCors(options =>
                                 .WithOrigins("http://localhost:4200",
                                                 "https://notify-bot.line.me",
                                               "http://10.199.15.44")
-                                .WithExposedHeaders("Content-Range")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials();

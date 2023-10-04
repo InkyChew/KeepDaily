@@ -3,7 +3,7 @@
     <div class="field photo">
         <div class="img-container">
             <input type="file" (change)="uploadPhoto($event)">
-            <img #usrimg [alt]="user.name + '\'s photo'">
+            <img [src]="getImg()" [alt]="user.name + '\'s photo'">
         </div>
         <button class="btn btn-primary del" (click)="delPhoto()"><i class="fa-solid fa-trash"></i></button> 
     </div>

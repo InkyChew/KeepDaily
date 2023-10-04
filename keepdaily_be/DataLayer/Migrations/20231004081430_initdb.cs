@@ -17,17 +17,34 @@ namespace DomainLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(10)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    ImgName = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    ImgType = table.Column<string>(type: "nvarchar(10)", nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     LineId = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     LineAccessToken = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
-                    Notify = table.Column<int>(type: "int", nullable: false)
+                    UserLevel = table.Column<int>(type: "int", nullable: false),
+                    EmailNotify = table.Column<bool>(type: "bit", nullable: false),
+                    LineNotify = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,7 +69,8 @@ namespace DomainLayer.Migrations
                     Description = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     StartFrom = table.Column<string>(type: "nvarchar(16)", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,6 +81,11 @@ namespace DomainLayer.Migrations
                         principalTable: "AppUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Plan_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -91,8 +114,23 @@ namespace DomainLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "AppUser",
-                columns: new[] { "Id", "Email", "EmailConfirmed", "IsActive", "Level", "LineAccessToken", "LineId", "Name", "Notify", "Password" },
-                values: new object[] { 1, "a@a", false, false, 1, null, null, "Inky", 1, "AQAAAAEAACcQAAAAEC/2HbbS1a3CX3i+86ReHA1pu6p3Gq+3MJr4uetpbPgg53zkqsz9HSnicSWkDLrkcQ==" });
+                columns: new[] { "Id", "Description", "Email", "EmailConfirmed", "EmailNotify", "ImgName", "ImgType", "IsActive", "LineAccessToken", "LineId", "LineNotify", "Name", "Password", "UserLevel" },
+                values: new object[] { 1, null, "a@a", true, true, null, null, true, null, null, false, "Inky", "AQAAAAEAACcQAAAAENk3ER4kMC43gMG5YgtaX2FgWLI5++Jd/GfVJBEobZyhAJXfWa95LyDPjltCranGqw==", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Sports" },
+                    { 2, "Diet" },
+                    { 3, "Cooking" },
+                    { 4, "Baking" },
+                    { 5, "Planting" },
+                    { 6, "Painting" },
+                    { 7, "Traveling" },
+                    { 8, "Learning" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUser_Email",
@@ -113,6 +151,11 @@ namespace DomainLayer.Migrations
                 column: "PlanId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Plan_CategoryId",
+                table: "Plan",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Plan_UserId",
                 table: "Plan",
                 column: "UserId");
@@ -131,6 +174,9 @@ namespace DomainLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppUser");
+
+            migrationBuilder.DropTable(
+                name: "Category");
         }
     }
 }

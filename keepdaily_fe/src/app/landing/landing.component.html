@@ -1,18 +1,18 @@
 <div class="landing">
-    <article class="landing">
-        <div class="col">
-            keepDaily is a place to set up a goal and record your progress.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima sunt pariatur quod cupiditate velit iure,
-            eligendi totam reprehenderit magnam, tempore doloremque rem rerum dolore quisquam adipisci? Eum asperiores
-            reiciendis ducimus.
+    <div class="col content">
+        <img class="logo" src="../../assets/cupcake.png" alt="logo">
+        <p>
+            <span class="title">CAKE,</span>
+            Turn your challenges into a piece of cake!
+        </p>
+        <a routerLink="/about">Learn more</a>
+    </div>
+
+    <div class="col intro">
+        <div class="tabs">
+            <a class="tab btn btn-primary-outline" routerLink="login" routerLinkActive="active">Login</a>
+            <a class="tab btn btn-primary-outline" routerLink="register" routerLinkActive="active">Register</a>
         </div>
-    
-        <div class="col intro">
-            <div class="tabs">
-                <a class="tab btn btn-primary-outline" routerLink="login" routerLinkActive="active">Login</a>
-                <a class="tab btn btn-primary-outline" routerLink="register" routerLinkActive="active">Register</a>
-            </div>
-            <router-outlet></router-outlet>
-        </div>
-    </article>
+        <router-outlet></router-outlet>
+    </div>
 </div>

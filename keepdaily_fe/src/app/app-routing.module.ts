@@ -16,6 +16,7 @@ import { FriendComponent } from './friend/friend.component';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { AuthGuard } from './helps/auth.guard';
 import { UserLevel } from './models/user';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent, children: [
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent, pathMatch: 'full'},
     {path: 'register', component: RegisterComponent, pathMatch: 'full'},
   ]},
+  {path: 'about', component: AboutComponent, pathMatch: 'full'},
   {path: 'email_confirm/:status', component: EmailConfirmComponent, pathMatch: 'full'},
   {path: 'forgot_password/:status', component: ForgotPasswordComponent, pathMatch: 'full'},
   {path: 'user_setting', component: UserSettingComponent, pathMatch: 'full', canActivate:[AuthGuard]},

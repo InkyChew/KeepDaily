@@ -232,13 +232,13 @@ namespace DomainLayer.Migrations
                         {
                             Id = 1,
                             Email = "a@a",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             EmailNotify = true,
-                            IsActive = false,
+                            IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAENGhDb2kigcmR4mG0xdl+brNC8fE8oQfBtOWe44LMqJN/pEFX+AISxJHuc/Egt9fqA==",
-                            UserLevel = 1
+                            Password = "AQAAAAEAACcQAAAAENk3ER4kMC43gMG5YgtaX2FgWLI5++Jd/GfVJBEobZyhAJXfWa95LyDPjltCranGqw==",
+                            UserLevel = 0
                         });
                 });
 

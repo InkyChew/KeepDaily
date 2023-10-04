@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   api: {
+    // url: 'http://localhost:9001/api',
     url: 'https://keepdaily.azurewebsites.net/api',
     endpoint: {
       user: '/User',

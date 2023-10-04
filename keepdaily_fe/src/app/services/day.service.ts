@@ -12,7 +12,7 @@ export class DayService {
   constructor(private _http: HttpClient, private _env: EnvService) { }
 
   getDayImage(name: string, type: string) {
-    return `${this._env.APIOption.DayEndpoint}/Img?name=${name}&type=${type}`
+    return `${this._env.APIOption.DayEndpoint}/Img?name=${name}&type=${type}`;
   }
 
   postDay(data: FormData) {

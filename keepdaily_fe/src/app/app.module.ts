@@ -24,6 +24,7 @@ import { FriendPlansComponent } from './friend-plans/friend-plans.component';
 import { MsgModalComponent } from './msg-modal/msg-modal.component';
 import { LoadingComponent } from './loading/loading.component';
 import { VideoModalComponent } from './video-modal/video-modal.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { VideoModalComponent } from './video-modal/video-modal.component';
     FriendPlansComponent,
     MsgModalComponent,
     LoadingComponent,
-    VideoModalComponent
+    VideoModalComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

@@ -35,8 +35,8 @@ export interface Day {
     year: number;
     month: number;
     date: number;
-    imgName?: string;
-    imgType?: string;
+    imgName: string | null;
+    imgType: string | null;
     planId: number;
 }
 

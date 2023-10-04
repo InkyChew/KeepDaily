@@ -2,7 +2,7 @@
     <header class="calendar-header">
         <span class="title">{{ calendar.year }} {{ calendar.month | month }}</span>
     </header>
-    
+
     <div class="calendar-body">
         <ul class="calendar-weekdays">
             <li>Sun</li>
@@ -17,22 +17,16 @@
             <ng-container *ngFor="let day of calendar.days; index as i">
                 <li class="date" [ngClass]="{'active' : canUpload(day)}">
                     <span>{{ day.date }}</span>
-                    <ng-container *ngIf="editable else readonly">
-                        <div class="img-container">
-                            <ng-container *ngIf="!fileUploading && day.imgName && day.imgType">
-                                <button class="btn btn-primary del" (click)="delete(day)"><i class="fa-solid fa-trash"></i></button>
-                                <img [src]="getImg(day)" [alt]="day.imgName">
-                            </ng-container>
-                            <input type="file" [disabled]="!canUpload(day)" (input)="uploadFile($event, day)">
-                        </div>
-                    </ng-container>
-                    <ng-template #readonly>
-                        <div class="img-container">
-                            <ng-container *ngIf="day.imgName && day.imgType">
-                                <img [src]="getImg(day)" [alt]="day.imgName">
-                            </ng-container>
-                        </div>
-                    </ng-template>
+                    <div class="img-container">
+                        <ng-container *ngIf="canUpload(day)">
+                            <button *ngIf="day.imgName && day.imgType" class="btn btn-primary del"
+                                (click)="delete(day, i)"><i class="fa-solid fa-trash"></i></button>
+                            <input type="file" accept="image/*" [disabled]="!canUpload(day)"
+                                (input)="resizeFile($event, day, i)">
+                        </ng-container>
+                        <img [src]="getImg(day)" [alt]="day.imgName"
+                            [style.opacity]="day.imgName && day.imgType ? 1 : 0">
+                    </div>
                 </li>
             </ng-container>
         </ul>
