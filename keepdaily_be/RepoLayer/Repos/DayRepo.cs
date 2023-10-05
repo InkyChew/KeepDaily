@@ -1,7 +1,6 @@
 ﻿using DomainLayer.Data;
 using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using RepoLayer.IRepos;
 using System;
 
@@ -23,6 +22,11 @@ namespace RepoLayer.Repos
         public IEnumerable<Day> GetAllDay()
         {
             return _days;
+        }
+
+        public IEnumerable<Day> GetDaysByPlan(int planId)
+        {
+            return _days.Where(_ => _.PlanId == planId);
         }
 
         public Day FindDay(int id)

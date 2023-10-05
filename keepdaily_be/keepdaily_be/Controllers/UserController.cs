@@ -80,8 +80,8 @@ namespace keepdaily_be.Controllers
             try
             {
                 var user = _mapper.Map<User>(userdto);
-                var refreshToken = Request.Cookies["refreshToken"];
-                if (refreshToken == null) return BadRequest();
+                //var refreshToken = Request.Cookies["refreshToken"];
+                //if (refreshToken == null) return BadRequest();
                 var res = _service.RefreshToken(user);
                 SetTokenCookie(res.RefreshToken);
                 return Ok(res);
