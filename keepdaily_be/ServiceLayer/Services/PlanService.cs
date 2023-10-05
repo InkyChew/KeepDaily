@@ -7,10 +7,13 @@ namespace ServiceLayer.Services
     public class PlanService : IPlanService
     {
         private readonly IPlanRepo _repo;
+        private readonly IDayRepo _dayRepo;
+        private readonly FileService _fileService = new("DayImgs");
 
-        public PlanService(IPlanRepo repo)
+        public PlanService(IPlanRepo repo, IDayRepo dayRepo)
         {
             _repo = repo;
+            _dayRepo = dayRepo;
         }
 
         public IEnumerable<Plan> GetAllPlan()
@@ -49,7 +52,13 @@ namespace ServiceLayer.Services
 
         public void DeletePlan(int id)
         {
+            var days = _dayRepo.GetDaysByPlan(id).ToList() ?? new List<Day>();
             _repo.DeletePlan(id);
+            // Delete All Photos
+            foreach (var day in days)
+            {
+                _fileService.Delete(day.ImgName);
+            }
         }
 
         private List<Day> CreateDayList(Plan plan, int year, int month)

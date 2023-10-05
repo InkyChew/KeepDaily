@@ -1,7 +1,6 @@
 ﻿using DomainLayer.Models;
 using RepoLayer.IRepos;
 using ServiceLayer.IServices;
-using System.Linq;
 
 namespace ServiceLayer.Services
 {

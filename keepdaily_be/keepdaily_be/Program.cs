@@ -47,8 +47,8 @@ builder.Services.AddCors(options =>
                           policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
                           //policy
                                 .WithOrigins("http://localhost:4200",
-                                                "https://notify-bot.line.me",
-                                              "http://10.199.15.44")
+                                             "https://notify-bot.line.me",
+                                             "https://accounts.google.com")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials();

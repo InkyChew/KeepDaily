@@ -52,7 +52,8 @@ export class PlansComponent implements OnInit {
   }
 
   delete(id: number, i: number) {
-    this._service.deletePlan(id).subscribe(() => this.planList.splice(i,1));
+    if(confirm("Sure to delete?"))
+      this._service.deletePlan(id).subscribe(() => this.planList.splice(i,1));
   }
 
   closeEditor(plan?: Plan) {

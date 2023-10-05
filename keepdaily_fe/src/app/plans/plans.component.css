@@ -1,6 +1,9 @@
 .plan-list {
     padding: 0;
     list-style: none;
+    height: 690px;
+    overflow-y: auto;
+    padding-right: var(--unit);
 }
 
 .plan-item {
@@ -19,4 +22,10 @@
 .plan-header .title {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .plan-list {
+        height: auto;
+    }
 }

@@ -23,6 +23,7 @@ namespace keepdaily_be.Controllers
         {
             try
             {
+                ViewBag.baseUrl = $"{Request.Scheme}://{Request.Host}";
                 var cookieToken = Request.Cookies["g_csrf_token"];
                 if (cookieToken != auth.Token)
                 {
