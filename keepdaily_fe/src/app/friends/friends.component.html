@@ -2,7 +2,7 @@
 
     <div class="search">
         <div class="field">
-            <input type="search" placeholder="friend's email" #qry/>
+            <input type="search" placeholder="friend's email or name" #qry/>
             <button class="btn btn-primary" (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <ul class="friend-list" *ngIf="searchFriends" (mouseleave)="searchFriends=undefined">

@@ -30,6 +30,9 @@
     margin: 0;
     text-align: center;
 }
+.logo .btn-link {
+    text-decoration: none;
+}
 .app-header .menu-list {
     display: flex;
     justify-content: center;

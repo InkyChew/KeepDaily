@@ -20,7 +20,7 @@ namespace ServiceLayer.Services
 
         public List<Category> GetAllCategory()
         {
-            return _repo.GetAllCategory().ToList();
+            return _repo.GetAllCategory().OrderBy(_ => _.Name).ToList();
         }
 
         public Category? GetCategory(int id)
