@@ -39,8 +39,8 @@ export class CalendarComponent implements OnInit {
 
     const img = new Image();
     img.onload = () => {
-      const maxWidth = 2048; // Set your desired max width
-      const maxHeight = 2048; // Set your desired max height
+      const maxWidth = 1920; // Set your desired max width
+      const maxHeight = 1080; // Set your desired max height
       let newWidth = img.width;
       let newHeight = img.height;
 

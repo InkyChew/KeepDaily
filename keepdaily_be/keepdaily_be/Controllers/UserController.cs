@@ -80,8 +80,8 @@ namespace keepdaily_be.Controllers
             try
             {
                 var user = _mapper.Map<User>(userdto);
-                //var refreshToken = Request.Cookies["refreshToken"];
-                //if (refreshToken == null) return BadRequest();
+                var refreshToken = Request.Cookies["refreshToken"];
+                if (refreshToken == null) return BadRequest();
                 var res = _service.RefreshToken(user);
                 SetTokenCookie(res.RefreshToken);
                 return Ok(res);
@@ -194,7 +194,7 @@ namespace keepdaily_be.Controllers
                 Expires = DateTime.UtcNow.AddDays(7),
                 SameSite = SameSiteMode.None,
                 Secure = true,
-                Domain = "localhost",
+                Domain = $"{Request.Host}",
                 IsEssential = true,
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);

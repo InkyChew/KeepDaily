@@ -1,7 +1,7 @@
 <section class="login">
     <h2>Login</h2>
 
-    <form [formGroup]="login" (ngSubmit)="submit()">
+    <form [formGroup]="login" (ngSubmit)="submit()" class="loginForm">
         <label class="field">
             <span class="field-title">Email</span>
             <input type="email" required formControlName="email" maxlength="50">
@@ -19,7 +19,8 @@
         <button class="btn-link" (click)="forgotPwd()">Forgot password</button>
     </form>
 
-    <div class="sso">
+    <div #gbtn></div>
+    <!-- <div>
         <div id="g_id_onload"
             data-client_id="272976394573-m3k7tm2m60a4dkm6qj8mlqn79dh48ckm.apps.googleusercontent.com"
             data-context="signin"
@@ -37,5 +38,5 @@
             data-size="large"
             data-logo_alignment="left">
         </div>
-    </div>
+    </div> -->
 </section>

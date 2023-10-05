@@ -44,8 +44,6 @@ export class UserSettingComponent implements OnInit {
   }
 
   getImg() {
-    console.log(this.user);
-    
     return this._userService.getPhoto(this.user);
   }
 

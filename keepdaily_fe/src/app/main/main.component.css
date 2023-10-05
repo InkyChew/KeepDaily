@@ -45,7 +45,7 @@ section {
 
 .content {
     width: 100%;
-    overflow-y: auto;
+    padding-right: 0;
     box-sizing: border-box;
 }
 

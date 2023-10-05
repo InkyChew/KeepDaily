@@ -26,6 +26,8 @@ namespace ServiceLayer.Services
                         .SetInputFrameRate(frameRate)
                         .BuildVideoFromImages(imagePaths)
                         .SetFrameRate(count)
+                        .AddParameter("-s 1920x1080")
+                        .AddParameter("-vf pad=1920:1080:(ow-iw)/2:(oh-ih)/2")
                         .SetPixelFormat(PixelFormat.yuv420p)
                         .SetOutput(outputVideoPath)
                         .Start();
