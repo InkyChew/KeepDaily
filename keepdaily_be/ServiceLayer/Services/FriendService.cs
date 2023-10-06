@@ -52,5 +52,17 @@ namespace ServiceLayer.Services
         {
             _repo.InsertFriend(friend);
         }
+
+        public Message CreateFriendMessage(Friend friend)
+        {
+            var follower = _userRepo.GetUser(friend.UserId)!;
+            return new Message()
+            {
+                UserId = friend.FriendId,
+                Title = "Follow 🤝",
+                Content = $"{follower.Id}:{follower.Name} has followed you.",
+                Image = $"User/{follower.ImgName}"
+            };
+        }
     }
 }

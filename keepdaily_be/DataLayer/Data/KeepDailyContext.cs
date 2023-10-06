@@ -13,6 +13,7 @@ namespace DomainLayer.Data
         public DbSet<Day> Day { get; set; } = null!;
         public DbSet<User> AppUser { get; set; } = null!;
         public DbSet<Friend> Friend { get; set; } = null!;
+        public DbSet<Message> Message { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

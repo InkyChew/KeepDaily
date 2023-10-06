@@ -24,7 +24,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Logging.AddSerilog(Log.Logger);
-
+builder.Services.AddSignalR();
 
 /*
  * Database
@@ -71,6 +71,8 @@ builder.Services.AddScoped<IDayService, DayService>();
 builder.Services.AddScoped<IDayRepo, DayRepo>();
 builder.Services.AddScoped<IFriendService, FriendService>();
 builder.Services.AddScoped<IFriendRepo, FriendRepo>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IMessageRepo, MessageRepo>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IConfirmEmailService, ConfirmEmailService>();
 builder.Services.AddSingleton<IVideoService, VideoService>();
@@ -122,5 +124,7 @@ app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 
 app.MapRazorPages();
+
+app.MapHub<MessageHub>("/MessageHub");
 
 app.Run();

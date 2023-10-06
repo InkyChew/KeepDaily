@@ -9,5 +9,6 @@ namespace ServiceLayer.IServices
         public Friend? GetFriend(int uid, int fid);
         public void AddFriend(Friend friend);
         public void DeleteFriend(Friend friend);
+        public Message CreateFriendMessage(Friend friend);
     }
 }

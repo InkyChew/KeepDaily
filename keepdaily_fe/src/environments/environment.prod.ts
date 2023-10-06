@@ -11,7 +11,14 @@ export const environment = {
       day: '/Day',
       lineNotify: '/LineNotify',
       oAuthGoogle: '/OAuthGoogle',
-      confirmEmail: '/ConfirmEmail'
+      confirmEmail: '/ConfirmEmail',
+      message: '/Message'
+    }
+  },
+  hub: {
+    url: 'https://localhost:5000',
+    endpoint: {
+      messageHub: '/MessageHub'
     }
   }
 };

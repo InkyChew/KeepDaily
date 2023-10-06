@@ -37,6 +37,7 @@ namespace DomainLayer.Models
         public bool EmailNotify { get; set; } = true;
         public bool LineNotify { get; set; } = false;
         public virtual List<Plan> Plans { get; set; } = new List<Plan>();
+        public virtual List<Message> Messages { get; set; } = new List<Message>();
     }
 
     public enum UserLevel

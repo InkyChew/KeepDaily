@@ -19,7 +19,6 @@
     align-items: center;
     height: 75px;
     color: var(--primary-dark);
-    overflow: hidden;
     box-sizing: border-box;
     background-color: var(--white);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 3px;
@@ -40,6 +39,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+.app-header .menu-item {
+    position: relative;
 }
 .app-header .menu-item-link {
     display: block;

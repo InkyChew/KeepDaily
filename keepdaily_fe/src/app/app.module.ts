@@ -25,6 +25,7 @@ import { MsgModalComponent } from './msg-modal/msg-modal.component';
 import { LoadingComponent } from './loading/loading.component';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { AboutComponent } from './about/about.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AboutComponent } from './about/about.component';
     MsgModalComponent,
     LoadingComponent,
     VideoModalComponent,
-    AboutComponent
+    AboutComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

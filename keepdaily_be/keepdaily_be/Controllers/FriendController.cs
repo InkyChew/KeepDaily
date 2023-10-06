@@ -11,10 +11,12 @@ namespace keepdaily_be.Controllers
     public class FriendController : ControllerBase
     {
         private readonly IFriendService _service;
+        private readonly IMessageService _msgService;
 
-        public FriendController(IFriendService service)
+        public FriendController(IFriendService service, IMessageService msgService)
         {
             _service = service;
+            _msgService = msgService;
         }
 
         [HttpGet("{uid}")]
@@ -36,6 +38,8 @@ namespace keepdaily_be.Controllers
             try
             {
                 _service.AddFriend(friend);
+                var msg = _service.CreateFriendMessage(friend);
+                _msgService.CreateMessage(friend.FriendId, msg);
                 return NoContent();
             }
             catch (Exception ex)
