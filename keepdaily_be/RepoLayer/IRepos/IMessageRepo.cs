@@ -12,6 +12,7 @@ namespace RepoLayer.IRepos
         public IEnumerable<Message> GetAllMessage();
         public IEnumerable<Message> GetAllUserMessage(int uid);
         public void InsertMessage(Message message);
+        public void UpdateMessage(Message message);
         public void DeleteMessage(int id);
         public void RemoveMessage(Message message);
         public void SaveChanges();

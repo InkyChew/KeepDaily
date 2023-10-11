@@ -24,12 +24,17 @@ namespace RepoLayer.Repos
 
         public IEnumerable<Message> GetAllUserMessage(int uid)
         {
-            return _messages.Where(_ => _.UserId == uid);
+            return _messages.Where(_ => _.UserId == uid).OrderByDescending(_ => _.CreatedTime);
         }
 
         public void InsertMessage(Message message)
         {
             _messages.Add(message);
+        }
+
+        public void UpdateMessage(Message message)
+        {
+            _messages.Update(message);
         }
 
         public void DeleteMessage(int id)

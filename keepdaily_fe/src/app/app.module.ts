@@ -26,6 +26,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MessagesComponent } from './messages/messages.component';
     LoadingComponent,
     VideoModalComponent,
     AboutComponent,
-    MessagesComponent
+    MessagesComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,

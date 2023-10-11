@@ -39,6 +39,15 @@ namespace ServiceLayer.Services
             return message;
         }
 
+        public void UpdateReadMessage(List<Message> messages)
+        {
+            messages.ForEach(msg => {
+                msg.IsRead = true;
+                _repo.UpdateMessage(msg);
+            });
+            _repo.SaveChanges();
+        }
+
         public void DeleteMessage(int id)
         {
             _repo.DeleteMessage(id);

@@ -13,4 +13,12 @@ export class MessageService {
   getMessages(uid: number) {
     return this._http.get<IMessage[]>(`${this._env.APIOption.MessageEndpoint}?uid=${uid}`);
   }
+
+  updateReadMessage(newmsgs: IMessage[]) {
+    return this._http.patch(this._env.APIOption.MessageEndpoint, newmsgs);
+  }
+
+  deleteMessage(id: number) {
+    return this._http.delete(`${this._env.APIOption.MessageEndpoint}/${id}`);
+  }
 }

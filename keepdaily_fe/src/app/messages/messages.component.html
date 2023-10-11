@@ -1,32 +1,19 @@
-<ul class="msg-list">
-    <!-- <li class="msg-item" *ngFor="let msg of messages">
-        <div class="img-container" *ngIf="msg.image">
-            <img [src]="getImg(msg.image)">
-        </div>
-        <p class="msg-text">
-            <span class="title">{{ msg.title }}</span>
-            <span class="content">{{ msg.content }}</span>
-            <span class="time">{{ msg.createdTime }}</span>
-        </p>
-    </li> -->
-    <li class="msg-item">
-        <!-- <div class="img-container" *ngIf="msg.image">
-            <img [src]="getImg(msg.image)">
-        </div> -->
-        <p class="msg-text">
-            <span class="title">123</span>
-            <span class="content">456</span>
-            <span class="time">789</span>
-        </p>
-    </li>
-    <li class="msg-item">
-        <div class="img-container">
-            <img src="https://picsum.photos/300/200/?random=10">
-        </div>
-        <p class="msg-text">
-            <span class="title">123</span>
-            <span class="content">456</span>
-            <span class="time">789</span>
-        </p>
-    </li>
+<ul class="msg-list" [ngClass]="{'active' : show}">
+    <ng-container *ngIf="messages.length > 0 else empty">
+        <li class="msg-item" *ngFor="let msg of messages">
+            <div class="img-container" *ngIf="msg.image">
+                <img [src]="getImg(msg.image)">
+            </div>
+            <p class="msg-text">
+                <span class="title">{{ msg.title }}</span>
+                <span class="content">{{ msg.content }}</span>
+                <span class="time">{{ msg.createdTime | time }}</span>
+            </p>
+            <a [routerLink]="msg.link" class="msg-item-link"></a>
+            <button class="btn btn-cancel" (click)="delMsg(msg.id)"><i class="fa-solid fa-xmark"></i></button>
+        </li>
+    </ng-container>
+    <ng-template #empty>
+        <li class="msg-item">No message</li>
+    </ng-template>
 </ul>

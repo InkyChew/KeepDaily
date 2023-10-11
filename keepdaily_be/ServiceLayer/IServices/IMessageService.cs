@@ -6,6 +6,7 @@ namespace ServiceLayer.IServices
     {
         public List<Message> GetAllUserMessage(int uid);
         public Task<Message> CreateMessage(int receiverId, Message message);
+        public void UpdateReadMessage(List<Message> messages);
         public void DeleteMessage(int id);
     }
 }

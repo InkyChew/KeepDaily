@@ -3,7 +3,8 @@ export interface IMessage {
     userId: number;
     title: string;
     content: string;
+    link: string;
     image: string | null;
-    createdTime: string;
+    createdTime: Date;
     isRead: boolean;
 }

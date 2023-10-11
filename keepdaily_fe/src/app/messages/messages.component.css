@@ -1,13 +1,22 @@
 .msg-list {
     position: absolute;
+    top: 75px;
     right: 10px;
+    display: none;
+    overflow-y: auto;
     background-color: var(--light);
-    z-index: 500;
+    z-index: 40;
     padding: 0;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 1px 1px;
+    transition: all .5s;
+}
+.msg-list.active {
+    display: block;
+    max-height: 200px;
 }
 
 .msg-item {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,10 +29,17 @@
     border-bottom: 1px solid var(--secondary);
 }
 
+.msg-item-link {
+    position: absolute;
+    inset: 0;
+}
 
 .img-container {
     width: 50px;
     aspect-ratio: 1 / 1;
+    margin-right: 5px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .img-container img {
@@ -36,7 +52,8 @@
 
 .msg-text {
     flex: 1;
-    margin: 0 0 0 5px;
+    margin: 0;
+    color: var(--dark);
 }
 
 .msg-text span {
@@ -54,3 +71,14 @@
     text-align: end;
 }
 
+.btn-cancel {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    display: none;
+    font-size: .5em;
+    color: var(--secondary);
+}
+.msg-item:hover .btn-cancel {
+    display: block;
+}
