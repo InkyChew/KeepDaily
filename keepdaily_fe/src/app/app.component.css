@@ -13,6 +13,9 @@
     box-sizing: border-box;
 }
 
+/*
+ * Header
+ */
 .app-header {
     display: flex;
     justify-content: center;
@@ -51,31 +54,9 @@
     color: var(--secondary);
 }
 
-.fa-bell {
-    position: relative;
-}
-.fa-bell::after {
-    content: attr(data-msgcnt);
-    position: absolute;
-    right: -13px;
-    top: -13px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 18px;
-    aspect-ratio: 1 / 1;
-    border: 1px solid var(--light);
-    border-radius: 50%;
-    color: white;
-    font-size: .5em;
-    background-color: var(--danger);
-    transform: scale(0);
-    transition: all .5s ease;
-}
-.fa-bell.active::after {
-    transform: scale(1);
-}
-
+/*
+ * Footer
+ */
 .app-footer {
     position: fixed;
     bottom: 0;

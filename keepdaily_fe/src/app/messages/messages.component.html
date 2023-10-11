@@ -1,6 +1,9 @@
+<button class="btn menu-item-link btn-msg" (click)="openMsgBox()">
+    <i class="fa-solid fa-bell" [ngClass]="{'active' : newmsgs.length>0}" [attr.data-msgcnt]="newmsgs.length"></i>
+</button>
 <ul class="msg-list" [ngClass]="{'active' : show}">
-    <ng-container *ngIf="messages.length > 0 else empty">
-        <li class="msg-item" *ngFor="let msg of messages">
+    <ng-container *ngIf="msgList.length > 0 else empty">
+        <li class="msg-item" *ngFor="let msg of msgList">
             <div class="img-container" *ngIf="msg.image">
                 <img [src]="getImg(msg.image)">
             </div>
@@ -9,8 +12,8 @@
                 <span class="content">{{ msg.content }}</span>
                 <span class="time">{{ msg.createdTime | time }}</span>
             </p>
-            <a [routerLink]="msg.link" class="msg-item-link"></a>
-            <button class="btn btn-cancel" (click)="delMsg(msg.id)"><i class="fa-solid fa-xmark"></i></button>
+            <a *ngIf="msg.link" [routerLink]="msg.link" class="msg-item-link"></a>
+            <button class="btn btn-cancel" (click)="deleteMsg(msg.id)"><i class="fa-solid fa-xmark"></i></button>
         </li>
     </ng-container>
     <ng-template #empty>

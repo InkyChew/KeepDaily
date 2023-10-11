@@ -1,3 +1,36 @@
+.menu-item-link {
+    position: relative;
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--primary);
+    transition: all .5s;
+}
+.fa-bell {
+    position: relative;
+}
+.fa-bell::after {
+    content: attr(data-msgcnt);
+    position: absolute;
+    right: -13px;
+    top: -13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--light);
+    border-radius: 50%;
+    color: white;
+    font-size: .5em;
+    background-color: var(--danger);
+    transform: scale(0);
+    transition: all .5s ease;
+}
+.fa-bell.active::after {
+    transform: scale(1);
+}
+
 .msg-list {
     position: absolute;
     top: 75px;
@@ -8,6 +41,7 @@
     z-index: 40;
     padding: 0;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 1px 1px;
+    cursor: default;
     transition: all .5s;
 }
 .msg-list.active {
