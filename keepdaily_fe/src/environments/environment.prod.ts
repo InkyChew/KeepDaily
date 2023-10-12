@@ -16,7 +16,7 @@ export const environment = {
     }
   },
   hub: {
-    url: 'https://localhost:5000',
+    url: 'https://keepdaily.azurewebsites.net/api',
     endpoint: {
       messageHub: '/MessageHub'
     }

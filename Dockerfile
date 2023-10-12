@@ -30,7 +30,7 @@ RUN dotnet publish "keepdaily_be/keepdaily_be.csproj" -c Release -o /app/publish
 FROM base AS final
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get install -y ffmpeg
+RUN apt-get install -y --no-install-recommends ffmpeg
 WORKDIR /app
 COPY --from=publish /app/publish .
 COPY --from=build-fe /app/dist/keepdaily_fe ./ClientApp/dist
