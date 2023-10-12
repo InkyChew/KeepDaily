@@ -55,7 +55,7 @@ export class UserService {
   }
 
   getPhoto(u?: IUser, defImg?: string) {
-    const defaultImg = defImg ?? 'https://placehold.co/200';
+    const defaultImg = defImg ?? '../../assets/cupcake.png';
     if(u && u.imgName && u.imgType) {
       switch(u.imgType) {
         case "Google":

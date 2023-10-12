@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { IMessage } from '../models/message';
 import { environment } from 'src/environments/environment';
 import { MessageService } from '../services/message.service';

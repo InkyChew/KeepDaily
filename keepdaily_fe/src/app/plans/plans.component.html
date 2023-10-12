@@ -1,8 +1,8 @@
 <div class="plans">
-    <button class="btn btn-primary-outline" (click)="add()"><i class="fa-solid fa-plus"></i></button>
+    <button class="btn btn-primary-outline" (click)="add()" title="add" txs><i class="fa-solid fa-plus"></i></button>
 
     <ng-container *ngIf="planList.length == 0 else list">
-        <p>No plan now. Click add to create a new plan!</p>
+        <p txs data-txs="AddPlan">Click add to create a new plan!</p>
     </ng-container>
 
     <ng-template #list>
@@ -18,21 +18,21 @@
                     </label>
     
                     <label class="field">
-                        <span class="field-title required">Start From</span>
+                        <span class="field-title required" txs>Start From</span>
                         <input type="date" [(ngModel)]="plan.startFrom" [min]="today">
                     </label>
                     
                     <label class="field">
-                        <span class="field-title">Category</span>
+                        <span class="field-title" txs>Category</span>
                         <select [(ngModel)]="plan.categoryId">
-                            <option value="null">- Select a category -</option>
+                            <option value="null" txs data-txs="DefaultOption">- Select a category -</option>
                             <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg.name }}</option>
                         </select>   
                     </label>
     
                     <div class="btns">
-                        <button title="save" class="btn btn-primary" (click)="save(plan, i)"><i class="fa-solid fa-floppy-disk"></i></button>
-                        <button title="cancel" class="btn btn-primary-outline" (click)="closeEditor(plan)"><i class="fa-solid fa-xmark"></i></button>
+                        <button title="save" class="btn btn-primary" (click)="save(plan, i)" txs><i class="fa-solid fa-floppy-disk"></i></button>
+                        <button title="cancel" class="btn btn-primary-outline" (click)="closeEditor(plan)" txs><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </ng-container>
                 <ng-template #readonly>
@@ -46,8 +46,8 @@
                     <span>{{ plan.startFrom }}</span>
     
                     <div class="btns">
-                        <button title="edit" class="btn btn-primary" (click)="edit = i"><i class="fa-solid fa-pencil"></i></button>
-                        <button title="delete" class="btn btn-primary-outline" (click)="delete(plan.id, i)"><i class="fa-solid fa-trash"></i></button>
+                        <button title="edit" class="btn btn-primary" (click)="edit = i" txs><i class="fa-solid fa-pencil"></i></button>
+                        <button title="delete" class="btn btn-primary-outline" (click)="delete(plan.id, i)" txs><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </ng-template>
             </li>

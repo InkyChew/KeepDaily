@@ -61,7 +61,7 @@ namespace ServiceLayer.Services
             return new Message()
             {
                 UserId = friend.FriendId,
-                Title = "Follow 🤝",
+                Title = "New Friend 🤝",
                 Content = $"{follower.Name} has followed you.",
                 Link = $"/friend/{follower.Id}",
                 Image = imgurl

@@ -1,4 +1,4 @@
-<button class="btn menu-item-link btn-msg" (click)="openMsgBox()">
+<button class="btn menu-item-link btn-msg" title="messages" (click)="openMsgBox()" txs>
     <i class="fa-solid fa-bell" [ngClass]="{'active' : newmsgs.length>0}" [attr.data-msgcnt]="newmsgs.length"></i>
 </button>
 <ul class="msg-list" [ngClass]="{'active' : show}">
@@ -17,6 +17,6 @@
         </li>
     </ng-container>
     <ng-template #empty>
-        <li class="msg-item">No message</li>
+        <li class="msg-item" txs>No message</li>
     </ng-template>
 </ul>

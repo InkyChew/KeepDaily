@@ -8,13 +8,13 @@
         <p>{{ friend.description }}</p>
         
         <div class="btns">
-            <a class="btn btn-primary" title="plans" routerLink="plans" routerLinkActive="active"><i class="fa-solid fa-flag"></i></a>
-            <a class="btn btn-primary" title="friends" routerLink="friends" routerLinkActive="active"><i class="fa-solid fa-heart"></i></a>
+            <a class="btn btn-primary" title="plans" routerLink="plans" routerLinkActive="active" txs><i class="fa-solid fa-flag"></i></a>
+            <a class="btn btn-primary" title="friends" routerLink="friends" routerLinkActive="active" txs><i class="fa-solid fa-heart"></i></a>
             <ng-container *ngIf="isFriend else follow">
-                <button class="btn btn-primary" title="unfollow" (click)="delFriend()"><i class="fa-solid fa-heart-crack"></i></button>            
+                <button class="btn btn-primary" title="unfollow" (click)="delFriend()" txs><i class="fa-solid fa-heart-crack"></i></button>            
             </ng-container>
             <ng-template #follow>
-                <button class="btn btn-primary" title="follow" (click)="addFriend()"><i class="fa-solid fa-handshake"></i></button>
+                <button class="btn btn-primary" title="follow" (click)="addFriend()" txs><i class="fa-solid fa-handshake"></i></button>
             </ng-template>
         </div>
     </section>

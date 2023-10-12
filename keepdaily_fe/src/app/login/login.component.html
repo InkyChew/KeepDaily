@@ -1,22 +1,22 @@
 <section class="login">
-    <h2>Login</h2>
+    <h2 txs>Login</h2>
 
     <form [formGroup]="login" (ngSubmit)="submit()" class="loginForm">
         <label class="field">
-            <span class="field-title">Email</span>
+            <span class="field-title" txs>Email</span>
             <input type="email" required formControlName="email" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('email') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('email')  | txs | async }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Password</span>            
+            <span class="field-title" txs>Password</span>            
             <input type="password" required formControlName="password" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('password') | txs | async }}</small>
         </label>
 
-        <button class="btn btn-primary field" [disabled]="!login.valid">Submit</button>
+        <button class="btn btn-primary field" [disabled]="!login.valid" txs>Submit</button>
 
-        <button class="btn-link" (click)="forgotPwd()">Forgot password</button>
+        <button class="btn-link" (click)="forgotPwd()" txs>Forgot password</button>
     </form>
 
     <div>

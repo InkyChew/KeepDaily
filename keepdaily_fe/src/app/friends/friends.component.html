@@ -3,11 +3,11 @@
     <div class="search">
         <div class="field">
             <input type="search" placeholder="friend's email or name" #qry/>
-            <button class="btn btn-primary" (click)="search(qry)"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="btn btn-primary" title="search" (click)="search(qry)" txs><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <ul class="friend-list" *ngIf="searchFriends" (mouseleave)="searchFriends=undefined">
             <ng-container *ngIf="searchFriends.length == 0; else display">
-                <li class="friend-item">No results.</li>
+                <li class="friend-item" txs>No results</li>
             </ng-container>
             <ng-template #display>
                 <li *ngFor="let friend of searchFriends">
@@ -30,7 +30,7 @@
 
     <div class="friend-content">
         <ng-container *ngIf="friendList.length == 0 else list">
-            <p>No friends.</p>
+            <p txs>No friends</p>
         </ng-container>
     
         <ng-template #list>

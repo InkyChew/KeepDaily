@@ -1,28 +1,71 @@
-
-<ng-container *ngIf="status == 4; else init">
-    <p>
-        Please go to your mail box and confirm the email.
-        Click <button class="btn-link" (click)="send()">resend email</button> if not received or expired.
-    </p>
+<ng-container [ngSwitch]="lang">
+    <ng-container *ngSwitchCase="'en-US'">
+        <ng-container *ngTemplateOutlet="en"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'zh-TW'">
+        <ng-container *ngTemplateOutlet="zh"></ng-container>
+    </ng-container>
 </ng-container>
 
-<ng-template #init>
-    <ng-container *ngIf="status == 1 else invalid">
-        <h2>🎉Email confirmed successfully.</h2>
-        Your Email: {{ email }}
+<!-- en -->
+<ng-template #en>
+    <ng-container *ngIf="status == 4; else init">
         <p>
-            Please <a routerLink="/login">login</a> now!
-        </p>     
+            Please go to your mail box and confirm the email.
+            <button class="btn-link" (click)="send()">Resend email</button> if not received or expired.
+        </p>
     </ng-container>
     
-    <ng-template #invalid>
-        <h2>😔Fail to confirm email.</h2>
-        Your Email: {{ email }}
-        <ng-container *ngIf="status == 3 else register"><p>Please <button class="btn-link" (click)="send()">resend the email</button> and verify again.
-            Due to following possible reasons:
-            1. Only the latest confirmation letter is valid.
-            2. The confirmation letter exceeded the period of one day.</p>
+    <ng-template #init>
+        <ng-container *ngIf="status == 1 else invalid">
+            <h2>🎉Email confirmed successfully.</h2>
+            Your Email: {{ email }}
+            <p>
+                <a routerLink="/login">Login</a> now!
+            </p>     
         </ng-container>
-        <ng-template #register><p>Your account does not exist. Please <a routerLink="/register">register</a> a new one.</p></ng-template>
+        
+        <ng-template #invalid>
+            <h2>😔Fail to confirm email.</h2>
+            Your Email: {{ email }}
+            <ng-container *ngIf="status == 3 else register"><p>Please <button class="btn-link" (click)="send()">resend the email</button> and verify again.
+                Due to following possible reasons:
+                1. Only the latest confirmation letter is valid.
+                2. The confirmation letter exceeded the period of one day
+            </p>
+            </ng-container>
+            <ng-template #register><p>Your account does not exist. Please <a routerLink="/register">register</a> a new one.</p></ng-template>
+        </ng-template>
+    </ng-template>
+</ng-template>
+
+<!-- zh -->
+<ng-template #zh>
+    <ng-container *ngIf="status == 4; else init">
+        <p>
+            請前往您的信箱並確認電子郵件。
+            若未收到驗證信件或驗證信件已過期。請<button class="btn-link" (click)="send()">重新發送驗證信</button>。
+        </p>
+    </ng-container>
+    
+    <ng-template #init>
+        <ng-container *ngIf="status == 1 else invalid">
+            <h2>🎉信箱驗證成功</h2>
+            您的信箱: {{ email }}
+            <p>
+                <a routerLink="/login">立即登入</a>
+            </p>     
+        </ng-container>
+        
+        <ng-template #invalid>
+            <h2>😔信箱驗證失敗</h2>
+            您的信箱: {{ email }}
+            <ng-container *ngIf="status == 3 else register"><p>請<button class="btn-link" (click)="send()">重新發送驗證信</button>再驗證一次。
+                由於以下可能的原因：
+                1. 僅最新的驗證信件有效。
+                2. 驗證信件已超過一天的期限。</p>
+            </ng-container>
+            <ng-template #register><p>您的帳戶不存在。<a routerLink="/register">註冊</a>新帳戶。</p></ng-template>
+        </ng-template>
     </ng-template>
 </ng-template>

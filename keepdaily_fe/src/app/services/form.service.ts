@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class FormService {
         if(control.hasError('required'))
           msg = `${field.charAt(0).toUpperCase()}${field.slice(1)} is required`;
         else if((field == 'password' || field == 'confirmpassword') && this._group.hasError('passwordMismatch'))
-          msg = `Password and Confirm Password should be the same.`;
+          msg = `Password and Confirm Password should be the same`;
       }
     }
     return msg;

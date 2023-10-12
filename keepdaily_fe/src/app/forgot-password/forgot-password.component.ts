@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmEmailService } from '../services/confirm-email.service';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,17 +19,21 @@ export class ForgotPasswordComponent implements OnInit {
   email: string = this._route.snapshot.queryParams['email'];
   changePwd: FormGroup;
   formService: FormService;
+  lang: string = this._translateService.defaultLang;
   
   constructor(private _userService: UserService,
     private _emailService: ConfirmEmailService,
     private _route: ActivatedRoute,
-    private _router: Router) {
+    private _router: Router,
+    private _translateService: TranslateService) {
     this.changePwd  = new FormGroup({
       password: new FormControl('', [Validators.required]),
       confirmpassword: new FormControl('', [Validators.required])
     });
     this.formService = new FormService(this.changePwd);
-    this.changePwd.addValidators(this.formService.passwordMatchValidation())
+    this.changePwd.addValidators(this.formService.passwordMatchValidation());
+    
+    this._translateService.curLang$.subscribe(lang => this.lang = lang);
   }
 
   ngOnInit(): void { }

@@ -1,31 +1,31 @@
 <section class="register">
-    <h2>Register</h2>
+    <h2 txs>Register</h2>
 
     <form [formGroup]="register" (ngSubmit)="submit()">
         <label class="field">
-            <span class="field-title">Name</span>
+            <span class="field-title" txs>Name</span>
             <input type="text" required formControlName="name" maxlength="10">
-            <small class="field-msg">{{ formService.getErrorMsg('name') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('name')  | txs | async }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Email</span>
+            <span class="field-title" txs>Email</span>
             <input type="email" required formControlName="email" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('email') }}</small>
+            <small class="field-msg">{{ formService.getErrorMsg('email') | txs | async }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Password</span>
+            <span class="field-title" txs>Password</span>
             <input type="password" required formControlName="password" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('password') }}</small>
+            <small class="field-msg" txs>{{ formService.getErrorMsg('password') | txs | async }}</small>
         </label>
 
         <label class="field">
-            <span class="field-title">Confirm Password</span>
+            <span class="field-title" txs>Confirm Password</span>
             <input type="password" required formControlName="confirmpassword" maxlength="50">
-            <small class="field-msg">{{ formService.getErrorMsg('confirmpassword') }}</small>
+            <small class="field-msg" txs>{{ formService.getErrorMsg('confirmpassword') | txs | async }}</small>
         </label>
 
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" txs>Submit</button>
     </form>
 </section>

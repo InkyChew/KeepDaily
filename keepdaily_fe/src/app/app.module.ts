@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
@@ -27,6 +27,14 @@ import { VideoModalComponent } from './video-modal/video-modal.component';
 import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TimePipe } from './pipes/time.pipe';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { TranslateService } from './services/translate.service';
+import { TranslateDirective } from './helps/translate.directive';
+
+export function setupTranslateServiceFactory(
+  service: TranslateService): Function {
+  return () => service.loadData();
+}
 
 @NgModule({
   declarations: [
@@ -51,7 +59,9 @@ import { TimePipe } from './pipes/time.pipe';
     VideoModalComponent,
     AboutComponent,
     MessagesComponent,
-    TimePipe
+    TimePipe,
+    TranslatePipe,
+    TranslateDirective
   ],
   imports: [
     BrowserModule,
@@ -61,7 +71,16 @@ import { TimePipe } from './pipes/time.pipe';
     ReactiveFormsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true},
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateServiceFactory,
+      deps: [
+        TranslateService
+      ],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

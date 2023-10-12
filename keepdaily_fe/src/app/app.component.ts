@@ -1,11 +1,8 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import { HubService } from './services/hub.service';
-import { concatMap } from 'rxjs';
 import { IMessage } from './models/message';
-import { MessageService } from './services/message.service';
-import { IAuthenticateUser } from './models/user';
+import { TranslateService } from './services/translate.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +18,8 @@ export class AppComponent {
   showMsg: boolean = false;
 
   constructor(private _userService: UserService,
-    private _router: Router) {}
+    private _router: Router,
+    public translate: TranslateService) {}
 
   ngOnInit() {
     this._userService.user$.subscribe(user => {
