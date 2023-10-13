@@ -33,7 +33,7 @@ export class FriendComponent implements OnInit {
   }
   
   getPhoto(user: IUser) {
-    return this._userService.getPhoto(user);
+    return this._userService.getPhoto(user.imgName, user.imgType);
   }
 
   getfriendRelation(fid: number) {

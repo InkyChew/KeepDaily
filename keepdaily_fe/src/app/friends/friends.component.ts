@@ -37,7 +37,7 @@ export class FriendsComponent implements OnInit {
   }
 
   getPhoto(user: IUser) {
-    return this._userService.getPhoto(user);
+    return this._userService.getPhoto(user.imgName, user.imgType);
   }
   
   search(qry: HTMLInputElement) {

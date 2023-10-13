@@ -5,7 +5,7 @@
     <ng-container *ngIf="msgList.length > 0 else empty">
         <li class="msg-item" *ngFor="let msg of msgList">
             <div class="img-container" *ngIf="msg.image">
-                <img [src]="getImg(msg.image)">
+                <img [src]="getImg(msg)">
             </div>
             <p class="msg-text">
                 <span class="title">{{ msg.title }}</span>

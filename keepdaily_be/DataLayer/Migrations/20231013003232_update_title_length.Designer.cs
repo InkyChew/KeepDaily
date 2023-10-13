@@ -4,6 +4,7 @@ using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    partial class KeepDailyContextModelSnapshot : ModelSnapshot
+    [Migration("20231013003232_update_title_length")]
+    partial class update_title_length
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,9 +159,6 @@ namespace DomainLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -278,7 +277,7 @@ namespace DomainLayer.Migrations
                             IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAEM4/tfrlif/K3Ewnz+b9iDZfVH/mRmf1RFKAjoQxcgKqSidZf92FwWMAMAC9tGdBOA==",
+                            Password = "AQAAAAEAACcQAAAAEAKxe+lKLeGAMwj+d+ZJGhox4IbwDGNsRqIYHUBMqKLQdELT1ihri6NoHsKRdY8usw==",
                             UserLevel = 0
                         });
                 });

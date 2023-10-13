@@ -44,7 +44,7 @@ export class UserSettingComponent implements OnInit {
   }
 
   getImg() {
-    return this._userService.getPhoto(this.user);
+    return this._userService.getPhoto(this.user.imgName, this.user.imgType);
   }
 
   uploadPhoto(e: any) {
