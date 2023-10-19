@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICategory, Plan } from '../models/calendar';
+import { Category, Plan } from '../models/calendar';
 import { PlanService } from '../services/plan.service';
 import { formatDate } from '@angular/common';
 import { IUser } from '../models/user';
@@ -15,7 +15,7 @@ export class PlansComponent implements OnInit {
 
   user: IUser = this._userService.getCurrentUser();
   planList: Plan[] = [];
-  ctgList: ICategory[] = [];
+  ctgList: Category[] = [];
   edit: number = -1;
   today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 

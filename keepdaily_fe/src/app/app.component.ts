@@ -24,9 +24,6 @@ export class AppComponent {
   ngOnInit() {
     this._userService.user$.subscribe(user => {
       this.isLogin = user ? true : false;
-      if(this.isLogin) {
-        this._router.navigateByUrl('/main');
-      }
     });
   }
 

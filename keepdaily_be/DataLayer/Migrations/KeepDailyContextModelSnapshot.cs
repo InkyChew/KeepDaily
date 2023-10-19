@@ -34,6 +34,10 @@ namespace DomainLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("Name_zh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Category");
@@ -42,42 +46,62 @@ namespace DomainLayer.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Sports"
+                            Name = "Sports",
+                            Name_zh = "運動"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Diet"
+                            Name = "Diet",
+                            Name_zh = "健康飲食"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Cooking"
+                            Name = "Cooking",
+                            Name_zh = "烹飪"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Baking"
+                            Name = "Baking",
+                            Name_zh = "烘焙"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Planting"
+                            Name = "Planting",
+                            Name_zh = "植物"
                         },
                         new
                         {
                             Id = 6,
-                            Name = "Painting"
+                            Name = "Painting",
+                            Name_zh = "繪畫"
                         },
                         new
                         {
                             Id = 7,
-                            Name = "Traveling"
+                            Name = "Traveling",
+                            Name_zh = "旅行"
                         },
                         new
                         {
                             Id = 8,
-                            Name = "Learning"
+                            Name = "Learning",
+                            Name_zh = "學習"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Music",
+                            Name_zh = "音樂"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Daily",
+                            Name_zh = "日常"
                         });
                 });
 
@@ -275,7 +299,7 @@ namespace DomainLayer.Migrations
                             IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAENJ7i/RwR1i0iC36IG2K1G/fIaNusoodd2Ogl27mRkTMaDmHD3l4TLwDwbtbBUC6wA==",
+                            Password = "AQAAAAEAACcQAAAAEGHFzh1PdbO8sBNTD/NvJp86mddp14cc6FR5YrT0p5b1RiHukejWWrvNDkMtrZd9tg==",
                             UserLevel = 0
                         });
                 });

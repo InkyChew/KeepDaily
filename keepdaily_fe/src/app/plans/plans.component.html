@@ -26,7 +26,7 @@
                         <span class="field-title" txs>Category</span>
                         <select [(ngModel)]="plan.categoryId">
                             <option value="null" txs data-txs="DefaultOption">- Select a category -</option>
-                            <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg.name }}</option>
+                            <option *ngFor="let ctg of ctgList" [ngValue]="ctg.id">{{ ctg | ctgname | async}}</option>
                         </select>   
                     </label>
     
@@ -38,7 +38,7 @@
                 <ng-template #readonly>
                     <div class="plan-header">
                         <a class="btn-link title" [routerLink]="['/plan', plan.id]">{{ plan.title }}</a>
-                        <span class="ctg">{{ plan.category?.name }}</span>
+                        <span class="ctg">{{ plan.category | ctgname | async }}</span>
                     </div>
     
                     <p>{{ plan.description }}</p>

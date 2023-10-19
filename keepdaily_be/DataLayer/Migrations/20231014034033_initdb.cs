@@ -19,7 +19,7 @@ namespace DomainLayer.Migrations
                     Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    ImgName = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    ImgName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     ImgType = table.Column<string>(type: "nvarchar(10)", nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     LineId = table.Column<string>(type: "nvarchar(50)", nullable: true),
@@ -40,7 +40,8 @@ namespace DomainLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(10)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    Name_zh = table.Column<string>(type: "nvarchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,6 +58,31 @@ namespace DomainLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Friend", x => new { x.UserId, x.FriendId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Message",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Message", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Message_AppUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,21 +141,23 @@ namespace DomainLayer.Migrations
             migrationBuilder.InsertData(
                 table: "AppUser",
                 columns: new[] { "Id", "Description", "Email", "EmailConfirmed", "EmailNotify", "ImgName", "ImgType", "IsActive", "LineAccessToken", "LineId", "LineNotify", "Name", "Password", "UserLevel" },
-                values: new object[] { 1, null, "a@a", true, true, null, null, true, null, null, false, "Inky", "AQAAAAEAACcQAAAAENk3ER4kMC43gMG5YgtaX2FgWLI5++Jd/GfVJBEobZyhAJXfWa95LyDPjltCranGqw==", 0 });
+                values: new object[] { 1, null, "a@a", true, true, null, null, true, null, null, false, "Inky", "AQAAAAEAACcQAAAAEGHFzh1PdbO8sBNTD/NvJp86mddp14cc6FR5YrT0p5b1RiHukejWWrvNDkMtrZd9tg==", 0 });
 
             migrationBuilder.InsertData(
                 table: "Category",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Name", "Name_zh" },
                 values: new object[,]
                 {
-                    { 1, "Sports" },
-                    { 2, "Diet" },
-                    { 3, "Cooking" },
-                    { 4, "Baking" },
-                    { 5, "Planting" },
-                    { 6, "Painting" },
-                    { 7, "Traveling" },
-                    { 8, "Learning" }
+                    { 1, "Sports", "運動" },
+                    { 2, "Diet", "健康飲食" },
+                    { 3, "Cooking", "烹飪" },
+                    { 4, "Baking", "烘焙" },
+                    { 5, "Planting", "植物" },
+                    { 6, "Painting", "繪畫" },
+                    { 7, "Traveling", "旅行" },
+                    { 8, "Learning", "學習" },
+                    { 9, "Music", "音樂" },
+                    { 10, "Daily", "日常" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -151,6 +179,11 @@ namespace DomainLayer.Migrations
                 column: "PlanId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Message_UserId",
+                table: "Message",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Plan_CategoryId",
                 table: "Plan",
                 column: "CategoryId");
@@ -168,6 +201,9 @@ namespace DomainLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Friend");
+
+            migrationBuilder.DropTable(
+                name: "Message");
 
             migrationBuilder.DropTable(
                 name: "Plan");

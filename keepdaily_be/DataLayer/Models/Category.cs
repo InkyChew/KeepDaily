@@ -12,6 +12,9 @@ namespace DomainLayer.Models
 
         [Column(TypeName = "nvarchar(10)")]
         public string Name { get; set; } = null!;
+
+        [Column(TypeName = "nvarchar(10)")]
+        public string Name_zh { get; set; } = null!;
         public virtual List<Plan>? Plans { get; set; }
     }
 }

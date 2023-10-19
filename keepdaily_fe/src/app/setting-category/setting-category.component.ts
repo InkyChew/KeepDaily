@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
-import { ICategory } from '../models/calendar';
-import { NgModel } from '@angular/forms';
+import { Category } from '../models/calendar';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../services/form.service';
 
 @Component({
   selector: 'app-setting-category',
@@ -10,10 +11,9 @@ import { NgModel } from '@angular/forms';
 })
 export class SettingCategoryComponent implements OnInit {
 
-  ctgList: ICategory[] = [];
-  name: string | null = null;
+  ctgList: Category[] = [];
 
-  constructor(private _service: CategoryService) { }
+  constructor(private _service: CategoryService) {}
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -23,25 +23,22 @@ export class SettingCategoryComponent implements OnInit {
     this._service.getAllCategory().subscribe(res => this.ctgList = res);
   }
 
-  create(model: NgModel) {
-    if(this.name) {
-      const ctg: ICategory = {id:0, name: this.name};
-      this._service.postCategory(ctg).subscribe(res => {
-        this.ctgList.push(res);
-        model.reset();
-      });
-    }
+  add() {
+    this.ctgList.unshift(new Category());
   }
 
-  edit(ctg: ICategory, i: number) {
-    this._service.putCategory(ctg).subscribe(res => this.ctgList[i] = res);
+  save(ctg: Category, i: number) {
+    const method = ctg.id == 0
+            ? this._service.postCategory(ctg)
+            : this._service.putCategory(ctg);
+    method.subscribe(res => {
+      this.ctgList[i] = res;
+    });
   }
 
   delete(id: number, i: number) {
-    this._service.deleteCategory(id).subscribe(() => this.ctgList.splice(i,1));
-  }
-
-  closeEditor() {
-
+    if(id == 0) this.ctgList.shift();
+    else if(confirm("Sure to delete?"))
+      this._service.deleteCategory(id).subscribe(() => this.ctgList.splice(i,1));
   }
 }

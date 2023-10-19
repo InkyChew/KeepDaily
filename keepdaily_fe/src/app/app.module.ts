@@ -30,6 +30,8 @@ import { TimePipe } from './pipes/time.pipe';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslateService } from './services/translate.service';
 import { TranslateDirective } from './helps/translate.directive';
+import { ContactComponent } from './contact/contact.component';
+import { CategoryPipe } from './pipes/category.pipe';
 
 export function setupTranslateServiceFactory(
   service: TranslateService): Function {
@@ -61,7 +63,9 @@ export function setupTranslateServiceFactory(
     MessagesComponent,
     TimePipe,
     TranslatePipe,
-    TranslateDirective
+    TranslateDirective,
+    ContactComponent,
+    CategoryPipe
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { IAuthenticateUser } from '../models/user';
+import { IAuthenticateUser, UserLevel } from '../models/user';
 import { FormService } from '../services/form.service';
 import { ConfirmEmailService } from '../services/confirm-email.service';
 import { EnvService } from '../services/env.service';

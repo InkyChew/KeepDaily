@@ -1,3 +1,29 @@
 .btns a {
     margin-right: var(--unit);
 }
+
+.step-list {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    column-gap: 50px;
+}
+
+.step-item {
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+@media only screen and (max-width: 992px) {
+    .step-list {
+        flex-wrap: wrap;
+    }
+}

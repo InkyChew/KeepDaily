@@ -10,7 +10,7 @@ export class Plan {
     userId: number;
     user?: IUser;
     categoryId: number | null = null;
-    category?: ICategory;
+    category?: Category;
 
     constructor(uid: number, today: string) {
         this.userId = uid;
@@ -40,7 +40,8 @@ export interface Day {
     planId: number;
 }
 
-export interface ICategory {
-    id: number;
-    name: string;
+export class Category {
+    id: number = 0;
+    name: string = "";
+    name_zh: string = "";
 }

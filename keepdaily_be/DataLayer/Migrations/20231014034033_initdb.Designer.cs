@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    [Migration("20231005033700_update_user_imgname_length")]
-    partial class update_user_imgname_length
+    [Migration("20231014034033_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,10 @@ namespace DomainLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("Name_zh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Category");
@@ -44,42 +48,62 @@ namespace DomainLayer.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Sports"
+                            Name = "Sports",
+                            Name_zh = "運動"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Diet"
+                            Name = "Diet",
+                            Name_zh = "健康飲食"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Cooking"
+                            Name = "Cooking",
+                            Name_zh = "烹飪"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Baking"
+                            Name = "Baking",
+                            Name_zh = "烘焙"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Planting"
+                            Name = "Planting",
+                            Name_zh = "植物"
                         },
                         new
                         {
                             Id = 6,
-                            Name = "Painting"
+                            Name = "Painting",
+                            Name_zh = "繪畫"
                         },
                         new
                         {
                             Id = 7,
-                            Name = "Traveling"
+                            Name = "Traveling",
+                            Name_zh = "旅行"
                         },
                         new
                         {
                             Id = 8,
-                            Name = "Learning"
+                            Name = "Learning",
+                            Name_zh = "學習"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Music",
+                            Name_zh = "音樂"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Daily",
+                            Name_zh = "日常"
                         });
                 });
 
@@ -129,6 +153,44 @@ namespace DomainLayer.Migrations
                     b.HasKey("UserId", "FriendId");
 
                     b.ToTable("Friend");
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Plan", b =>
@@ -239,7 +301,7 @@ namespace DomainLayer.Migrations
                             IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAENUep4AeyrMSIey9OBzrXpIC9te9aLgksO/J5q9+EjfyPtF+oJRTwaqLpQL+Jx3p4A==",
+                            Password = "AQAAAAEAACcQAAAAEGHFzh1PdbO8sBNTD/NvJp86mddp14cc6FR5YrT0p5b1RiHukejWWrvNDkMtrZd9tg==",
                             UserLevel = 0
                         });
                 });
@@ -249,6 +311,15 @@ namespace DomainLayer.Migrations
                     b.HasOne("DomainLayer.Models.Plan", null)
                         .WithMany("Days")
                         .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DomainLayer.Models.Message", b =>
+                {
+                    b.HasOne("DomainLayer.Models.User", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -282,6 +353,8 @@ namespace DomainLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Models.User", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("Plans");
                 });
 #pragma warning restore 612, 618
