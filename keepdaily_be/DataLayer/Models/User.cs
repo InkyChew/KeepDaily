@@ -23,7 +23,7 @@ namespace DomainLayer.Models
 
         [Column(TypeName = "nvarchar(100)")]
         public string? Description { get; set; }
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(200)")]
         public string? ImgName { get; set; }
         [Column(TypeName = "nvarchar(10)")]
         public string? ImgType { get; set; }

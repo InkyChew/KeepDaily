@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { IMessage } from '../models/message';
+import { IMessage, MessageType } from '../models/message';
 import { environment } from 'src/environments/environment';
 import { MessageService } from '../services/message.service';
 import { HubService } from '../services/hub.service';
@@ -54,8 +54,16 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  getImg(img: string) {
-    return `${environment.api.url}/${img}`
+  getImg(msg: IMessage) {
+    if(msg.image) {
+      switch(msg.type) {
+        case MessageType.Friend:
+          const img = msg.image.split('|');
+          return this._userService.getPhoto(img[0], img[1]);
+        default:
+          return `${environment.api.url}/${msg.image}`
+      }
+    } else return '../../assets/cupcake.png';
   }
 
   getMsgList() {

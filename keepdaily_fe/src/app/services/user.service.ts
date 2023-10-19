@@ -54,15 +54,15 @@ export class UserService {
     return this._http.patch(`${this._env.APIOption.UserEndpoint}/${id}`, data);
   }
 
-  getPhoto(u?: IUser, defImg?: string) {
+  getPhoto(imgName?: string, imgType?: string, defImg?: string) {
     const defaultImg = defImg ?? '../../assets/cupcake.png';
-    if(u && u.imgName && u.imgType) {
-      switch(u.imgType) {
+    if(imgName && imgType) {
+      switch(imgType) {
         case "Google":
         case "Line":
-          return u.imgName;
+          return imgName;
         default:
-          return `${this._env.APIOption.UserEndpoint}/Img?name=${u.imgName}&type=${u.imgType}`;
+          return `${this._env.APIOption.UserEndpoint}/Img?name=${imgName}&type=${imgType}`;
       }
     } else return defaultImg;
   }

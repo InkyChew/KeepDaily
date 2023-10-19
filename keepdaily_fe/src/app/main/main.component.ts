@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
   }
   
   getPhoto(user: IUser) {
-    return this._userService.getPhoto(user);
+    return this._userService.getPhoto(user.imgName, user.imgType);
   }
   
   goToLogin() {

@@ -4,6 +4,7 @@ using DomainLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DomainLayer.Migrations
 {
     [DbContext(typeof(KeepDailyContext))]
-    partial class KeepDailyContextModelSnapshot : ModelSnapshot
+    [Migration("20231013003232_update_title_length")]
+    partial class update_title_length
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +36,6 @@ namespace DomainLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Name_zh")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Category");
@@ -46,62 +44,42 @@ namespace DomainLayer.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Sports",
-                            Name_zh = "運動"
+                            Name = "Sports"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Diet",
-                            Name_zh = "健康飲食"
+                            Name = "Diet"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Cooking",
-                            Name_zh = "烹飪"
+                            Name = "Cooking"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Baking",
-                            Name_zh = "烘焙"
+                            Name = "Baking"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Planting",
-                            Name_zh = "植物"
+                            Name = "Planting"
                         },
                         new
                         {
                             Id = 6,
-                            Name = "Painting",
-                            Name_zh = "繪畫"
+                            Name = "Painting"
                         },
                         new
                         {
                             Id = 7,
-                            Name = "Traveling",
-                            Name_zh = "旅行"
+                            Name = "Traveling"
                         },
                         new
                         {
                             Id = 8,
-                            Name = "Learning",
-                            Name_zh = "學習"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Music",
-                            Name_zh = "音樂"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Daily",
-                            Name_zh = "日常"
+                            Name = "Learning"
                         });
                 });
 
@@ -180,9 +158,6 @@ namespace DomainLayer.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -302,7 +277,7 @@ namespace DomainLayer.Migrations
                             IsActive = true,
                             LineNotify = false,
                             Name = "Inky",
-                            Password = "AQAAAAEAACcQAAAAEGHFzh1PdbO8sBNTD/NvJp86mddp14cc6FR5YrT0p5b1RiHukejWWrvNDkMtrZd9tg==",
+                            Password = "AQAAAAEAACcQAAAAEAKxe+lKLeGAMwj+d+ZJGhox4IbwDGNsRqIYHUBMqKLQdELT1ihri6NoHsKRdY8usw==",
                             UserLevel = 0
                         });
                 });

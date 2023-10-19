@@ -1,5 +1,6 @@
 export interface IMessage {
     id: number;
+    type: MessageType;
     userId: number;
     title: string;
     content: string;
@@ -7,4 +8,8 @@ export interface IMessage {
     image: string | null;
     createdTime: Date;
     isRead: boolean;
+}
+
+export enum MessageType {
+    Friend = 1
 }

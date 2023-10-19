@@ -56,15 +56,14 @@ namespace ServiceLayer.Services
         public Message CreateFriendMessage(Friend friend)
         {
             var follower = _userRepo.GetUser(friend.UserId)!;
-            var imgurl = (follower.ImgName != null && follower.ImgType != null)
-                            ? $"User/Img?name={follower.ImgName}&type={follower.ImgType}" : null;
             return new Message()
             {
+                Type = MessageType.Friend,
                 UserId = friend.FriendId,
                 Title = "New Friend 🤝",
                 Content = $"{follower.Name} has followed you.",
                 Link = $"/friend/{follower.Id}",
-                Image = imgurl
+                Image = $"{follower.ImgName}|{follower.ImgType}"
             };
         }
     }
